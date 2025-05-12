@@ -1,0 +1,97 @@
+<div #dialogWrapper class="dialog-content-wrapper">
+  <header>
+    <a class="search-icon-block">
+      <svg class="icon-search">
+        <use xlink:href="/scss/icons.svg#icon-search"></use>
+      </svg>
+    </a>
+
+    <mat-form-field
+      appearance="outline"
+      class="custom-autocomplete-box searchquestion-autocomplete-box">
+      <input
+        #categoryTypeInput
+        class="formcontrol"
+        type="text"
+        placeholder="Search"
+        matInput
+        #categoryTrigger="matAutocompleteTrigger"
+        (focus)="showFilteredCategoryType(categoryTypeInput.value)"
+        (input)="_filterCategoryType(categoryTypeInput.value)"
+        (blur)="onInputBlur()"
+        (keydown.enter)="categoryTrigger.closePanel(); categoryTypeInput.blur()"
+        [matAutocomplete]="categoryType" />
+      <mat-autocomplete #categoryType="matAutocomplete" class="search-autocpmplete-panel">
+        @if (filteredCategoryType && filteredCategoryType.length > 0) {
+          <div class="category-question-wrapper">
+            @for (option of filteredCategoryType; track $index) {
+              <mat-option [value]="option">
+                <div class="category-common-question-block" (click)="openSearchQuestion(option)">
+                  <span
+                    [innerHTML]="
+                      (language === 'chinese' ? option.questionName.zh : option.questionName.en)
+                        | highlight: categoryTypeInput.value
+                    "></span>
+                  <p
+                    [innerHTML]="
+                      (language === 'chinese' ? option.question.zh : option.question.en)
+                        | highlight: categoryTypeInput.value
+                    "></p>
+                </div>
+              </mat-option>
+            }
+          </div>
+        } @else {
+          <!-- <div class="category-question-wrapper">
+            <mat-option disabled>
+              <div class="category-common-question-block">
+                {{ language === 'chinese' ? '没有找到记录' : 'No record found' }}
+              </div>
+            </mat-option>
+          </div> -->
+
+          <div class="no-records-block">
+            <p>{{ language === 'chinese' ? '没有找到记录' : 'No records found' }}</p>
+          </div>
+        }
+      </mat-autocomplete>
+      @if (categoryTypeInput.value) {
+        <a class="autocomplete-cross" (click)="resetCountry()">
+          <svg>
+            <use xlink:href="/scss/icons.svg#icon-cross"></use>
+          </svg>
+        </a>
+      }
+    </mat-form-field>
+    <a [attr.role]="'none'" class="icon-cross-block" (click)="closeDialog()">
+      <svg>
+        <use xlink:href="/scss/icons.svg#icon-cross"></use>
+      </svg>
+    </a>
+  </header>
+  @if (!isShowSearchList) {
+    <div class="category-area">
+      <div class="category-box-wrapper">
+        @for (item of categoriesList; track $index) {
+          <div
+            class="category-common-box"
+            [ngClass]="{ 'active-common-box': item.questionnaire_type_id === questionerId }"
+            (click)="selectMenu(item.questionnaire_type_id)">
+            <div class="image-block">
+              <img [src]="item.url" alt="" />
+            </div>
+            <p>
+              {{ language === 'chinese' ? item.questionnaire_type.zh : item.questionnaire_type.en }}
+            </p>
+          </div>
+        }
+      </div>
+      <p>
+        {{ 'PROFILE_PAGE.SMART_SEARCH_HELPS' | translate }}
+      </p>
+      <button type="button" class="btn primary-btn mt-5" (click)="closeDialog()">
+        {{ 'COMMON.CLOSE' | translate }}
+      </button>
+    </div>
+  }
+</div>

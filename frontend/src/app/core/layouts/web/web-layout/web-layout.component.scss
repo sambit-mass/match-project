@@ -1,0 +1,23 @@
+@import 'partials';
+.page-wrapper {
+  @apply bg-gray-300;
+  @apply mt-0;
+  @apply pt-0 pb-0;
+}
+.web-wrap {
+  @apply flex;
+}
+.web-page-wraper {
+  @apply h-full;
+  @apply bg-gray-300;
+  @apply pb-[104px];
+}
+.middle-part-wrapper {
+  @apply w-[calc(100%-341px)];
+}
+
+.profile-left-panel {
+  @apply w-[341px];
+  @apply bg-white;
+  @include transition;
+}

@@ -1,0 +1,210 @@
+<!-- category html design -->
+<div class="main-wrapper">
+  @if (showCategorySubmenu) {
+    <div class="add-category-panel">
+      <div class="category-header-part" (click)="openSearchCategoryDialog($event)">
+        <h6>Category</h6>
+        <a class="search-icon-block">
+          <svg class="icon-search">
+            <use xlink:href="/scss/icons.svg#icon-search"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="category-body-part">
+        @for (item of categoriesList; track $index) {
+          <div
+            class="category-item"
+            [ngClass]="{
+              'category-item-active': item.questionnaire_type_id === selectedCategoryActiveId,
+            }"
+            (click)="showQuestion(item.questionnaire_type_id)">
+            <p>
+              {{ language === 'chinese' ? item.questionnaire_type.zh : item.questionnaire_type.en }}
+            </p>
+            <a class="icon-block">
+              <svg>
+                <use xlink:href="/scss/icons.svg#icon-chevron-right"></use>
+              </svg>
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+  }
+  <div
+    class="profile-middle-block-wrapper"
+    [ngClass]="{ 'category-profile-middle-wrapper': showCategorySubmenu }">
+    <div class="profile-wrapper" [ngClass]="{ 'profile-collapse': showCategorySubmenu }">
+      <app-web-header></app-web-header>
+
+      <div class="message-board">
+        <h3>Good Morning {{ profileData?.user_first_name }} !</h3>
+        <h3>Great love stories start with a single hello!</h3>
+        <!-- [ngClass]="{
+            red: headingClass === 'red',
+            green: headingClass === 'green',
+            white: headingClass === 'white',
+            gold: headingClass === 'gold',
+            grey: headingClass === 'grey',
+          }" -->
+        <div class="right-part">
+          <a class="message-icon-block">
+            <svg class="icon-message">
+              <use xlink:href="/scss/icons.svg#icon-message"></use>
+            </svg>
+          </a>
+          <button type="button" class="btn primary-btn boost-profile-btn">
+            {{ 'PROFILE_PAGE.BOOST_PROFILE' | translate }}
+          </button>
+        </div>
+        <div class="floating-profile-image">
+          <div class="image-block">
+            @if (profileData?.profile_image) {
+              <img [src]="profileData?.profile_image" alt="" />
+            } @else {
+              <p>{{ profileData?.user_first_name | initialName }}</p>
+            }
+          </div>
+          <h3>{{ profileData?.user_first_name }}</h3>
+        </div>
+      </div>
+      <div class="tab-block">
+        <ul>
+          <li>
+            <a [ngClass]="{ 'active-tab': activeTab === 'about' }" (click)="tabActive('about')">{{
+              'PROFILE_PAGE.ABOUT' | translate
+            }}</a>
+          </li>
+          <li>
+            <a [ngClass]="{ 'active-tab': activeTab === 'photo' }" (click)="tabActive('photo')">{{
+              'PROFILE_PAGE.PHOTOS' | translate
+            }}</a>
+          </li>
+          <li>
+            <a
+              [ngClass]="{ 'active-tab': activeTab === 'preference' }"
+              (click)="tabActive('preference')"
+              >{{ 'PROFILE_PAGE.PARTNER_PROFILE' | translate }}</a
+            >
+          </li>
+        </ul>
+      </div>
+      @switch (activeTab) {
+        @case ('about') {
+          <app-about
+            #aboutComp
+            (sendQuestion)="getQuestion($event)"
+            [setQuestionnaireTypeId]="selectedAboutQuestionnaireTypeId"></app-about>
+        }
+        @case ('photo') {
+          <app-update-photo></app-update-photo>
+        }
+        @case ('preference') {
+          <app-preference></app-preference>
+        }
+      }
+    </div>
+    <div class="profile-right-panel">
+      <app-right-panel> </app-right-panel>
+    </div>
+  </div>
+</div>
+<!-- Search Category Dialog -->
+<ng-template #searchCategoryDialog>
+  <div class="dialog-wrapper">
+    <div class="dialog-content">
+      <!-- <div class="dialog-content-wrapper"> -->
+      <!-- <div class="category-box-wrapper">
+          <div class="category-common-box">
+            <div class="image-block">
+              <img src="/images/Partner-Preference-image.png" alt="" />
+            </div>
+            <p>Partner Preference</p>
+          </div>
+          <div class="category-common-box active-common-box">
+            <div class="image-block">
+              <img src="/images/page-common-character2.png" alt="" />
+            </div>
+            <p>Profile Basics</p>
+          </div>
+          <div class="category-common-box">
+            <div class="image-block">
+              <img src="/images/Lifestyle-preferences-image.png" alt="" />
+            </div>
+            <p>Lifestyle Preferences</p>
+          </div>
+          <div class="category-common-box">
+            <div class="image-block">
+              <img src="/images/value&beliefs-image.png" alt="" />
+            </div>
+            <p>Values and Beliefs</p>
+          </div>
+          <div class="category-common-box">
+            <div class="image-block">
+              <img src="/images/personality&interests-image.png" alt="" />
+            </div>
+            <p>Personality and Interests</p>
+          </div>
+          <div class="category-common-box">
+            <div class="image-block">
+              <img src="/images/Relationship-preferences-image.png" alt="" />
+            </div>
+            <p>Relationship Preferences</p>
+          </div>
+          <div class="category-common-box">
+            <div class="image-block">
+              <img src="/images/Date-preferences-image.png" alt="" />
+            </div>
+            <p>Date Preferences</p>
+          </div>
+          <div class="category-common-box">
+            <div class="image-block">
+              <img src="/images/Communication&interaction-image.png" alt="" />
+            </div>
+            <p>Communication and Interaction</p>
+          </div>
+          <div class="category-common-box">
+            <div class="image-block">
+              <img src="/images/Future-aspirations-image.png" alt="" />
+            </div>
+            <p>Future Aspirations</p>
+          </div>
+        </div> -->
+      <!-- <p>
+          Smart Search helps you find real connections by matching you on what truly matters - from
+          partner preferences and profile basics to lifestyle habits, values, and beliefs. It
+          understands your personality, interests, relationship goals, how you like to communicate,
+          your idea of a perfect date, and even your future aspirations. It's more than just a
+          search — it's your path to someone who fits naturally into your life.
+        </p>
+        <button type="button" class="btn primary-btn">CLOSE</button> -->
+      <!-- search by category 2 html design -->
+
+      <!-- <div class="category-question-wrapper">
+          <div class="category-common-question-block">
+            <span>Partner Preference</span>
+            <p>Does your partner have <strong>children?</strong></p>
+          </div>
+          <div class="category-common-question-block">
+            <span>Partner Preference</span>
+            <p>Does your partner have <strong>children?</strong></p>
+          </div>
+          <div class="category-common-question-block">
+            <span>Profile Basics</span>
+            <p>Do you want to have <strong> children?</strong></p>
+          </div>
+          <div class="category-common-question-block">
+            <span>Profile Basics</span>
+            <p>Do you have <strong>children?</strong></p>
+          </div>
+        </div> -->
+      <!-- </div> -->
+
+      <app-category-question-search
+        [questionerId]="selectedCategoryActiveId"
+        (searchQuestion)="getSearchQuestion($event)"
+        (selectQuestionMenu)="showQuestion($event)"
+        (closeCategory)="closeSearchCategoryDialog()" />
+    </div>
+  </div>
+</ng-template>

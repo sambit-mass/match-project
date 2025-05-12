@@ -1,0 +1,90 @@
+<section class="page-wrapper image-upload-page-wrap fadeInRight">
+  @if (showMessage && showMessage.message) {
+    <div class="upload-image-toastr">
+      <custom-toast />
+    </div>
+  }
+  <div class="content-card-wrap upload-images">
+    <div class="content-card">
+      <!--*** Remove the "hidden" class below to view the gallery, As the gallery will be visible once someone uploads a image at the first ***-->
+      <div class="uploaded-image-block">
+        <!-- Image gallery starts here -->
+        <div class="upload-gallery-wrap">
+          <div class="upload-gallery-content">
+            @for (item of allImages; track $index) {
+              <!--*** "--selected" class will be added along with "upload-gallery-content-items" class when the profile picture is selected ***-->
+              <!--*** Class "--added" will be added along with "upload-gallery-content-items" when the profile picture is selected ***-->
+              <div
+                class="upload-gallery-content-items"
+                [ngClass]="{ '--added': item.is_main_image === true }">
+                <figure>
+                  <img [src]="item.image_path" alt="Uploaded image" />
+                </figure>
+                <a class="close-btn icon-cross" (click)="openWarningDialog($event, $index)">
+                  <svg>
+                    <use xlink:href="/scss/icons.svg#icon-cross"></use>
+                  </svg>
+                </a>
+                <a class="close-btn icon-tick">
+                  <svg class="icon-tick">
+                    <use xlink:href="/scss/icons.svg#icon-tick"></use>
+                  </svg>
+                </a>
+                @if (item.is_main_image != true) {
+                  <span class="overlay-text" (click)="setAsProfilePhoto($index, item)">
+                    {{ 'IMAGEUPLOAD_PAGE.SET_PROFILE_PHOTO' | translate }}
+                  </span>
+                }
+              </div>
+            }
+            @if (allImages.length < 12) {
+              <div class="upload-gallery-content-items add-more">
+                <input
+                  #fileref
+                  type="file"
+                  accept=".jpg,.jpeg,.png,.heic,.heif"
+                  (change)="fileChangeEvent($event)" />
+
+                <figure>
+                  <svg>
+                    <use xlink:href="/scss/icons.svg#icon-plus"></use>
+                  </svg>
+                </figure>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template let-data #warningDialog>
+  <div class="dialog-wrapper">
+    <header>
+      <a [attr.role]="'none'" (click)="closeWarningDialog()">
+        <svg>
+          <use xlink:href="/scss/icons.svg#icon-cross"></use>
+        </svg>
+      </a>
+    </header>
+    <div class="dialog-content">
+      <div class="warning-image-block">
+        <img src="/images/new-warning-image.svg" alt="" />
+      </div>
+      <h3>{{ 'IMAGEUPLOAD_PAGE.DELETE_IMAGE' | translate }}</h3>
+      <div class="button-block">
+        <button
+          type="button"
+          class="btn primary-btn"
+          (click)="removeImage()"
+          [disabled]="isImageDelete">
+          {{ 'COMMON.YES' | translate }}
+        </button>
+        <button type="button" class="btn transparent-btn" (click)="closeWarningDialog()">
+          {{ 'COMMON.NO' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

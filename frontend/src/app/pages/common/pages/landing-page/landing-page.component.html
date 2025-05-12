@@ -1,0 +1,28 @@
+<app-auth-header [showProfile]="false" [showSignIn]="true" [showSignUp]="true"></app-auth-header>
+<section class="landing-wrapper fadeInRight">
+  <div class="landing-content">
+    <span class="sub-heading">
+      {{ 'LANDING_PAGE.HEARTS_MEET' | translate }}— <br />
+      {{ 'LANDING_PAGE.FIND_LOVE' | translate }}, {{ 'LANDING_PAGE.DEEP_CONNECTIONS' | translate }},
+      {{ 'LANDING_PAGE.BUILDING_TOGETHER' | translate }}
+      <!-- find true love, deep connections, and a future worth building together. -->
+    </span>
+    <h1>
+      <span>{{ 'LANDING_PAGE.LOVE' | translate }}</span
+      >{{ 'LANDING_PAGE.WITH_PURPOSE' | translate }},<br /><span>{{
+        'LANDING_PAGE.CONNECTIONS' | translate
+      }}</span>
+      {{ 'LANDING_PAGE.THAT' | translate }}
+      <span>{{ 'LANDING_PAGE.LAST' | translate }}</span>
+    </h1>
+    <div class="landing-page-image-wrap">
+      <figure class="landing-page-image">
+        <img src="images/landing-page-image.png" alt="Landing page Image" />
+      </figure>
+      <a class="custom-btn" (click)="onSignUp()">
+        {{ 'LANDING_PAGE.MAKE_CONNECTIONS' | translate }}
+      </a>
+    </div>
+  </div>
+</section>
+<app-auth-footer></app-auth-footer>

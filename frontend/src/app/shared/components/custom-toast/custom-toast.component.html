@@ -1,0 +1,71 @@
+<!-- @if (errorMessage || successMessage) {
+  <div
+    [@slideInOut]
+    class="custom-toastr-block"
+    [ngClass]="{ 'error-block': errorMessage, 'success-block': successMessage }">
+    <a class="icon-cross" (click)="closeToastr()">
+      <svg>
+        <use xlink:href="/scss/icons.svg#icon-cross"></use>
+      </svg>
+    </a>
+    <div class="icon-block">
+      @if (errorMessage) {
+        <svg>
+          <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+        </svg>
+      } @else {
+        <svg>
+          <use xlink:href="/scss/icons.svg#icon-tick-success"></use>
+        </svg>
+      }
+    </div>
+    <div class="content-area">
+      @if (errorMessage) {
+        <h6>{{ 'COMMON.ERROR' | translate }}</h6>
+      } @else {
+        <h6>{{ 'COMMON.SUCCESS' | translate }}</h6>
+      }
+      <p>{{ errorMessage ? message : message }}</p>
+    </div>
+  </div>
+} -->
+
+@if (showMessage && showMessage.message) {
+  <div
+    [@slideInOut]
+    class="custom-toastr-block"
+    [ngClass]="{
+      'error-block': showMessage.type === 'error',
+      'success-block': showMessage.type === 'success',
+    }">
+    <a class="icon-cross" (click)="closeToastr()">
+      <svg>
+        <use xlink:href="/scss/icons.svg#icon-cross"></use>
+      </svg>
+    </a>
+    <div class="icon-block">
+      @if (showMessage.type === 'error') {
+        <svg>
+          <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+        </svg>
+      } @else {
+        <svg>
+          <use xlink:href="/scss/icons.svg#icon-tick-success"></use>
+        </svg>
+      }
+    </div>
+    <div class="content-area">
+      @if (showMessage.type === 'error') {
+        <h6>{{ 'COMMON.ERROR' | translate }}</h6>
+      } @else {
+        <h6>{{ 'COMMON.SUCCESS' | translate }}</h6>
+      }
+      <p>
+        {{ message }}
+        @if (showMessage.message === 'FOR_REG_AND_LOGIN_ERROR.ALREADY_EXIST_EMAIL') {
+          <a (click)="onSignIn()">{{ 'COMMON.SIGN_IN' | translate }}</a>
+        }
+      </p>
+    </div>
+  </div>
+}

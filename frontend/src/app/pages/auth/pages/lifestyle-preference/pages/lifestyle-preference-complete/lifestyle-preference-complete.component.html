@@ -1,0 +1,49 @@
+<app-auth-header [showProfile]="true"></app-auth-header>
+<section class="about-step-page-wrap fadeInRight">
+  <figure class="page-partical-image">
+    <img src="images/page-common-particals.png" alt="Common Partical" />
+  </figure>
+  <div class="page-container">
+    <div class="about-step-page-cont relative">
+      <div class="moveble-block-first">
+        <figure>
+          <img src="images/Lifestyle-preferences-image.png" alt="Common Partical" />
+        </figure>
+        <h1
+          [appTyping]="'QUESTIONCOMPLETE_PAGE.LIFESTYLE_PREFERENCE' | translate"
+          [typingSpeed]="120"
+          [typingDelay]="2500"></h1>
+        <h6
+          [appTyping]="'QUESTIONCOMPLETE_PAGE.LIFESTYLE_PREFERENCE_SUB_HEADING' | translate"
+          [typingSpeed]="120"
+          [typingDelay]="5000"></h6>
+      </div>
+      <div class="moveble-block-second">
+        <figure>
+          <img src="images/value&beliefs-image.png" alt="About Step page caracter" />
+        </figure>
+        <h2
+          [appTyping]="'QUESTIONCOMPLETE_PAGE.GO_TO_VALUES_AND_BELIEFS' | translate"
+          [typingSpeed]="120"
+          [typingDelay]="13000"></h2>
+        <h6
+          [appTyping]="'QUESTIONCOMPLETE_PAGE.GO_TO_VALUES_AND_BELIEFS_SUB_HEADING' | translate"
+          [typingSpeed]="120"
+          [typingDelay]="15500"></h6>
+        <a class="btn primary-btn" (click)="goToValuesAndBeliefs()">{{
+          'COMMON.NEXT' | translate
+        }}</a>
+      </div>
+      <!-- <h1>
+        {{ 'QUESTIONCOMPLETE_PAGE.LIFESTYLE_PREFERENCE' | translate }}
+        <span>{{ 'QUESTIONCOMPLETE_PAGE.GO_TO_VALUES_AND_BELIEFS' | translate }}</span>
+      </h1> -->
+      <!-- <figure>
+        <img src="images/value&beliefs-image-1.png" alt="About Step page caracter" />
+      </figure>
+      <a class="btn primary-btn" (click)="goToValuesAndBeliefs()">{{
+        'COMMON.NEXT' | translate
+      }}</a> -->
+    </div>
+  </div>
+</section>

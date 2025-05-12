@@ -1,0 +1,79 @@
+<header>
+  <div class="header-content-block">
+    <a class="logo" [ngClass]="{ removepointer: isLoggedIn }" (click)="rootRedirection()">
+      <figure>
+        <img src="images/logo-image.svg" alt="logo" />
+      </figure>
+    </a>
+    <div class="header-right-part">
+      <mat-form-field appearance="outline" class="custom-select">
+        <mat-select
+          placeholder="english"
+          [(value)]="selectedLanguage"
+          panelClass="custom-select-panel"
+          (selectionChange)="onLanguageChange($event)">
+          @for (item of langageList; track $index) {
+            <mat-option [value]="item.value">{{ item.name }}</mat-option>
+          }
+        </mat-select>
+        <div class="flag-box">
+          <img
+            [src]="
+              selectedLanguage === 'zh'
+                ? '/images/chinese-flag-image.svg'
+                : '/images/flag-image.svg'
+            "
+            alt="" />
+        </div>
+      </mat-form-field>
+      @if (isShowProfile && profileData) {
+        <div class="profile-block">
+          <div class="profile-details-block">
+            <div class="dropdown-area" [matMenuTriggerFor]="menu">
+              <div class="image-block">
+                @if (profileData.profile_image) {
+                  <img [src]="profileData.profile_image" alt="" />
+                } @else {
+                  <p>{{ profileData.user_first_name | initialName }}</p>
+                }
+              </div>
+              <div class="name-block">
+                <h2>{{ profileData.user_first_name }}</h2>
+                <!-- <p>Premium</p> -->
+              </div>
+              <a class="down-arrow-icon">
+                <img src="/images/profile-dropdown-image.svg" alt="" width="10" height="4" />
+              </a>
+            </div>
+            <mat-menu #menu="matMenu" class="profile-dropdown-box">
+              <div class="profile-area" [attr.role]="'none'">
+                <h3>{{ profileData.user_first_name }}</h3>
+                <p>{{ profileData.email }}</p>
+                <a (click)="onLogout($event)" class="btn btn-logout">
+                  <svg>
+                    <use xlink:href="/scss/icons.svg#icon-logout"></use>
+                  </svg>
+                  Log Out
+                </a>
+              </div>
+            </mat-menu>
+          </div>
+        </div>
+      }
+      <div class="button-block">
+        @if (isShowSignIn) {
+          <button type="button" class="btn btn-secondary btn-signin" (click)="onSignIn()">
+            <!-- SIGN IN -->
+            {{ 'COMMON.SIGN_IN' | translate }}
+          </button>
+        }
+        @if (isShowSignUp) {
+          <button type="button" class="btn btn-secondary btn-signup" (click)="onSignUp()">
+            <!-- SIGN UP -->
+            {{ 'COMMON.SIGN_UP' | translate }}
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,410 @@
+@import 'partials';
+.main-wrapper {
+  @apply flex;
+  @apply w-full;
+}
+.profile-middle-block-wrapper {
+  @apply w-full;
+  @apply flex;
+  &.category-profile-middle-wrapper {
+    @apply flex-shrink-0;
+  }
+}
+.profile-wrapper {
+  @apply px-10;
+  @apply w-[calc(100%-380px)];
+
+  &.profile-collapse {
+    @apply pl-7;
+  }
+}
+
+header {
+  @apply pt-8 pb-7;
+  @include flex-all(flex, center, space-between);
+  .left-block {
+    h2 {
+      @apply text-2xl;
+      @apply font-primary;
+      @apply leading-none;
+      @apply font-semibold;
+      @apply text-black-1200;
+      @apply mb-2;
+    }
+    p {
+      @apply text-base;
+      @apply font-primary;
+      @apply leading-none;
+      @apply font-normal;
+      @apply text-gray-800;
+    }
+  }
+}
+//profile block///
+.profile-block {
+  @include flex-all(flex, center);
+  @apply gap-x-7;
+}
+.profile-icon-block {
+  @include flex-all(flex, center);
+  @apply gap-x-6;
+  a {
+    @apply cursor-pointer;
+  }
+  .image-setting {
+    @apply w-8;
+    @apply h-8;
+    img {
+      @apply h-full;
+    }
+  }
+
+  .image-notification {
+    @apply w-8;
+    @apply h-8;
+    @apply relative;
+    img {
+      @apply h-full;
+    }
+    .notification-small-box {
+      @apply absolute;
+      @apply -top-1;
+      @apply -right-1;
+      @apply w-2;
+      @apply h-2;
+      @apply rounded-full;
+      &.notification-green {
+        @apply bg-[#0FBE71];
+      }
+    }
+  }
+}
+.profile-details-block {
+  @include flex-all(flex, center);
+  @apply relative;
+  .name-block {
+    h2 {
+      @apply text-base;
+      @apply font-normal;
+      @apply font-primary;
+      @apply leading-none;
+      @apply text-black-1200;
+      @apply mb-1.5;
+      @include truncate(1);
+      @apply max-w-24;
+    }
+    p {
+      @apply text-xs;
+      @apply font-medium;
+      @apply font-primary;
+      @apply leading-none;
+      @apply text-gray-800;
+    }
+  }
+  .dropdown-area {
+    @apply cursor-pointer;
+    @include flex-all(flex, center);
+    @apply relative;
+  }
+
+  .image-block {
+    @apply mr-4;
+    @apply w-[50px];
+    @apply h-[50px];
+    @apply rounded-xl;
+    @apply bg-gray-100;
+    @apply overflow-hidden;
+    @include flex-all(flex, center, center);
+    span {
+      @apply text-lg;
+      @apply leading-none;
+      @apply font-semibold;
+      @apply text-primary;
+      @apply uppercase;
+    }
+  }
+  .down-arrow-icon {
+    @apply ml-7;
+    @apply cursor-pointer;
+    @apply w-3;
+    @apply h-2.5;
+    img {
+      @apply w-full;
+      @apply h-full;
+    }
+  }
+}
+//message board//
+.message-board {
+  @apply bg-secondary;
+  @apply pl-[171px] pr-10 pt-[54px] pb-7;
+  @apply rounded-xl;
+  @apply relative;
+  @apply mb-28;
+  h3 {
+    @apply text-[25px];
+    @apply font-primary;
+    @apply leading-9;
+    @apply font-black;
+    @apply text-white;
+  }
+  .right-part {
+    @include flex-all(flex, center);
+    @apply justify-end;
+    @apply gap-x-3;
+    .message-icon-block {
+      @apply w-[42px];
+      @apply h-11;
+      @apply rounded-xl;
+      @apply bg-white;
+      @include flex-all(flex, center, center);
+      @include transition;
+      @apply cursor-pointer;
+      &:hover {
+        @apply bg-black-1000;
+        svg {
+          @apply fill-white;
+        }
+      }
+      .icon-message {
+        @apply w-4;
+        @apply h-4;
+        @apply fill-black;
+      }
+    }
+  }
+  .floating-profile-image {
+    @include flex-all(flex, center);
+    @apply gap-x-4;
+    @apply absolute;
+    @apply -bottom-16;
+    @apply left-8;
+    .image-block {
+      @apply w-[124px];
+      @apply h-[124px];
+      @apply rounded-3xl;
+      @apply overflow-hidden;
+      @apply border-[3px] border-solid border-white;
+      @apply bg-white;
+      img {
+        @apply w-full;
+        @apply h-full;
+        @apply object-cover;
+      }
+    }
+    h3 {
+      @apply text-base;
+      @apply font-primary;
+      @apply leading-none;
+      @apply font-semibold;
+      @apply text-black-1200;
+      @apply mt-10;
+    }
+  }
+}
+.primary-btn {
+  &.boost-profile-btn {
+    @apply min-w-[229px];
+  }
+}
+//tab Design//
+.tab-block {
+  @apply mb-8;
+  ul {
+    @include flex-all(flex, center);
+    @apply border-b border-solid border-gray-1000;
+    @apply gap-x-3.5;
+    li {
+      @apply w-[349px];
+      @apply text-center;
+      a {
+        @apply text-lg;
+        @apply font-primary;
+        @apply leading-none;
+        @apply font-bold;
+        @apply text-gray-900;
+        @apply capitalize;
+        @apply block;
+        @apply pb-6;
+        @apply relative;
+        @apply cursor-pointer;
+        @include transition;
+        &::after {
+          @apply empty-content;
+          @apply h-[4px];
+          @apply bg-primary;
+          @apply absolute;
+          @apply bottom-0;
+          @apply left-0;
+          @apply right-0;
+          @apply mx-auto;
+          @apply w-0;
+          @include transition;
+        }
+        &:hover {
+          @apply text-black;
+          &::after {
+            @apply w-full;
+            animation: fill 1s forwards;
+            -webkit-animation: fill 1s forwards;
+            -moz-animation: fill 1s forwards;
+          }
+        }
+        &.active-tab {
+          @apply text-black;
+          &::after {
+            @apply empty-content;
+            @apply w-full;
+            @apply h-[4px];
+            @apply bg-primary;
+            @apply absolute;
+            @apply bottom-0;
+            @apply left-0;
+          }
+        }
+      }
+    }
+  }
+}
+// add category css
+.add-category-panel {
+  @apply bg-white;
+  @apply w-[232px];
+  @apply flex-shrink-0;
+}
+.category-header-part {
+  @apply pt-6 pr-4 pl-3;
+  @include flex-all(flex, center, space-between);
+  @apply mb-6;
+  @apply cursor-pointer;
+  @include transition;
+  &:hover {
+    .search-icon-block {
+      svg {
+        @apply fill-black;
+      }
+    }
+  }
+  h6 {
+    @apply text-xs;
+    @apply font-primary;
+    @apply leading-none;
+    @apply font-normal;
+    @apply text-other-600;
+  }
+  .search-icon-block {
+    @include transition;
+    svg {
+      @apply w-4;
+      @apply h-4;
+      @apply fill-other-600;
+    }
+  }
+}
+.category-body-part {
+  @apply px-3;
+  .category-item {
+    @apply py-6 pr-4 pl-5;
+    @include rounded(9);
+    @include flex-all(flex, center, space-between);
+    box-shadow: $Shadowmd;
+    @apply cursor-pointer;
+    @include transition;
+    &:hover {
+      box-shadow: $categoryItemShadow;
+      .icon-block {
+        @apply opacity-100;
+      }
+    }
+    &.category-item-active {
+      box-shadow: $categoryItemShadow;
+      .icon-block {
+        @apply opacity-100;
+      }
+    }
+    p {
+      @apply text-md;
+      @apply font-primary;
+      @apply leading-5;
+      @apply font-medium;
+      @apply text-black;
+    }
+    .icon-block {
+      @apply cursor-pointer;
+      @include transition;
+      @apply opacity-0;
+      @apply mt-0.5;
+
+      svg {
+        @apply w-2.5;
+        @apply h-4;
+        @apply fill-primary;
+      }
+    }
+    &:not(:last-of-type) {
+      @apply mb-3.5;
+    }
+  }
+}
+.profile-right-panel {
+  @apply w-[380px];
+  @apply bg-white;
+  @apply px-8 pt-28;
+  @apply mb-[72px];
+  @apply relative;
+}
+
+//Dialog Design//
+::ng-deep .search-category-dialog {
+  @apply max-w-[868px] #{!important};
+  @apply w-full;
+  .mat-mdc-dialog-surface {
+    @apply shadow-none #{!important};
+    @apply rounded-3xl #{!important};
+  }
+
+  .dialog-content {
+    @apply h-[520px];
+    @apply overflow-y-auto;
+    &::-webkit-scrollbar {
+      @apply w-1;
+    }
+    &::-webkit-scrollbar-track {
+      @apply bg-[#d1d0d0];
+    }
+    &::-webkit-scrollbar-thumb {
+      @apply bg-black-100;
+      @apply rounded-xl;
+    }
+    @apply pb-14;
+  }
+
+  .category-question-wrapper {
+    .category-common-question-block {
+      @apply px-10 pt-8;
+      &:not(:last-of-type) {
+        @apply border-b border-solid border-[#EEEEEE];
+        @apply pb-8;
+      }
+      span {
+        @apply text-xs;
+        @apply leading-none;
+        @apply font-primary;
+        @apply font-medium;
+        @include property('color', rgba(0, 0, 0, 0.5));
+        @apply mb-2.5;
+        @apply block;
+      }
+      p {
+        @apply text-base;
+        @apply leading-none;
+        @apply font-primary;
+        @apply font-normal;
+        @apply text-black;
+        @apply text-left;
+        @apply m-0;
+        @apply max-w-max;
+      }
+    }
+  }
+}

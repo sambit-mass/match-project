@@ -1,0 +1,424 @@
+@import 'partials';
+
+.right-panel-common-block {
+  @include property('background-color', rgba(248, 250, 251, 1));
+  @apply rounded-xl;
+  @apply py-5 px-4;
+  &:not(:last-of-type) {
+    @apply mb-[26px];
+  }
+  a {
+    @apply text-label;
+    @apply font-primary;
+    @apply leading-none;
+    @apply font-normal;
+    @apply text-blue-200;
+    @apply cursor-pointer;
+    @include transition;
+    &:hover {
+      @apply text-black-1000;
+    }
+  }
+  h6 {
+    @apply text-xl;
+    @apply font-primary;
+    @apply leading-none;
+    @apply font-bold;
+    @apply text-black;
+    @apply mb-8;
+  }
+}
+.content-area {
+  @include flex-all(flex, center);
+  @apply mb-6;
+
+  .image-block {
+    @apply w-10;
+    @apply h-10;
+    @apply rounded-xl;
+    @apply overflow-hidden;
+    @apply mr-3;
+    img {
+      @apply w-full;
+      @apply h-full;
+      @apply object-cover;
+    }
+  }
+  p {
+    @apply text-label;
+    @apply font-primary;
+    @apply leading-none;
+    @apply font-bold;
+    @apply text-black;
+    @apply w-[calc(100%-128px)];
+    @include truncate(1);
+  }
+}
+.primary-btn {
+  @apply h-[46px];
+  @apply bg-white;
+  @include property('border', 1px solid rgba(238, 238, 238, 1));
+  @include property('color', rgba(51, 51, 51, 1));
+  @apply rounded-lg;
+  &:hover {
+    @apply bg-primary;
+    @apply text-white;
+  }
+}
+.right-footer-block {
+  // @apply absolute;
+  // @apply bottom-0;
+  // @apply w-[calc(100%-60px)];
+  @apply fixed;
+  @apply bottom-[10px];
+  @apply right-0;
+  @apply z-100;
+  @apply max-w-[348px];
+  @apply w-full;
+  .chat-bot-block {
+    @apply bg-white;
+    @apply border border-solid border-other-300;
+    @apply rounded-tl-xl rounded-tr-xl;
+    @apply overflow-hidden;
+    @apply rounded-bl-xl rounded-br-xl;
+    @include transition;
+    @apply duration-700;
+  }
+  .chat-bot-image {
+    @apply fixed;
+    @apply bottom-0;
+    @apply right-0;
+    @apply cursor-pointer;
+    @include transition;
+    @apply duration-700;
+    img {
+      @apply max-w-16;
+      @apply inline-block;
+    }
+  }
+  &.hideChat {
+    .chat-bot-block {
+      @apply opacity-0;
+      @apply invisible;
+      @apply translate-y-[51px];
+      @include transition;
+      @apply duration-700;
+    }
+  }
+  &.showChat {
+    .chat-bot-image {
+      @apply -translate-y-[10px];
+      @apply opacity-0;
+      @apply invisible;
+      @include transition;
+      @apply duration-700;
+    }
+  }
+}
+.header-part {
+  @apply bg-gray-300;
+  @apply py-[18px] px-6;
+  @include flex-all(flex, center, space-between);
+  @apply mb-8;
+  .logo-block {
+    @apply w-[166px];
+    img {
+      @apply w-full;
+      @apply h-auto;
+      @apply object-cover;
+    }
+  }
+  .minimize-btn {
+    @apply py-1 px-1.5;
+    @apply cursor-pointer;
+  }
+  .minus {
+    @apply w-4;
+    @apply h-[4px];
+    @apply bg-black;
+    @apply inline-block;
+    @apply rounded-3xl;
+    @apply cursor-pointer;
+  }
+}
+.body-part {
+  @apply pl-5;
+  // @apply h-[calc(100vh-550px)];
+  // @apply overflow-y-auto;
+
+  // &::-webkit-scrollbar {
+  //   @apply w-[1px];
+  // }
+
+  // &::-webkit-scrollbar-thumb {
+  //   @apply bg-black-100;
+  //   @apply rounded-xl;
+  // }
+  .icon-block {
+    @apply w-[52px];
+    @apply h-[52px];
+    @apply rounded-full;
+    @apply border border-solid border-other-200;
+    @include flex-all(flex, center, center);
+    img {
+      @apply w-[26px];
+    }
+  }
+}
+.body-contentpart {
+  @apply flex;
+  @apply gap-x-2;
+}
+.quick-replies-block {
+  @apply bg-gray-300;
+  @apply relative;
+  @apply p-3 pb-4;
+  @apply w-[calc(100%-60px)];
+  @include rounded(10);
+  @apply mb-4;
+  h6 {
+    @apply text-sm;
+    @apply leading-4;
+    @apply font-primary;
+    @apply font-normal;
+    @apply text-black-1300;
+    @apply mb-3;
+  }
+  p {
+    @apply text-sm;
+    @apply leading-4;
+    @apply font-primary;
+    @apply font-normal;
+    @apply text-black-1300;
+    @apply mb-5;
+  }
+  &::after {
+    @apply empty-content;
+    @apply absolute;
+    @apply -left-2;
+    @apply top-2.5;
+    @include background-image('tooltip-image.svg', no-repeat, $size: 20px);
+    @apply w-3.5;
+    @apply h-6;
+    @apply z-50;
+  }
+}
+.answer-block {
+  @apply bg-white;
+  @apply py-3 pr-3.5 pl-2;
+  @apply rounded-lg;
+  @include flex-all(flex, center, space-between);
+  box-shadow: $Shadowsm;
+  p {
+    @apply text-sm;
+    @apply leading-none;
+    @apply font-primary;
+    @apply font-normal;
+    @apply text-black-1300;
+    @apply mb-0;
+    @apply w-[calc(100%-8px)];
+  }
+  a {
+    @apply mt-1;
+    @include transition;
+    @apply cursor-pointer;
+    &:hover {
+      svg {
+        @apply fill-black-1000;
+      }
+    }
+    svg {
+      @apply w-2;
+      @apply h-2.5;
+      @apply fill-blue-300;
+    }
+  }
+  &:not(:last-of-type) {
+    @apply mb-2;
+  }
+}
+.message-area {
+  @apply pr-5;
+  @apply h-[calc(100vh-509px)];
+  @apply overflow-y-auto;
+  @apply pb-7;
+
+  &::-webkit-scrollbar {
+    @apply w-[1px];
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-black-100;
+    @apply rounded-xl;
+  }
+  .error-msg {
+    @apply flex;
+    @apply items-start;
+    @apply justify-center;
+    @apply gap-x-1;
+    p {
+      @apply text-xss;
+      @apply text-black-300;
+      @apply text-center;
+    }
+    img {
+      @apply max-w-3.5;
+    }
+  }
+  .message-wrapper {
+    @apply relative;
+    @apply mb-4;
+    @apply flex;
+    @apply gap-x-2.5;
+    &.message-wrapper-self {
+      @apply flex-row-reverse;
+      .tooltip {
+        @apply bg-primary;
+        p {
+          @apply text-white;
+        }
+        &::after {
+          @apply left-auto;
+          @apply -right-2;
+          @apply rotate-0;
+          @include background-image('Bubble-image-two.svg', no-repeat);
+        }
+      }
+    }
+  }
+  .image-block {
+    @apply w-[46px];
+    @apply h-[46px];
+    @apply rounded-full;
+    @apply overflow-hidden;
+    @apply shrink-0;
+    &.bot-image {
+      @apply border border-solid border-other-200;
+      @include flex-all(flex, center, center);
+      img {
+        @apply object-contain;
+        @apply w-[26px];
+      }
+    }
+    img {
+      @apply w-full;
+      @apply h-full;
+      @apply object-cover;
+    }
+  }
+
+  .tooltip {
+    @apply relative;
+    @apply p-3.5;
+    @apply pb-0.5;
+    @apply rounded-xl;
+    @apply bg-gray-300;
+    &::after {
+      @apply empty-content;
+      @apply absolute;
+      @apply -left-2;
+      @apply top-3.5;
+      @include background-image('gray-buble.svg', no-repeat);
+      @apply w-3;
+      @apply h-3;
+      @apply z-50;
+    }
+    p {
+      @apply text-md;
+      @apply font-primary;
+      @apply leading-none;
+      @apply font-normal;
+      @apply text-black-1300;
+      &.time-stamp {
+        @apply text-xxs;
+        @apply text-right;
+        @apply mt-0.5;
+      }
+    }
+  }
+}
+.footer-part {
+  @apply pt-2.5 pb-2.5 px-4;
+  @apply border-t border-solid border-other-300;
+  @include flex-all(flex, center);
+  .left-part {
+    @include flex-all(flex, center);
+    @apply gap-x-3;
+    @apply w-[calc(100%-40px)];
+    .formcontrol {
+      @apply resize-none;
+      @apply w-full;
+      // @apply h-[calc(100vh-550px)];
+      @apply overflow-y-auto;
+      @apply h-6;
+      @apply mr-1 #{!important};
+      @apply pr-1 pl-2.5 #{!important};
+
+      &::-webkit-scrollbar {
+        @apply w-[3px];
+      }
+
+      &::-webkit-scrollbar-thumb {
+        @apply bg-black-100;
+        @apply rounded-xl;
+      }
+    }
+  }
+  .left-icon-block {
+    @apply w-[26px];
+    @apply h-[26px];
+    @apply rounded-md;
+    @apply bg-red-200;
+    @include flex-all(flex, center, center);
+    @apply cursor-pointer;
+    a {
+      @apply border border-solid border-primary;
+      @apply h-4;
+      @apply bg-primary;
+      @apply rounded-md;
+      @apply rotate-[38deg];
+    }
+  }
+  .right-icon-block {
+    @apply w-[47px];
+    @apply h-[47px];
+    @apply rounded-full;
+    @apply border border-solid border-other-300;
+    @include flex-all(flex, center, center);
+    @include transition;
+    @apply cursor-pointer;
+    &:hover {
+      @apply bg-black-1000;
+      svg {
+        @apply fill-white;
+      }
+    }
+
+    svg {
+      @apply w-3.5;
+      @apply h-[18px];
+      @apply fill-primary;
+    }
+    &.arrow-block {
+      @apply bg-black;
+      svg {
+        // @apply fill-black;
+      }
+      &.disabled {
+        @apply opacity-40;
+      }
+    }
+  }
+  &.warning {
+    @apply border border-solid border-primary;
+    @apply rounded-bl-xl rounded-br-xl;
+  }
+}
+.formcontrol {
+  @apply border-none;
+  @apply pl-0 py-0 pr-2;
+  @apply w-[calc(100%-42px)];
+  &::placeholder {
+    @apply text-other-400;
+  }
+}

@@ -1,0 +1,21 @@
+<div class="search-wrapper">
+  <div class="filter-search">
+    <input
+      type="text"
+      class="formcontrol"
+      autocompleteOff="off"
+      [(ngModel)]="searchModel"
+      (ngModelChange)="onChangeValue()"
+      [placeholder]="searchPlaceholder()" />
+    @if (searchModel()) {
+      <div [attr.role]="'none'" class="cross_icon_wraper" (click)="onClearValue()">
+        <svg class="icon icon-search-cross">
+          <use xlink:href="./assets/scss/icons.svg#icon-search-cross"></use>
+        </svg>
+      </div>
+    }
+    <svg class="icon icon-search">
+      <use xlink:href="./assets/scss/icons.svg#icon-search"></use>
+    </svg>
+  </div>
+</div>

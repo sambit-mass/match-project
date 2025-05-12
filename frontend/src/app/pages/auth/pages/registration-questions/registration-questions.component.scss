@@ -1,0 +1,24 @@
+@import 'partials';
+
+.age-range {
+  @apply pt-6 pb-16;
+  @include flex-all(flex, center, center);
+  @apply w-max;
+  @apply mx-auto;
+  @apply relative;
+  .min-value,
+  .max-value {
+    @apply absolute;
+    @apply top-20;
+    @apply text-md;
+    @apply font-medium;
+    @apply font-primary;
+    @apply text-black;
+  }
+  .min-value {
+    @apply left-2;
+  }
+  .max-value {
+    @apply right-2;
+  }
+}

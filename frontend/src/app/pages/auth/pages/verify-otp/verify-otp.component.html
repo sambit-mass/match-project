@@ -1,0 +1,162 @@
+<app-auth-header></app-auth-header>
+<!-- OTP Verification Form -->
+<div class="login-page-wrapper">
+  <div class="form-block fadeInRight">
+    <a class="icon-cross" (click)="openWarningDialog($event)">
+      <svg>
+        <use xlink:href="/scss/icons.svg#icon-cross"></use>
+      </svg>
+    </a>
+    <!-- Warning Dialog -->
+    <ng-template let-data #warningDialog>
+      <div class="dialog-wrapper">
+        <header>
+          <a [attr.role]="'none'" (click)="closeWarningDialog()">
+            <svg>
+              <use xlink:href="/scss/icons.svg#icon-cross"></use>
+            </svg>
+          </a>
+        </header>
+        <div class="dialog-content">
+          <div class="warning-image-block">
+            <img src="/images/new-warning-image.svg" alt="" />
+          </div>
+          <h3>{{ 'OTP_PAGE.EXIT_DIALOG' | translate }}</h3>
+          <div class="button-block">
+            <button type="button" class="btn primary-btn" (click)="backToLogin($event)">
+              {{ 'COMMON.YES' | translate }}
+            </button>
+            <button type="button" class="btn transparent-btn" (click)="closeWarningDialog()">
+              {{ 'COMMON.NO' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="form-block-header-part">
+      <h1>{{ 'OTP_PAGE.OTP_VERIFICATION' | translate }}</h1>
+      <p>{{ 'OTP_PAGE.SENT_VERIFICATION_CODE' | translate }} {{ sendOtpParam.email }}</p>
+      <p>
+        {{ 'OTP_PAGE.CODES_ARE_VALID_FOR' | translate }} 5 {{ 'OTP_PAGE.MINUTES' | translate }}.
+      </p>
+      <!-- Custom Toast Start -->
+      <custom-toast />
+      <!-- Custom Toast End -->
+    </div>
+
+    <!-- //////for otp design////// -->
+    <div class="body-part">
+      <!-- <div class="form-group">
+          <div
+            class="formcontrol-wrapper"
+            [ngClass]="{ 'auth-invalid-control': !otp && submitted }">
+            <input
+              type="number"
+              autocomplete="off"
+              class="formcontrol"
+              [placeholder]="'OTP_PAGE.ENTER_VERIFICATION_CODE' | translate"
+              [(ngModel)]="otp"
+              (keydown.enter)="verifyOtp()" />
+          </div>
+          @if (!otp && submitted) {
+            <div [@fadeAnimation] class="auth-error-message">
+              <div class="icon-block">
+                <svg>
+                  <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+                </svg>
+              </div>
+              <p>{{ 'VALIDATION.OTP' | translate }}</p>
+            </div>
+          }
+        </div> -->
+
+      <form class="mt-10" [formGroup]="otpForm" (ngSubmit)="verifyOtp(true)">
+        <div class="form-group">
+          <div class="otp-inputs">
+            <div
+              class="formcontrol-wrapper"
+              [ngClass]="{ 'auth-invalid-control': otpForm.invalid && submitted }">
+              <input
+                type="number"
+                class="formcontrol"
+                formControlName="digit1"
+                #digit1
+                (keyup)="moveToNext(null, digit1, digit2, $event)"
+                id="otp1"
+                [readOnly]="isDisabled"
+                (paste)="handlePaste($event)"
+                appNoSpecialCharacters />
+              <input
+                type="number"
+                class="formcontrol"
+                formControlName="digit2"
+                #digit2
+                (keyup)="moveToNext(digit1, digit2, digit3, $event)"
+                [readOnly]="isDisabled"
+                (paste)="handlePaste($event)"
+                appNoSpecialCharacters />
+              <input
+                type="number"
+                class="formcontrol"
+                formControlName="digit3"
+                #digit3
+                (keyup)="moveToNext(digit2, digit3, digit4, $event)"
+                [readOnly]="isDisabled"
+                (paste)="handlePaste($event)"
+                appNoSpecialCharacters />
+              <input
+                type="number"
+                class="formcontrol"
+                formControlName="digit4"
+                #digit4
+                (keyup)="moveToNext(digit3, digit4, digit5, $event)"
+                [readOnly]="isDisabled"
+                (paste)="handlePaste($event)"
+                appNoSpecialCharacters />
+              <input
+                type="number"
+                class="formcontrol"
+                formControlName="digit5"
+                #digit5
+                (keyup)="moveToNext(digit4, digit5, digit6, $event)"
+                [readOnly]="isDisabled"
+                (paste)="handlePaste($event)"
+                appNoSpecialCharacters />
+              <input
+                type="number"
+                class="formcontrol"
+                formControlName="digit6"
+                #digit6
+                (keyup)="moveToNext(digit5, digit6, null, $event)"
+                [readOnly]="isDisabled"
+                (paste)="handlePaste($event)"
+                appNoSpecialCharacters />
+            </div>
+          </div>
+        </div>
+
+        <!-- ----------------------- -->
+
+        @if (remainingTime > 0) {
+          <p class="resend-text">
+            {{ 'OTP_PAGE.REQUEST_A_RESEND_IN' | translate }}
+            <span>{{ remainingTime }} {{ 'OTP_PAGE.SECONDS' | translate }}</span>
+          </p>
+        } @else {
+          <p class="resend-text">
+            {{ 'OTP_PAGE.DIDNT_RECIEVE_ONE' | translate
+            }}<a (click)="resendOtp()">{{ 'OTP_PAGE.REQUEST_A_RESEND' | translate }}</a>
+          </p>
+        }
+        <button
+          type="submit"
+          class="btn primary-btn btn-submit"
+          [disabled]="isDisabled"
+          (click)="verifyOtp()">
+          {{ 'COMMON.SUBMIT' | translate }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,255 @@
+@import 'partials';
+header {
+  @apply min-h-20;
+  @apply border-b border-solid border-gray;
+  @apply bg-white;
+  @apply fixed;
+  @apply top-0;
+  @apply left-0;
+  @apply w-full;
+  @apply z-100;
+}
+.logo {
+  @apply relative;
+  @apply z-1;
+  &.removepointer {
+    @apply pointer-events-none;
+  }
+  &::after {
+    @apply empty-content;
+    @apply absolute;
+    @apply -right-[66px];
+    @apply -top-6;
+    @include background-image('header-partical.svg', no-repeat);
+    @apply w-20;
+    @apply h-[86px];
+    @apply -z-1;
+  }
+  figure {
+    @apply w-[145px];
+    @apply cursor-pointer;
+    img {
+      @apply w-full;
+    }
+  }
+}
+.header-content-block {
+  @apply pr-28 pl-24;
+  @include flex-all(flex, center);
+  @apply justify-between;
+  @apply pt-4;
+}
+.button-block {
+  @include flex-all(flex, center);
+  @apply gap-x-2.5;
+  .btn-signin {
+    @apply bg-secondary;
+    &:hover {
+      @apply bg-secondary-100;
+    }
+  }
+  .btn-signup {
+    @apply bg-primary;
+
+    &:hover {
+      @apply bg-primary-100;
+    }
+  }
+}
+
+.header-right-part {
+  @include flex-all(flex, center);
+  @apply gap-x-5;
+}
+
+//profile block///
+.profile-block {
+  @include flex-all(flex, center);
+  @apply gap-x-7;
+}
+.profile-icon-block {
+  @include flex-all(flex, center);
+  @apply gap-x-6;
+  a {
+    @apply cursor-pointer;
+  }
+  .image-setting {
+    @apply w-8;
+    @apply h-8;
+    img {
+      @apply h-full;
+    }
+  }
+
+  .image-notification {
+    @apply w-8;
+    @apply h-8;
+    @apply relative;
+    img {
+      @apply h-full;
+    }
+    .notification-small-box {
+      @apply absolute;
+      @apply -top-1;
+      @apply -right-1;
+      @apply w-2;
+      @apply h-2;
+      @apply rounded-full;
+      &.notification-green {
+        @apply bg-[#0FBE71];
+      }
+    }
+  }
+}
+.profile-details-block {
+  @include flex-all(flex, center);
+  @apply relative;
+  .name-block {
+    h2 {
+      @apply text-base;
+      @apply font-normal;
+      @apply font-primary;
+      @apply leading-none;
+      @apply text-black-1200;
+      @apply mb-1.5;
+      @include truncate(1);
+      @apply max-w-24;
+    }
+    p {
+      @apply text-xs;
+      @apply font-medium;
+      @apply font-primary;
+      @apply leading-none;
+      @apply text-gray-800;
+    }
+  }
+  .dropdown-area {
+    @apply cursor-pointer;
+    @include flex-all(flex, center);
+    @apply relative;
+  }
+
+  .image-block {
+    @apply mr-4;
+    @apply w-[50px];
+    @apply h-[50px];
+    @apply rounded-xl;
+    @include property('background', rgba(246, 85, 88, 0.1));
+    @apply overflow-hidden;
+    @include flex-all(flex, center, center);
+    img {
+      @apply size-full;
+      @apply object-cover;
+    }
+    span {
+      @apply text-lg;
+      @apply leading-none;
+      @apply font-semibold;
+      @apply text-primary;
+      @apply uppercase;
+    }
+    p {
+      @apply text-xl;
+      @apply leading-none;
+      @apply font-medium;
+      @apply text-primary;
+      @apply font-primary;
+    }
+  }
+  .down-arrow-icon {
+    @apply ml-7;
+    @apply cursor-pointer;
+    @apply w-3;
+    @apply h-2.5;
+    img {
+      @apply size-full;
+    }
+  }
+}
+::ng-deep .profile-dropdown-box {
+  @apply min-w-[350px] #{!important};
+  @apply max-w-[350px] #{!important};
+  @apply pt-[50px] pb-11 px-[35px] #{!important};
+  @apply rounded-[15px] #{!important};
+  @apply absolute;
+  @apply top-1.5;
+  @apply -left-24;
+  @apply bg-white #{!important};
+  .mat-mdc-menu-content {
+    @apply p-0 #{!important};
+  }
+}
+.profile-area {
+  @apply relative;
+  @include flex-all(flex, center);
+  @apply flex-col;
+  .icon-close {
+    @apply absolute;
+    @apply -top-8;
+    @apply -right-[18px];
+    @apply w-3;
+    @apply h-3;
+    @apply cursor-pointer;
+    @include transition;
+    img {
+      @apply w-full;
+      @apply h-full;
+    }
+  }
+  h3 {
+    @apply text-2xl;
+    @apply font-normal;
+    @apply font-primary;
+    @apply leading-none;
+    @apply text-black;
+    @apply mb-3.5;
+  }
+  p {
+    @apply text-label;
+    @apply font-normal;
+    @apply font-primary;
+    @apply leading-none;
+    @apply text-gray-800;
+    @apply mb-6;
+  }
+}
+.btn-logout {
+  @apply gap-x-2.5;
+  @apply w-full;
+  @apply border border-solid border-secondary;
+  @apply text-secondary;
+  &:hover {
+    @apply bg-secondary;
+    @apply text-white;
+    svg {
+      @apply fill-white;
+    }
+  }
+  svg {
+    @apply w-4;
+    @apply h-4;
+    @apply fill-secondary;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1199px) {
+  ::ng-deep .profile-dropdown-box {
+    @apply min-w-[230px] #{!important};
+    @apply max-w-[230px] #{!important};
+    @apply py-8 px-6 #{!important};
+    @apply -left-8;
+  }
+  .profile-area {
+    h3 {
+      @apply text-lg;
+      @apply leading-none;
+      @apply mb-5;
+    }
+  }
+}
+@media (max-width: 991px) {
+  .header-content-block {
+    @apply px-10;
+  }
+}

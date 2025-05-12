@@ -1,0 +1,44 @@
+<app-auth-header [showProfile]="true"></app-auth-header>
+<section class="about-step-page-wrap fadeInRight">
+  <figure class="page-partical-image">
+    <img src="images/page-common-particals.png" alt="Common Partical" />
+  </figure>
+  <div class="page-container">
+    <div class="about-step-page-cont relative">
+      <div class="moveble-block-first">
+        <figure>
+          <img src="images/Partner-Preference-image.png" alt="Common Partical" />
+        </figure>
+        <h1
+          [appTyping]="'QUESTIONCOMPLETE_PAGE.PARTNER_PREFERENCE'"
+          [typingSpeed]="120"
+          [typingDelay]="2500"></h1>
+        <h6
+          [appTyping]="'QUESTIONCOMPLETE_PAGE.PARTNER_PREFERENCE_SUB_HEADING'"
+          [typingSpeed]="120"
+          [typingDelay]="5000"
+          [typingDelayOnLangChange]="2500"></h6>
+      </div>
+      <div class="moveble-block-second">
+        <figure>
+          <img src="images/about-step-image-1.png" alt="About Step page caracter" />
+        </figure>
+        <h2
+          [appTyping]="'QUESTIONCOMPLETE_PAGE.GO_TO_PROFILE_BASICS'"
+          [typingSpeed]="120"
+          [typingDelay]="13000"></h2>
+        <h6
+          [appTyping]="'QUESTIONCOMPLETE_PAGE.GO_TO_PROFILE_BASICS_SUB_HEADING'"
+          [typingSpeed]="120"
+          [typingDelay]="15500"
+          [typingDelayOnLangChange]="2500"></h6>
+        <a class="btn primary-btn" (click)="goToProfileBasics()">{{ 'COMMON.NEXT' | translate }}</a>
+      </div>
+
+      <!-- <figure>
+        <img src="images/about-step-image-1.png" alt="About Step page caracter" />
+      </figure> -->
+      <!-- <a class="btn primary-btn" (click)="goToProfileBasics()">{{ 'COMMON.NEXT' | translate }}</a> -->
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+@import 'partials';
+
+::ng-deep .custom-warning-dialog {
+  .mat-mdc-dialog-container {
+    @apply w-[58.8rem];
+    @apply max-w-full;
+  }
+  .mat-mdc-dialog-surface {
+    @apply rounded-none #{!important};
+  }
+  .dialog-wrapper {
+    @apply text-center;
+    @apply pt-[66px] pb-5 pb-11 px-7;
+    @apply border-[5px] border-solid border-[#C19779];
+  }
+  .dialog-close-block {
+    @apply absolute;
+    @apply right-[5px];
+    @apply top-[5px];
+    a {
+      @apply block;
+      @apply h-7;
+      @apply w-[33px];
+      @apply bg-[#A0A0A0];
+      @apply rounded-none;
+      @apply leading-[26px];
+      @apply cursor-pointer;
+      @apply transition;
+      @include flex-all(flex, center, center);
+      svg {
+        @apply w-3;
+        @apply h-3;
+        @apply fill-white;
+        @apply transition;
+      }
+      &:hover {
+        @apply bg-[#C19779];
+      }
+    }
+  }
+  .warning-icon {
+    @apply w-[7rem];
+    @apply mt-12 mx-auto mb-8;
+  }
+  .dialog-content {
+    @apply max-w-full;
+    @apply mx-auto;
+    @apply px-5;
+    p {
+      @apply text-black;
+      @apply text-1xl;
+      @apply leading-8;
+      @apply font-semibold;
+      @apply tracking-[0.44px];
+    }
+  }
+  .dialog-actions {
+    @include flex-all(flex, center, center);
+    @apply pt-9;
+    button {
+      @apply mx-2;
+      @apply px-3;
+      @apply text-[15px];
+      @apply min-w-[91px];
+    }
+  }
+}
+::ng-deep .cdk-global-scrollblock {
+  @apply top-0 #{!important};
+}

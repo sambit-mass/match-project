@@ -1,0 +1,57 @@
+@import 'partials';
+.page-wrapper {
+  @apply pt-14;
+  .pge-character-image {
+    @apply bottom-[-17px];
+  }
+}
+.page-heading {
+  @apply mb-7 #{!important};
+}
+.question-wrapper {
+  @apply min-h-32;
+}
+
+.age-range {
+  @apply pt-6 pb-16;
+  @include flex-all(flex, center, center);
+  @apply w-max;
+  @apply mx-auto;
+  @apply relative;
+  .min-value,
+  .max-value {
+    @apply absolute;
+    @apply top-20;
+    @apply text-md;
+    @apply font-medium;
+    @apply font-primary;
+    @apply text-black;
+  }
+
+  .min-value {
+    @apply left-2;
+  }
+  .max-value {
+    @apply right-2;
+  }
+}
+::ng-deep .partner-preferrence-range {
+  .mdc-slider__thumb {
+    @apply pr-2;
+    .mdc-slider__value-indicator-text {
+      @apply text-xl;
+    }
+  }
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .page-container {
+    @apply w-[750px];
+  }
+}
+@media (min-width: 992px) {
+  .page-container {
+    @apply w-[914px];
+  }
+}

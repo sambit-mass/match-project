@@ -1,0 +1,230 @@
+@import 'partials';
+
+header {
+  @include flex-all(flex, center);
+  @apply mb-9;
+  @apply pl-7 pt-[18px] pb-2.5 pr-8;
+  @apply border-b-2 border-solid border-other-700;
+  @include property('box-shadow', 0px 3px 12px 0px rgba(158, 158, 158, 0.1));
+  .search-icon-block {
+    svg {
+      @apply w-6;
+      @apply h-6;
+      @apply fill-other-600;
+    }
+  }
+
+  .formcontrol {
+    @apply w-full;
+    @apply h-[52px];
+    @apply py-0 pr-[54px];
+    @apply border-none;
+    @apply bg-transparent;
+    @apply text-lg;
+    @apply leading-none;
+    @apply text-black-600;
+    &::placeholder {
+      @apply text-lg;
+      @apply leading-none;
+      @include property('color', rgba(0, 0, 0, 0.5));
+    }
+  }
+  .icon-cross-block {
+    @apply absolute;
+    @apply right-6;
+    @apply top-[21px];
+    @apply cursor-pointer;
+    @apply bg-black;
+    @apply w-9;
+    @apply h-9;
+    @include flex-all(flex, center, center);
+    @apply rounded-full;
+    @include transition;
+    &:hover {
+      @apply bg-primary;
+    }
+    svg {
+      @apply w-3;
+      @apply h-3;
+      @apply fill-white;
+    }
+  }
+}
+.category-area {
+  @apply pl-7 pr-8;
+  // @apply h-[calc(100vh-580px)];
+  p {
+    @apply text-lg;
+    @apply leading-6;
+    @apply font-primary;
+    @apply font-normal;
+    @apply text-black-600;
+    @apply max-w-[740px];
+    @apply mx-auto;
+    @apply text-center;
+  }
+}
+.category-box-wrapper {
+  @apply flex;
+  @apply gap-x-3;
+  @apply mb-10;
+  .category-common-box {
+    @apply cursor-pointer;
+    &.active-common-box {
+      .image-block {
+        box-shadow: $categoryItemShadow;
+        @apply scale-110;
+      }
+      p {
+        @apply text-xs;
+        @apply text-primary;
+      }
+    }
+    &:nth-of-type(2) {
+      p {
+        @apply max-w-[68px];
+      }
+    }
+  }
+  .image-block {
+    @apply w-[77px];
+    @apply h-[77px];
+    @include rounded(10);
+    box-shadow: $textareaShadow;
+    @apply mb-3.5;
+
+    img {
+      @apply w-full;
+      @apply h-full;
+      @apply object-contain;
+    }
+  }
+  p {
+    @apply text-xxs;
+    @apply font-primary;
+    @apply leading-[14px];
+    @apply font-semibold;
+    @apply text-gray-400;
+    @apply text-center;
+    @apply mb-0;
+  }
+}
+.primary-btn {
+  @apply min-w-[87px];
+  @apply mx-auto;
+}
+::ng-deep .searchquestion-autocomplete-box {
+  .mdc-notched-outline__trailing,
+  .mdc-notched-outline__leading {
+    @apply border-none;
+  }
+  .mat-mdc-text-field-wrapper {
+    @apply bg-transparent;
+    @apply pl-6 #{!important};
+    @apply h-[50px];
+  }
+  .mat-mdc-form-field-infix {
+    @apply py-0 #{!important};
+    @apply w-[calc(100%-20px)];
+  }
+  .mat-mdc-form-field-flex {
+    @apply w-full;
+  }
+  .mat-mdc-form-field-input-control {
+    @apply h-[52px] #{!important};
+    &::placeholder {
+      @apply text-lg;
+      @apply font-primary;
+      @apply leading-none;
+      @apply font-normal;
+      @include property('color', rgba(14, 12, 12, 0.5) !important);
+    }
+  }
+
+  a.autocomplete-cross {
+    @apply right-8;
+    @apply top-6;
+    &::after {
+      @apply h-[30px];
+      @apply top-2;
+    }
+    svg {
+      @apply w-[18px];
+      @apply h-[18px];
+    }
+  }
+}
+::ng-deep .search-autocpmplete-panel {
+  @apply opacity-100 #{!important};
+  @apply visible #{!important};
+  @apply bg-transparent #{!important};
+  @apply shadow-none #{!important};
+  @apply pt-0 #{!important};
+  @apply max-h-[392px] #{!important};
+  @apply min-h-[392px];
+  @apply p-0 #{!important};
+  @apply mt-[30px];
+  @apply absolute #{!important};
+  @apply w-[868px] #{!important};
+  @apply -left-[52px];
+  &::-webkit-scrollbar {
+    @apply w-1;
+  }
+  &::-webkit-scrollbar-track {
+    @apply bg-[#d1d0d0];
+  }
+  &::-webkit-scrollbar-thumb {
+    @apply bg-black-100;
+    @apply rounded-xl;
+  }
+  .mat-mdc-option {
+    @apply pr-0 pl-0 #{!important};
+    @apply rounded-none;
+    &:hover {
+      @apply bg-gray-300;
+    }
+    span {
+      @apply w-full;
+      @apply m-0;
+    }
+  }
+}
+.category-question-wrapper {
+  .category-common-question-block {
+    @apply pt-5 pb-5 px-10;
+    &:not(:last-of-type) {
+      @apply border-b border-solid border-[#EEEEEE];
+      @apply pb-8;
+    }
+    span {
+      @apply text-xs;
+      @apply leading-none;
+      @apply font-primary;
+      @apply font-medium;
+      @include property('color', rgba(0, 0, 0, 0.5));
+      @apply mb-2.5;
+      @apply block;
+    }
+    p {
+      @apply text-base;
+      @apply leading-none;
+      @apply font-primary;
+      @apply font-normal;
+      @apply text-black;
+      @apply text-left;
+      @apply m-0;
+      @apply max-w-max;
+    }
+  }
+}
+.no-records-block {
+  @apply text-center;
+  @apply mt-52;
+  p {
+    @apply text-3xl;
+    @apply leading-none;
+    @apply font-primary;
+    @apply font-semibold;
+    @apply text-black;
+  }
+}

@@ -1,0 +1,52 @@
+@import 'partials';
+
+.not-found-wrapper {
+  @apply h-[calc(100vh-118px)];
+  @apply w-full;
+  @include flex-all(flex, center, center);
+}
+
+.content-block {
+  @apply text-center;
+  @apply max-w-[650px];
+  p {
+    @apply text-black;
+    @apply text-2xl;
+    @apply leading-8;
+    @apply font-semibold;
+    @apply font-primary;
+    @apply mb-12;
+  }
+  a {
+    @apply w-[19rem];
+    @apply h-10;
+    @include flex-all(flex, center, center);
+    @include rounded(5);
+    @apply bg-primary;
+    @apply font-primary;
+    @apply text-[15px];
+    @apply font-bold;
+    @apply text-white;
+    @apply uppercase;
+    @include property('letter-spacing', 0.75px);
+    @apply mx-auto;
+    @apply cursor-pointer;
+    i {
+      @apply ml-4;
+      @include font-size(9);
+    }
+  }
+}
+//Responsive//
+@media only screen and (max-width: 840px) {
+  .content-block {
+    @apply px-8;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .content-block {
+    p {
+      @apply text-lg;
+    }
+  }
+}

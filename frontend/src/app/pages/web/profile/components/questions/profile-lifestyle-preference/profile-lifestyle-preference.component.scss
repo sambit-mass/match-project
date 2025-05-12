@@ -1,0 +1,75 @@
+@import 'partials';
+.dialog-chat-box {
+  @apply min-h-[333px];
+  @apply bg-white;
+  @apply rounded-3xl;
+  box-shadow: $textareaShadow;
+  @apply overflow-hidden;
+  @apply pt-6 px-5;
+  h3 {
+    @apply text-xl;
+    @apply font-primary;
+    @apply leading-none;
+    @apply font-semibold;
+    @apply text-black-700;
+    @apply mb-6;
+  }
+}
+.question-wrapper {
+  @apply min-h-[180px];
+}
+.chatbox-footer-part {
+  @apply py-5;
+  @apply border-t border-solid border-[#EEEEEE];
+  @include flex-all(flex, center, space-between);
+  .left-part {
+    @include flex-all(flex, center);
+    @apply gap-x-3.5;
+    .left-part-common-block {
+      @apply border border-solid border-[#EEEEEE];
+      @apply rounded-xl;
+      @include flex-all(flex, center);
+      @apply gap-x-1.5;
+      @apply py-3 pr-4 pl-3;
+      @include transition;
+      @apply cursor-pointer;
+      .image-block {
+        @apply w-5;
+        @apply h-5;
+        img {
+          @apply size-full;
+        }
+      }
+      p {
+        @apply text-md;
+        @apply leading-none;
+        @apply font-primary;
+        @apply font-semibold;
+        @apply text-black-500;
+      }
+      &:hover {
+        @apply border-primary;
+      }
+      &.ai-voice-block {
+        .image-block {
+          @apply w-5;
+          @apply h-6;
+        }
+      }
+      &.active-block {
+        @apply border-primary;
+      }
+    }
+  }
+}
+.button-block {
+  @include flex-all(flex, center);
+  @apply gap-x-2.5;
+  .btn-save {
+    @apply bg-black-1000;
+    @apply min-w-[121px];
+    &:hover {
+      @apply bg-primary;
+    }
+  }
+}

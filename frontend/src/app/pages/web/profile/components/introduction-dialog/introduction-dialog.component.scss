@@ -1,0 +1,91 @@
+@import 'partials';
+.dialog-chat-box {
+  @apply min-h-[274px];
+  @apply bg-white;
+  @apply rounded-3xl;
+  box-shadow: $textareaShadow;
+  @apply overflow-hidden;
+}
+.textarea-control-wrapper {
+  @apply min-h-[190px];
+  @apply pt-7;
+}
+.textarea-control {
+  @apply pt-0 pb-5 px-5;
+  @apply border-none;
+  @apply text-xl;
+  @apply leading-7;
+  @apply font-primary;
+  @apply font-semibold;
+  @apply text-black-700;
+  &::-webkit-scrollbar {
+    @apply w-1;
+  }
+  &::-webkit-scrollbar-track {
+    @apply bg-[#d1d0d0];
+    @apply rounded-xl;
+  }
+  &::-webkit-scrollbar-thumb {
+    @apply bg-black-100;
+    @apply rounded-xl;
+  }
+}
+.chatbox-footer-part {
+  @apply mx-5;
+  @apply py-5;
+  @apply border-t border-solid border-[#EEEEEE];
+  @include flex-all(flex, center, space-between);
+  .left-part {
+    @include flex-all(flex, center);
+    @apply gap-x-3.5;
+    .left-part-common-block {
+      @apply border border-solid border-[#EEEEEE];
+      @apply rounded-xl;
+      @include flex-all(flex, center);
+      @apply gap-x-1.5;
+      @apply py-3 pr-4 pl-3;
+      @include transition;
+      @apply cursor-pointer;
+      .image-block {
+        @apply w-5;
+        @apply h-5;
+        img {
+          @apply w-full;
+          @apply h-full;
+        }
+      }
+      p {
+        @apply text-md;
+        @apply leading-none;
+        @apply font-primary;
+        @apply font-semibold;
+        @apply text-black-500;
+      }
+      &:hover {
+        @apply border-primary;
+      }
+      &.ai-voice-block {
+        .image-block {
+          @apply w-5;
+          @apply h-6;
+        }
+      }
+      &.active-block {
+        @apply border-primary;
+      }
+      &.--active {
+        @apply border-primary;
+      }
+      &.disabled {
+        @apply bg-disabled;
+        @apply border-disabled;
+        @apply opacity-70;
+        @apply pointer-events-none;
+      }
+    }
+  }
+}
+.button-block {
+  @include flex-all(flex, center);
+  @apply gap-x-2.5;
+}

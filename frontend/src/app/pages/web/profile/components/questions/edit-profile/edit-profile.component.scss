@@ -1,0 +1,251 @@
+@import 'partials';
+.login-page-wrapper {
+  @apply mt-20;
+  @include background-image('login-background-image.png', no-repeat);
+  @apply bg-cover;
+  @include flex-all(flex, center, center);
+  @apply min-h-[calc(100vh-162px)];
+}
+.form-block {
+  @apply bg-white;
+  @apply pt-[68px] px-10 pb-12;
+  @apply my-20;
+  @apply max-w-[540px];
+  @apply w-full;
+  @apply rounded-3xl;
+  @apply relative;
+  .icon-cross {
+    @apply absolute;
+    @apply top-6;
+    @apply right-6;
+    @apply cursor-pointer;
+
+    svg {
+      @apply w-3.5;
+      @apply h-3.5;
+      @apply fill-gray-400;
+      &:hover {
+        @apply fill-black-400;
+      }
+    }
+  }
+  &.social-media {
+    @apply pt-[93px] pb-[66px] px-12;
+  }
+}
+.form-block-header-part {
+  @apply mb-14;
+  .title-block {
+    @apply flex;
+    @apply gap-x-6;
+  }
+  .icon-chevron-left {
+    @apply pt-1;
+    @apply cursor-pointer;
+    @apply w-3.5;
+    @include transition;
+    &:hover {
+      @apply opacity-70;
+    }
+    img {
+      @apply w-full;
+    }
+  }
+  h1 {
+    @apply text-3xl;
+    @apply leading-none;
+    @apply font-primary;
+    @apply font-black;
+    @apply text-black-900;
+  }
+  p {
+    @apply text-base;
+    @apply leading-[22px];
+    @apply font-primary;
+    @apply font-normal;
+    @apply text-gray-400;
+    @apply mt-5;
+    @apply max-w-[346px];
+    a {
+      @apply text-primary;
+      @apply font-bold;
+      @apply cursor-pointer;
+      @apply transition-all;
+      &:hover {
+        @apply underline;
+      }
+    }
+  }
+  &.social-form-header-part {
+    @apply text-center;
+    @apply mb-10;
+    .title-block {
+      @apply justify-center;
+    }
+    h1 {
+      strong {
+        @apply text-primary;
+      }
+    }
+    p {
+      @apply text-black-500;
+      @apply max-w-full;
+      @apply mt-2;
+    }
+  }
+}
+.icon-eye-close {
+  @include flex-all(flex, center);
+  @apply gap-x-2.5;
+  @apply text-2xl;
+  @apply font-primary;
+  @apply leading-none;
+  @apply font-normal;
+  @include property('color', rgba(102, 102, 102, 0.8));
+  @apply absolute;
+  @apply top-1/2 -translate-y-1/2;
+  @apply right-3.5;
+  @apply cursor-pointer;
+  @include transition;
+  &:hover {
+    @apply text-black-1000;
+    svg {
+      @apply fill-black-1000;
+    }
+  }
+  svg {
+    @apply w-[22px];
+    @apply h-[22px];
+    @include property('fill', rgba(102, 102, 102, 0.8));
+  }
+}
+.global-checkbox {
+  @apply mb-7;
+  @apply relative;
+  .auth-error-message {
+    @apply left-[30px];
+    @apply -bottom-5;
+    p {
+      @apply text-sm;
+      @apply font-normal;
+      @apply font-primary;
+      @apply text-error-100;
+    }
+  }
+}
+
+.app-store-block {
+  @include flex-all(flex, center, center);
+  @apply gap-x-2;
+  .image-block {
+    @apply w-24;
+    @apply h-7;
+    @apply cursor-pointer;
+    @apply inline-block;
+    img {
+      @apply w-full;
+      @apply h-full;
+      @apply object-cover;
+    }
+  }
+}
+// For social media css
+.social-links-wrap {
+  @apply flex;
+  @apply flex-col;
+  @apply gap-y-5;
+  @apply mb-[53px];
+  a {
+    @apply cursor-pointer;
+    @apply scale-100;
+    @apply transition-all;
+    &:hover {
+      @apply scale-[1.02];
+    }
+  }
+  .social-links-block {
+    @include flex-all(flex, center);
+    @apply gap-x-4;
+    @apply min-h-[56px];
+    @include rounded(12);
+    @apply pl-[127px];
+    .icon {
+      @apply w-[31px];
+      @include flex-all(flex, center, center);
+      svg {
+        @apply h-3.5;
+      }
+    }
+    span {
+      @apply text-base;
+      @apply leading-none;
+      @apply text-white;
+      @apply font-primary;
+      @apply font-medium;
+      @apply mt-1;
+      @apply tracking-[0.55px];
+      // letter-spacing: -2%;
+    }
+    &.facebook {
+      @apply bg-[#3B5998];
+    }
+    &.google {
+      @apply bg-[#CF4332];
+    }
+    &.apple {
+      @apply bg-[#2D3748];
+    }
+    &.mail {
+      @apply border border-[#CACACA];
+      span {
+        @apply text-[#2D3748];
+      }
+    }
+  }
+  .divider {
+    @apply relative;
+    @include flex-all(flex, center, center);
+    @apply py-3.5;
+    span {
+      @apply text-xl;
+      @apply inline-block;
+      @apply px-5;
+      @apply bg-white;
+      @apply text-gray-400;
+      @apply relative;
+      @apply z-1;
+      @apply uppercase;
+    }
+    &::after {
+      @apply empty-content;
+      @apply absolute;
+      @apply left-0;
+      @apply top-1/2;
+      @apply translate-y-1/2;
+      @apply w-full;
+      @apply h-0.5;
+      @include property('background', rgba(102, 102, 102, 0.25));
+    }
+  }
+}
+
+.chatbox-footer-part {
+  @apply py-5;
+  @apply border-t border-solid border-[#EEEEEE];
+  @include flex-all(flex, center, space-between);
+  .left-part {
+    @include flex-all(flex, center);
+    @apply gap-x-3.5;
+  }
+}
+.button-block {
+  @include flex-all(flex, center);
+  @apply gap-x-2.5;
+  .btn-save {
+    @apply bg-black-1000;
+    @apply min-w-[121px];
+    &:hover {
+      @apply bg-primary;
+    }
+  }
+}

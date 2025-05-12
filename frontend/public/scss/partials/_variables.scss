@@ -1,0 +1,58 @@
+/* 
+ * * Global Variables
+ *
+ * @designer: Angshuman Roy
+ */
+$CardContentShadow: 0px 4px 13px 0px #9e9e9e2e;
+$calendarShadow: 0px 5px 16px 0px rgba(158, 158, 158, 0.5);
+$Shadowsm: 0px 5px 16px 0px rgba(158, 158, 158, 0.05);
+$Shadowmd: 0px 0px 13px 0px rgba(158, 158, 158, 0.18);
+$selectboxShadow: 0px 16px 34px 0px rgba(0, 0, 0, 0.05);
+$dateRangeButton: linear-gradient(152.76deg, #f65f65 20.06%, #ed1c24 51.7%, #871015 114.49%);
+$addMoreButtonShadow: 0px 0px 10px 0px #9e9e9e26;
+$selectedProfilePictureShadow: 0px 0px 15px 0px #ff0000cc;
+$categoryItemShadow: 0px 0px 10px 0px rgba(255, 0, 0, 0.5);
+$textareaShadow: 0px 4px 13px 0px rgba(158, 158, 158, 0.18);
+
+/* Animations */
+@keyframes fadeInRightStayFadeOutLeft {
+  0% {
+    transform: translateX(100%);
+    @apply opacity-0;
+  }
+  20% {
+    transform: translateX(0);
+    @apply opacity-100;
+  }
+  80% {
+    transform: translateX(0);
+    @apply opacity-100;
+  }
+  100% {
+    transform: translateX(-100%);
+    @apply opacity-0;
+    @apply hidden;
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    transform: translateX(100%);
+    @apply opacity-0;
+  }
+  100% {
+    transform: translateX(0);
+    @apply opacity-100;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    @apply opacity-0;
+    transform: translateY(60%);
+  }
+  to {
+    @apply opacity-100;
+    transform: translateY(0);
+  }
+}

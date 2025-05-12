@@ -1,0 +1,26 @@
+<!-- <div class="stepper-block"> -->
+<h2>
+  {{ 'COMMON_QUESTION.LETS_BEGIN' | translate }} ! –
+  {{ 'COMMON_QUESTION.TELL_YOURSELF' | translate }}
+</h2>
+<p>
+  {{ count }} {{ 'COMMON_QUESTION.OF' | translate }}
+  {{ questionLength }}
+  {{ 'COMMON_QUESTION.STEPS_COMPLETED' | translate }} |<span>
+    {{ language === 'chinese' ? questionListObject.zh : questionListObject.en }}</span
+  >
+</p>
+<div class="stepper-row">
+  @for (item of nineArray; track $index) {
+    <div class="stepper-box" [ngClass]="{ active: isActive > $index }"></div>
+  }
+  <!-- <div class="stepper-box"></div>
+    <div class="stepper-box"></div>
+    <div class="stepper-box"></div>
+    <div class="stepper-box"></div>
+    <div class="stepper-box"></div>
+    <div class="stepper-box"></div>
+    <div class="stepper-box"></div>
+    <div class="stepper-box"></div> -->
+</div>
+<!-- </div> -->

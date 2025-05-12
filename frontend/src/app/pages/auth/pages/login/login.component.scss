@@ -1,0 +1,220 @@
+@import 'partials';
+.login-page-wrapper {
+  @apply mt-20;
+  @include background-image('login-background-image.png', no-repeat);
+  @apply bg-cover;
+  @include flex-all(flex, center, center);
+  @apply min-h-[calc(100vh-162px)];
+}
+.form-block {
+  @apply bg-white;
+  @apply pt-[68px] px-10 pb-12;
+  @apply my-20;
+  @apply max-w-[540px];
+  @apply w-full;
+  @apply rounded-3xl;
+  h1 {
+    @apply text-3xl;
+    @apply leading-none;
+    @apply font-primary;
+    @apply font-black;
+    @apply text-black-900;
+    @apply mb-9;
+  }
+}
+.icon-eye-close {
+  @include flex-all(flex, center);
+  @apply gap-x-2.5;
+  @apply text-2xl;
+  @apply font-primary;
+  @apply leading-none;
+  @apply font-normal;
+  @include property('color', rgba(102, 102, 102, 0.8));
+  @apply absolute;
+  @apply top-1/2 -translate-y-1/2;
+  @apply right-3.5;
+  @apply cursor-pointer;
+  @include transition;
+  &:hover {
+    @apply text-black-1000;
+    svg {
+      @apply fill-black-1000;
+    }
+  }
+  svg {
+    @apply w-[22px];
+    @apply h-[22px];
+    @include property('fill', rgba(102, 102, 102, 0.8));
+  }
+}
+.primary-btn {
+  @apply text-lg;
+  @apply font-primary;
+  @apply leading-none;
+  @apply font-semibold;
+  @apply w-full;
+  @apply h-14;
+  @apply bg-black-500;
+  @apply pt-5 pb-4;
+  &:hover {
+    @apply bg-primary;
+  }
+  &.btn-submit {
+    @apply bg-primary;
+  }
+  &:hover {
+    @apply bg-primary;
+  }
+}
+.password-block {
+  @include flex-all(flex, center, space-between);
+  @apply mb-7;
+  a {
+    @apply text-base;
+    @apply leading-none;
+    @apply font-primary;
+    @apply font-normal;
+    @apply capitalize;
+    @apply text-black-500;
+    @apply cursor-pointer;
+    @include transition;
+    &:hover {
+      @apply text-secondary;
+    }
+  }
+}
+.global-checkbox {
+  @apply mb-0;
+  .checkmark {
+    @apply mt-0.5;
+    @apply absolute;
+    @apply top-0;
+    @apply left-0;
+    @apply h-[18px];
+    @apply w-[18px];
+    @apply rounded-sm;
+    @apply border border-solid border-gray-400;
+  }
+  .customCheckbox input:checked ~ .checkmark {
+    @apply bg-other;
+    @apply border-other;
+  }
+  .customCheckbox .checkmark:after {
+    @apply left-[5px];
+    @apply top-0;
+    @apply w-1.5;
+    @apply h-3;
+  }
+}
+.or-block {
+  @apply relative;
+  @apply text-center;
+  @apply mt-8;
+  span {
+    @apply text-xl;
+    @apply leading-none;
+    @apply font-primary;
+    @apply font-normal;
+    @apply text-gray-400;
+    @apply uppercase;
+    @apply bg-white;
+    @apply px-6;
+    @apply z-10;
+    @apply relative;
+  }
+  &::after {
+    @apply empty-content;
+    @apply absolute;
+    @apply right-0;
+    @apply top-2;
+    @apply h-0.5;
+    @apply w-full;
+    @apply bg-[rgba(102,102,102,0.23)];
+  }
+}
+.social-icon-block {
+  @apply mb-10;
+  @include flex-all(flex, center, center);
+  @apply gap-x-4;
+  @apply mt-8;
+  .icon-block {
+    @include flex-all(flex, center, center);
+    @apply w-16;
+    @apply h-16;
+    @include rounded(9);
+    @apply cursor-pointer;
+    @include transition;
+    &:hover {
+      @apply scale-110;
+    }
+    &.icon-facebook {
+      @include property('background', linear-gradient(360deg, #3b5998 0%, #1b52c5 100%));
+    }
+    &.icon-google {
+      @include property('background', linear-gradient(180deg, #cf4332 0%, #b31300 100%));
+    }
+    &.icon-app-store {
+      @include property('background', linear-gradient(360deg, #2d3748 0%, #49566b 100%));
+    }
+  }
+}
+.sign-up-text {
+  @apply text-base;
+  @apply leading-none;
+  @apply font-primary;
+  @apply font-normal;
+  @apply text-gray-400;
+  @apply mb-3.5;
+
+  a {
+    @apply font-medium;
+    @apply text-other;
+    @apply cursor-pointer;
+    @include transition;
+    @apply relative;
+    &:hover {
+      @apply text-black-1000;
+      &::after {
+        @apply bg-black-1000;
+      }
+    }
+    &::after {
+      @apply empty-content;
+      @apply absolute;
+      @apply bottom-[3px];
+      @apply left-0;
+      @apply h-px;
+      @apply w-full;
+      @apply bg-secondary;
+    }
+  }
+}
+.learn-more-text {
+  @apply text-base;
+  @apply leading-6;
+  @apply font-primary;
+  @apply font-normal;
+  @apply text-gray-400;
+  @apply max-w-[364px];
+  a {
+    @apply font-medium;
+    @apply text-black;
+    @apply cursor-pointer;
+    @include transition;
+    &:hover {
+      @apply text-secondary;
+    }
+  }
+}
+::ng-deep .login-toastr-block {
+  .custom-toastr-block {
+    @apply mb-9 #{!important};
+  }
+}
+
+// Responsive
+@media (max-width: 1399px) {
+  .icon-eye-close {
+    @apply text-md;
+  }
+}

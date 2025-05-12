@@ -1,0 +1,148 @@
+<div>
+  <form [formGroup]="questionForm">
+    @for (item of singleQuestionList; track item; let mainIndex = $index) {
+      @if (item.q_id === 10 && activeQuestionerIdType.id === item.q_id) {
+        <!---------------------------category 1a---------------------->
+        <div>
+          <header>
+            <h1 class="page-heading">
+              {{ language === 'chinese' ? item.question.zh : item.question.en }}
+            </h1>
+            <span class="sub-heading">{{
+              language === 'chinese' ? item.question_desc.zh : item.question_desc.en
+            }}</span>
+          </header>
+          <div class="content-card-wrap">
+            <div class="content-card">
+              <label class="card-heading"
+                >{{ 'PARTNER_PREFERENCE.SET_HEIGHT' | translate }}
+                <span>{{ 'PARTNER_PREFERENCE.CENTIMETER' | translate }}</span></label
+              >
+              <div class="age-range">
+                <span class="min-value">{{ min }}</span>
+                <mat-slider
+                  class="custom-range partner-preferrence-range"
+                  #slider
+                  [discrete]="thumbLabel"
+                  [max]="max"
+                  [min]="min">
+                  <input matSliderThumb formControlName="height" />
+                </mat-slider>
+                <span class="max-value">{{ max }}</span>
+              </div>
+              <div class="chatbox-footer-part">
+                <div class="left-part">
+                  <button type="button" class="btn transparent-btn" (click)="closeDialog.emit()">
+                    {{ 'COMMON.CANCEL' | translate }}
+                  </button>
+                </div>
+                <div class="button-block">
+                  <button
+                    type="button"
+                    class="btn primary-btn btn-save"
+                    (click)="saveAnswer(item.q_id, item.field_name, item.options)"
+                    [disabled]="isDisabled">
+                    {{ 'COMMON.SAVE' | translate }}
+                  </button>
+                  @if (allQuestionId.length > 1) {
+                    <button
+                      type="button"
+                      class="btn primary-btn"
+                      (click)="goToNextStep(item.q_id, item.field_name, item.options)"
+                      [disabled]="isDisabled">
+                      {{ 'COMMON.SAVE_AND_NEXT' | translate }}
+                    </button>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      } @else {
+        <!---------------------------category 1a---------------------->
+        @if (activeQuestionerIdType.id === item.q_id) {
+          <div>
+            <header>
+              <h1 class="page-heading">
+                {{ language === 'chinese' ? item.question.zh : item.question.en }}
+              </h1>
+              <span class="sub-heading">{{
+                language === 'chinese' ? item.question_desc.zh : item.question_desc.en
+              }}</span>
+            </header>
+            <div class="content-card-wrap">
+              <div class="content-card">
+                <label class="card-heading">
+                  @if (item.selection_type === 0) {
+                    {{ 'COMMON_QUESTION.SELECT_ONLY_ONE' | translate }}
+                  } @else {
+                    {{ 'COMMON_QUESTION.PICK_FEW_ITEMS' | translate }}
+                    <span>({{ 'COMMON.MAX' | translate }}-4)</span>
+                  }
+                </label>
+                <div class="question-wrapper">
+                  <ul class="multi-select-wrap" [formArrayName]="item.field_name">
+                    <!--*** "--active" class will be toggled in the "li"s on click of the "li" below ***-->
+                    @for (option of item.options; track option; let optionIndex = $index) {
+                      <li
+                        class="multi-select-option"
+                        [ngClass]="{
+                          '--active': option.selected,
+                        }">
+                        <input
+                          type="checkbox"
+                          [formControlName]="$index"
+                          (change)="
+                            onclickAnswer(
+                              option.op_id,
+                              item.selection_type,
+                              item.field_name,
+                              mainIndex,
+                              optionIndex,
+                              option.en
+                            )
+                          " />
+                        <span>{{ language === 'chinese' ? option.zh : option.en }}</span>
+                      </li>
+                    }
+                  </ul>
+                </div>
+                <div class="chatbox-footer-part">
+                  <div class="left-part">
+                    <button type="button" class="btn transparent-btn" (click)="closeDialog.emit()">
+                      {{ 'COMMON.CANCEL' | translate }}
+                    </button>
+                  </div>
+                  <div class="button-block">
+                    <button
+                      type="button"
+                      class="btn primary-btn btn-save"
+                      (click)="saveAnswer(item.q_id, item.field_name, item.options)"
+                      [disabled]="isDisabled"
+                      [ngClass]="{
+                        disabled: !selectedId[item.field_name].length,
+                      }">
+                      {{ 'COMMON.SAVE' | translate }}
+                    </button>
+                    @if (allQuestionId.length > 1) {
+                      <button
+                        type="button"
+                        class="btn primary-btn"
+                        (click)="goToNextStep(item.q_id, item.field_name, item.options)"
+                        [ngClass]="{
+                          disabled: !this.selectedId[item.field_name].length,
+                        }"
+                        [disabled]="isDisabled">
+                        {{ 'COMMON.SAVE_AND_NEXT' | translate }}
+                      </button>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      }
+    }
+  </form>
+</div>

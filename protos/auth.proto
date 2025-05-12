@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+service AuthService {
+    /* Login related service START */
+
+    rpc generateAuthCode(LoginRequest) returns (LoginResponse) {}
+    rpc generateToken(GenerateTokenRequest) returns (GenerateAuthTokenResponse) {}
+    rpc regenerateToken(ReGenerateTokenRequest) returns (ReGenerateTokenResponse) {}
+    rpc generateAuthCodeFromRegistration(GenerateAuthCodeFromRegistrationRequest) returns (GenerateAuthCodeFromRegistrationResponse) {}
+
+    /* Login related service END */
+}
+
+message Empty {}
+
+/******************************** FOR GENERATE AUTH CODE START ********************************************/
+message LoginRequest {
+    string email = 1;
+    string password = 2;
+    int32 login_type = 3;
+    optional string social_id = 4;
+    optional string social_token = 5;
+    optional int32 social_type = 6;
+    optional int32 device_os_type = 7;
+    optional string app_version = 8;
+    optional string device_uid = 9;
+    optional string device_token = 10;
+    optional string device_name = 11;
+    optional string device_model = 12;
+    optional string device_version = 13;
+    optional string browser_id = 14;
+    optional string browser_version = 15;
+    optional string session_id = 16;
+    optional string browser_name = 17;
+    optional int32 auth_user_id = 18;
+}
+
+message LoginResponseDataSets {
+  string authorization_code = 1;
+  string redirect_url = 2;
+}
+
+message LoginResponse {
+    bool status = 1;
+    int32 status_code = 2;
+    LoginResponseDataSets data_sets = 3;
+    string status_message = 4;
+}
+/******************************** FOR GENERATE AUTH CODE END ********************************************/
+
+/******************************** FOR GENERATE AUTH TOKEN START ********************************************/
+message GenerateTokenRequest {
+    string authorization_code = 1;
+}
+
+message GenerateAuthTokenResponseDataSets {
+    string access_token = 1;
+    string refresh_token = 2;
+    string refresh_token_expire_timestamp = 3;
+}
+
+message GenerateAuthTokenResponse {
+    bool status = 1;
+    int32 status_code = 2;
+    GenerateAuthTokenResponseDataSets data_sets = 3;
+    string status_message = 4;
+}
+/******************************** FOR GENERATE AUTH TOKEN END ********************************************/
+
+/******************************** FOR RE-GENERATETOKEN START ********************************************/
+message ReGenerateTokenRequest {
+    string refresh_token = 1;
+    refToken_loginDetails token_params = 2;
+}
+
+message refToken_loginDetails {
+    string username = 1;
+    string user_id = 2;
+    int32 user_type = 3;
+    string client_id = 4;
+}
+
+message ReGenerateTokenResponseDataSets {
+    string access_token = 1;
+    string refresh_token = 2;
+    string refresh_token_expire_timestamp = 3;
+}
+  
+message ReGenerateTokenResponse {
+    bool status = 1;
+    int32 status_code = 2;
+    ReGenerateTokenResponseDataSets data_sets = 3;
+    string status_message = 4;
+}
+/******************************** FOR RE-GENERATETOKEN END ********************************************/
+
+/******************************** FOR GENERATE AUTH CODE FROM OTP START ********************************************/
+message GenerateAuthCodeFromRegistrationRequest {
+    string email = 1;
+    int32 device_os_type = 2;
+    string app_version = 3;
+    string device_uid = 4;
+    string device_token = 5;
+    string device_name = 6;
+    string device_model = 7;
+    string device_version = 8;
+    string browser_id = 9;
+    string browser_version = 10;
+    string session_id = 11;
+    string browser_name = 12;
+    int32 is_social_reg = 13;
+    string social_id = 14;
+}
+
+message GenerateAuthCodeFromRegistrationResponseDataSets {
+  string authorization_code = 1;
+  string redirect_url = 2;
+}
+
+message GenerateAuthCodeFromRegistrationResponse {
+    bool status = 1;
+    int32 status_code = 2;
+    GenerateAuthCodeFromRegistrationResponseDataSets data_sets = 3;
+    string status_message = 4;
+}
+/******************************** FOR GENERATE AUTH CODE FROM OTP END ********************************************/

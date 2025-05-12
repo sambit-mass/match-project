@@ -1,0 +1,124 @@
+@import 'partials';
+.login-page-wrapper {
+  @apply mt-20;
+  @include background-image('login-background-image.png', no-repeat);
+  @apply bg-fixed;
+  @apply bg-center;
+  @apply bg-cover;
+  @include flex-all(flex, center, center);
+  @apply min-h-[calc(100vh-162px)];
+}
+.form-block {
+  @apply bg-white;
+  @apply pt-20 pb-11;
+  @apply my-20;
+  @apply max-w-[540px];
+  @apply w-full;
+  @apply rounded-3xl;
+  @apply relative;
+  .icon-cross {
+    @apply absolute;
+    @apply top-6;
+    @apply right-6;
+    @apply cursor-pointer;
+    svg {
+      @apply w-3.5;
+      @apply h-3.5;
+      @apply fill-gray-400;
+      &:hover {
+        @apply fill-black-400;
+      }
+    }
+  }
+}
+.form-block-header-part {
+  @apply mb-10 px-10;
+
+  h1 {
+    @apply text-3xl;
+    @apply leading-none;
+    @apply font-primary;
+    @apply font-black;
+    @apply text-black-900;
+    @apply mb-5;
+  }
+  p {
+    @apply text-base;
+    @apply leading-[22px];
+    @apply font-primary;
+    @apply font-normal;
+    @apply text-gray-400;
+    @apply max-w-[346px];
+    a {
+      @apply text-primary;
+      @apply font-bold;
+      @apply cursor-pointer;
+      @apply transition-all;
+      &:hover {
+        @apply underline;
+      }
+    }
+  }
+  ::ng-deep {
+    .custom-toastr-block {
+    }
+  }
+}
+.body-part {
+  @apply px-10;
+}
+.formcontrol-wrapper {
+  @include flex-all(flex, center);
+  @apply gap-x-3;
+}
+.formcontrol {
+  @apply text-center;
+  @apply px-0;
+  @apply text-xl;
+  @apply leading-none;
+}
+
+.primary-btn {
+  @apply text-lg;
+  @apply font-primary;
+  @apply leading-none;
+  @apply font-medium;
+  @apply w-full;
+  @apply h-14;
+  @apply capitalize;
+  @apply pt-5 pb-4;
+  @apply bg-primary;
+  &:hover {
+    @apply bg-black-1000;
+  }
+}
+.resend-text {
+  @apply text-base;
+  @apply font-primary;
+  @apply leading-none;
+  @apply font-normal;
+  @apply text-gray-400;
+  @apply text-center;
+  @apply pt-6 pb-[60px];
+
+  a {
+    @apply font-bold;
+    @apply text-primary;
+    @apply pl-1;
+    @apply cursor-pointer;
+    &:hover {
+      @apply text-black-1000;
+    }
+  }
+}
+.button-block {
+  @include flex-all(flex, center, center);
+  @apply gap-x-3;
+  .primary-btn {
+    @apply pt-4;
+    @apply w-fit;
+    @apply text-base;
+    @apply leading-none;
+    @apply font-semibold;
+  }
+}

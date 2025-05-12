@@ -1,0 +1,161 @@
+@import 'partials';
+footer {
+  @apply bg-black-300;
+  @apply py-16 px-32;
+  span {
+    @apply text-xxs;
+    @apply font-primary;
+    @apply leading-none;
+    @apply font-medium;
+    @include property('color', rgba(255, 255, 255, 0.4));
+    @apply mb-7;
+    @apply inline-block;
+    @apply uppercase;
+  }
+}
+.footer-left-part {
+  @apply min-h-[468px];
+  @apply relative;
+
+  p {
+    @apply text-[40px];
+    @apply font-primary;
+    @apply leading-[45px];
+    @apply font-normal;
+    @apply text-white;
+    @apply mb-8;
+    @apply max-w-80;
+  }
+}
+.formcontrol-wrapper {
+  @apply max-w-[484px];
+  a {
+    @apply absolute;
+    @apply right-5;
+    @apply top-6;
+    @apply cursor-pointer;
+    img {
+      @apply w-4;
+    }
+  }
+}
+.formcontrol {
+  @apply border border-solid border-other-500;
+  @apply bg-transparent;
+  @include property('color', rgba(255, 255, 255, 0.4));
+  @apply pl-5 pr-12;
+  &::placeholder {
+    @include property('color', rgba(255, 255, 255, 0.4));
+  }
+}
+.social-icons {
+  @include flex-all(flex, center);
+  @apply gap-x-7;
+  @apply absolute;
+  @apply bottom-0;
+  .image-block {
+    @apply w-5;
+    @include transition;
+    @apply cursor-pointer;
+    &:hover {
+      @apply scale-125;
+    }
+    img {
+      @apply w-full;
+      @apply h-auto;
+      @apply object-cover;
+    }
+  }
+}
+.footer-right-part {
+  @apply min-h-[468px];
+  @apply relative;
+}
+nav {
+  @apply mb-8;
+  ul {
+    @apply h-[156px];
+    @apply columns-2;
+    @apply flex flex-col flex-wrap;
+
+    li {
+      @apply w-1/2;
+      a {
+        @apply text-md;
+        @apply font-primary;
+        @apply leading-none;
+        @apply font-normal;
+        @apply text-white;
+        @apply mb-4;
+        @apply inline-block;
+        @include transition;
+        @apply cursor-pointer;
+        @apply relative;
+        @apply pb-px;
+
+        &::after {
+          @apply empty-content;
+          @apply w-full;
+          @apply h-px;
+          @apply bg-primary;
+          @apply absolute;
+          @apply bottom-0;
+          @apply left-0;
+          @apply w-0;
+          @include transition;
+        }
+        &:hover {
+          @apply text-primary;
+          &::after {
+            @apply w-full;
+          }
+        }
+      }
+    }
+  }
+}
+.contact-details {
+  p {
+    &:not(:last-of-type) {
+      @apply mb-3.5;
+    }
+    a {
+      @apply text-md;
+      @apply font-primary;
+      @apply leading-none;
+      @apply font-normal;
+      @apply text-white;
+      @include transition;
+      @apply relative;
+      &::after {
+        @apply empty-content;
+        @apply w-0;
+        @apply h-px;
+        @apply bg-primary;
+        @apply absolute;
+        @apply bottom-0;
+        @apply left-0;
+        @include transition;
+      }
+      &:hover {
+        @apply text-primary;
+        &::after {
+          @apply w-full;
+        }
+      }
+    }
+  }
+}
+.copyright-part {
+  @include flex-all(flex, center, space-between);
+  @apply absolute;
+  @apply bottom-0;
+  @apply w-full;
+  p {
+    @apply text-xxs;
+    @apply font-primary;
+    @apply leading-none;
+    @apply font-medium;
+    @include property('color', rgba(255, 255, 255, 0.4));
+  }
+}

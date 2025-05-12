@@ -1,0 +1,99 @@
+@import 'partials';
+
+.custom-toastr-block {
+  @include rounded(10);
+  @apply py-5 pr-2.5 pl-5;
+  @apply flex;
+  @apply gap-x-5;
+  @apply relative;
+  @apply mt-9;
+  animation: fadeIn 0.6s ease-in both;
+  animation-delay: 0.2s;
+  @include transition;
+  .icon-cross {
+    @apply absolute;
+    @apply top-3.5;
+    @apply right-2.5;
+    @apply cursor-pointer;
+
+    svg {
+      @apply w-3.5;
+      @apply h-3.5;
+      @apply fill-black-400;
+      @include transition;
+      &:hover {
+        @apply fill-red-400;
+      }
+    }
+  }
+  .content-area {
+    @apply w-[calc(100%-64px)];
+    h6 {
+      @apply text-[21px];
+      @apply font-primary;
+      @apply leading-none;
+      @apply font-bold;
+      @apply text-black-1000;
+      @apply mb-1.5;
+    }
+    p {
+      @apply text-sm;
+      @apply font-primary;
+      @apply leading-[18px];
+      @apply font-normal;
+      @apply text-black-400;
+      @apply mt-0;
+      a {
+        @apply text-primary;
+        @apply relative;
+        @include transition;
+        @apply cursor-pointer;
+        @apply ml-1;
+        @apply font-bold;
+        @apply underline;
+
+        &:hover {
+          @apply no-underline;
+        }
+      }
+    }
+  }
+  .icon-block {
+    @apply w-11;
+    @apply h-11;
+    @apply rounded-full;
+    @include flex-all(flex, center, center);
+    svg {
+      @apply w-1;
+      @apply h-3.5;
+      @apply fill-white;
+    }
+  }
+  &.success-block {
+    @apply bg-green-600;
+    .icon-block {
+      @apply bg-green-500;
+      svg {
+        @apply w-3;
+        @apply h-3;
+      }
+    }
+  }
+  &.error-block {
+    @apply bg-red-300;
+    .icon-block {
+      @apply bg-red-400;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    @apply opacity-0;
+    @include property('transform', translateY(-40%));
+  }
+  to {
+    @apply opacity-100;
+    @include property('transform', translateY(0));
+  }
+}

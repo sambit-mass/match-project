@@ -1,0 +1,200 @@
+@import 'partials';
+
+::ng-deep .crop-image-modal {
+  @apply w-[70rem];
+  @include property('max-width', initial !important);
+
+  .mat-mdc-dialog-surface {
+    @include rounded(24);
+  }
+
+  .dialog-content {
+    @apply pt-8 px-9 pb-11;
+    @apply text-center;
+    @apply relative;
+    .close-btn {
+      @apply absolute;
+      @apply right-5;
+      @apply top-5;
+      @apply cursor-pointer;
+      svg {
+        @apply w-3.5;
+        @apply h-3.5;
+        @apply fill-gray-400;
+        &:hover {
+          @apply fill-black-400;
+        }
+      }
+    }
+    h1 {
+      @apply text-1xl;
+      @apply leading-none;
+      @apply font-bold;
+      @apply font-primary;
+      @apply text-black-1000;
+      @apply mb-6;
+    }
+
+    .corped-image ::ng-deep {
+      @apply w-[250px];
+      // @apply h-[265px];
+      @apply h-auto;
+      @apply mx-auto;
+      @include rounded(24);
+      @apply mb-[68px];
+
+      img {
+        @apply w-full;
+        @apply h-full;
+        @apply object-cover;
+      }
+
+      .ngx-ic-overlay {
+        @apply outline-none;
+      }
+    }
+
+    .crop-functionality {
+      @apply px-12;
+      @apply gap-x-3;
+      @apply mb-[72px];
+      @apply cursor-pointer;
+      @include flex-all(flex, center, center);
+
+      a {
+        @apply shrink-0;
+        @apply rounded-full;
+        @apply w-[34px];
+        @apply h-[34px];
+        box-shadow: $CardContentShadow;
+        @include flex-all(flex, center, center);
+        @apply cursor-pointer;
+      }
+    }
+
+    .crop-range {
+      @apply min-w-[218px] #{!important};
+      @apply w-full;
+
+      .mdc-slider__thumb-knob {
+        background: $dateRangeButton !important;
+        @apply border-0 #{!important};
+        @apply w-7;
+        @apply h-7;
+      }
+
+      .mdc-slider__track--inactive {
+        @apply bg-[#F45D64] #{!important};
+      }
+
+      .mdc-slider__track--inactive,
+      .mdc-slider__track--active {
+        @apply h-2;
+        @apply rounded-none #{!important};
+      }
+
+      .mdc-slider__track--active_fill {
+        @apply border-primary #{!important};
+        @apply border-t-8;
+      }
+
+      .mat-ripple {
+        @apply hidden #{!important};
+        @apply pointer-events-none #{!important};
+      }
+    }
+
+    .primary-btn {
+      @apply text-lg;
+      @apply leading-[56px];
+      @apply w-4/5;
+      @apply inline-block;
+      @include rounded(12);
+      @apply cursor-pointer;
+    }
+
+    ::ng-deep .sliderContainer-m,
+    .m {
+      @include flex-all(flex, center, center);
+      @apply gap-x-3.5;
+      @apply pt-8 pb-10 px-0;
+      @apply m-0;
+      .horizontal-w,
+      ly-slider.w {
+        @apply w-[270px];
+        @apply h-[54px];
+      }
+      .wrapper-o,
+      .o {
+        @apply h-2.5;
+        .y-bg-.sliderContainer-mq {
+          @apply bg-[#F45D64];
+        }
+        .track-p,
+        .q {
+          @apply border-primary;
+        }
+        .thumb-t,
+        .t {
+          background: $dateRangeButton;
+          @apply w-7;
+          @apply h-7;
+          @include property('transform', rotateZ(1deg));
+        }
+      }
+      > button {
+        @apply shrink-0;
+        @apply rounded-full;
+        @apply w-[34px];
+        @apply h-[34px];
+        box-shadow: $CardContentShadow;
+        @include flex-all(flex, center, center);
+        @apply cursor-pointer;
+        @apply min-w-fit;
+        @apply min-h-fit;
+        @apply text-black-1000;
+        @apply px-0;
+      }
+    }
+  }
+  .scroll-wrapper {
+    @apply h-[calc(100vh-344px)];
+    @apply max-h-[594px];
+    @apply overflow-y-auto;
+    @apply pr-1;
+    &::-webkit-scrollbar {
+      @apply w-1;
+    }
+    &::-webkit-scrollbar-track {
+      @apply bg-[#d1d0d0];
+      @apply rounded-xl;
+    }
+    &::-webkit-scrollbar-thumb {
+      @apply bg-black-100;
+      @apply rounded-xl;
+    }
+  }
+
+  ::ng-deep .LyImageCropper-a {
+    .LyImageCropper-area-e {
+      @apply rounded-xl;
+    }
+    .LyImageCropper-cropperContainer-b {
+      @apply w-auto;
+      @apply h-full;
+      .LyImageCropper-area-e _LyCropperArea--round-true-aw {
+        @apply w-[350px];
+        @apply h-[350px];
+      }
+    }
+  }
+  ::ng-deep .a {
+    .b {
+      @apply w-auto;
+      @apply h-full;
+    }
+    .e {
+      @apply rounded-xl;
+    }
+  }
+}

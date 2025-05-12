@@ -1,0 +1,399 @@
+<app-auth-header></app-auth-header>
+<section class="page-wrapper">
+  <figure class="page-partical-image">
+    <img src="images/page-common-particals.png" alt="Common Partical" />
+  </figure>
+  <figure class="pge-character-image">
+    <img src="images/Communication&interaction-image.png" alt="Common Partical" />
+  </figure>
+
+  <div class="page-container">
+    <div class="stepper-block">
+      <app-registration-question-header
+        [count]="count"
+        [language]="language"
+        [questionLength]="questionLength"
+        [questionListObject]="questionListObject"
+        [isActive]="7"></app-registration-question-header>
+    </div>
+
+    <mat-horizontal-stepper [selectedIndex]="selectedIndex">
+      @for (item of regQuestionList; track $index) {
+        @if (item.questionnaire_type_id === 8) {
+          <form [formGroup]="questionForm">
+            @for (item of item.questions; track $index) {
+              @if (item.q_id === 55) {
+                <mat-step>
+                  @if (selectedIndex === $index) {
+                    <header class="fadeInRight">
+                      <h1 class="page-heading">
+                        {{ language === 'chinese' ? item.question.zh : item.question.en }}
+                      </h1>
+                      <span class="sub-heading">{{
+                        language === 'chinese' ? item.question_desc.zh : item.question_desc.en
+                      }}</span>
+                    </header>
+                    <div class="content-card-wrap fadeInRight">
+                      <div class="content-card">
+                        <label class="card-heading">
+                          @if (item.selection_type === 0) {
+                            {{ 'COMMON_QUESTION.SELECT_ONLY_ONE' | translate }}
+                          } @else {
+                            {{ 'COMMON_QUESTION.PICK_FEW_ITEMS' | translate }}
+                            <span>({{ 'COMMON.MAX' | translate }}-4)</span>
+                          }
+                        </label>
+                        <div class="question-wrapper">
+                          <ul class="multi-select-wrap" formArrayName="social_media_usage">
+                            <!--*** "--active" class will be toggled in the "li"s on click of the "li" below ***-->
+                            @for (option of item.options; track $index) {
+                              <li
+                                class="multi-select-option"
+                                [ngClass]="{
+                                  '--active': this.selectedId['social_media_usage'].includes(
+                                    option.op_id
+                                  ),
+                                }">
+                                <input
+                                  type="checkbox"
+                                  [formControlName]="$index"
+                                  (change)="
+                                    onclickAnswer(
+                                      option.op_id,
+                                      item.q_id,
+                                      item.selection_type,
+                                      $event,
+                                      option.en,
+                                      item.field_name,
+                                      $index
+                                    )
+                                  " />
+                                <span>{{ language === 'chinese' ? option.zh : option.en }}</span>
+                              </li>
+                            }
+                          </ul>
+                        </div>
+                        <div class="card-button-wrap">
+                          <div class="button-block left">
+                            <!-- <button class="btn transparent-btn" (click)="goToPrevious()">
+                    {{ "COMMON.PREVIOUS" | translate }}
+                  </button> -->
+                          </div>
+                          <div class="button-block right">
+                            <a
+                              class="btn primary-btn"
+                              (click)="goToNextStep()"
+                              [ngClass]="{
+                                disabled: !this.selectedId['social_media_usage'].length,
+                              }"
+                              >{{ 'COMMON.NEXT' | translate }}</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </mat-step>
+              }
+              @if (item.q_id === 56) {
+                <mat-step>
+                  @if (selectedIndex === $index) {
+                    <header class="fadeInRight">
+                      <h1 class="page-heading">
+                        {{ language === 'chinese' ? item.question.zh : item.question.en }}
+                      </h1>
+                      <span class="sub-heading">{{
+                        language === 'chinese' ? item.question_desc.zh : item.question_desc.en
+                      }}</span>
+                    </header>
+                    <div class="content-card-wrap fadeInRight">
+                      <div class="content-card">
+                        <label class="card-heading">
+                          @if (item.selection_type === 0) {
+                            {{ 'COMMON_QUESTION.SELECT_ONLY_ONE' | translate }}
+                          } @else {
+                            {{ 'COMMON_QUESTION.PICK_FEW_ITEMS' | translate }}
+                            <span>({{ 'COMMON.MAX' | translate }}-4)</span>
+                          }
+                        </label>
+                        <div class="question-wrapper">
+                          <ul class="multi-select-wrap" formArrayName="communication_preference">
+                            <!--*** "--active" class will be toggled in the "li"s on click of the "li" below ***-->
+                            @for (option of item.options; track $index) {
+                              <li
+                                class="multi-select-option"
+                                [ngClass]="{
+                                  '--active': this.selectedId['communication_preference'].includes(
+                                    option.op_id
+                                  ),
+                                }">
+                                <input
+                                  type="checkbox"
+                                  [formControlName]="$index"
+                                  (change)="
+                                    onclickAnswer(
+                                      option.op_id,
+                                      item.q_id,
+                                      item.selection_type,
+                                      $event,
+                                      option.en,
+                                      item.field_name,
+                                      $index
+                                    )
+                                  " />
+                                <span>{{ language === 'chinese' ? option.zh : option.en }}</span>
+                              </li>
+                            }
+                          </ul>
+                        </div>
+                        <div class="card-button-wrap">
+                          <div class="button-block left">
+                            <button class="btn transparent-btn" (click)="goToPrevious()">
+                              {{ 'COMMON.PREVIOUS' | translate }}
+                            </button>
+                          </div>
+                          <div class="button-block right">
+                            <a
+                              class="btn primary-btn"
+                              (click)="goToNextStep()"
+                              [ngClass]="{
+                                disabled: !this.selectedId['communication_preference'].length,
+                              }"
+                              >{{ 'COMMON.NEXT' | translate }}</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </mat-step>
+              }
+              @if (item.q_id === 57) {
+                <mat-step>
+                  @if (selectedIndex === $index) {
+                    <header class="fadeInRight">
+                      <h1 class="page-heading">
+                        {{ language === 'chinese' ? item.question.zh : item.question.en }}
+                      </h1>
+                      <span class="sub-heading">{{
+                        language === 'chinese' ? item.question_desc.zh : item.question_desc.en
+                      }}</span>
+                    </header>
+                    <div class="content-card-wrap fadeInRight">
+                      <div class="content-card">
+                        <label class="card-heading">
+                          @if (item.selection_type === 0) {
+                            {{ 'COMMON_QUESTION.SELECT_ONLY_ONE' | translate }}
+                          } @else {
+                            {{ 'COMMON_QUESTION.PICK_FEW_ITEMS' | translate }}
+                            <span>({{ 'COMMON.MAX' | translate }}-4)</span>
+                          }
+                        </label>
+                        <div class="question-wrapper">
+                          <ul class="multi-select-wrap" formArrayName="emotional_openness">
+                            <!--*** "--active" class will be toggled in the "li"s on click of the "li" below ***-->
+                            @for (option of item.options; track $index) {
+                              <li
+                                class="multi-select-option"
+                                [ngClass]="{
+                                  '--active': this.selectedId['emotional_openness'].includes(
+                                    option.op_id
+                                  ),
+                                }">
+                                <input
+                                  type="checkbox"
+                                  [formControlName]="$index"
+                                  (change)="
+                                    onclickAnswer(
+                                      option.op_id,
+                                      item.q_id,
+                                      item.selection_type,
+                                      $event,
+                                      option.en,
+                                      item.field_name,
+                                      $index
+                                    )
+                                  " />
+                                <span>{{ language === 'chinese' ? option.zh : option.en }}</span>
+                              </li>
+                            }
+                          </ul>
+                        </div>
+                        <div class="card-button-wrap">
+                          <div class="button-block left">
+                            <button class="btn transparent-btn" (click)="goToPrevious()">
+                              {{ 'COMMON.PREVIOUS' | translate }}
+                            </button>
+                          </div>
+                          <div class="button-block right">
+                            <a
+                              class="btn primary-btn"
+                              (click)="goToNextStep()"
+                              [ngClass]="{
+                                disabled: !this.selectedId['emotional_openness'].length,
+                              }"
+                              >{{ 'COMMON.NEXT' | translate }}</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </mat-step>
+              }
+              @if (item.q_id === 58) {
+                <mat-step>
+                  @if (selectedIndex === $index) {
+                    <header class="fadeInRight">
+                      <h1 class="page-heading">
+                        {{ language === 'chinese' ? item.question.zh : item.question.en }}
+                      </h1>
+                      <span class="sub-heading">{{
+                        language === 'chinese' ? item.question_desc.zh : item.question_desc.en
+                      }}</span>
+                    </header>
+                    <div class="content-card-wrap fadeInRight">
+                      <div class="content-card">
+                        <label class="card-heading">
+                          @if (item.selection_type === 0) {
+                            {{ 'COMMON_QUESTION.SELECT_ONLY_ONE' | translate }}
+                          } @else {
+                            {{ 'COMMON_QUESTION.PICK_FEW_ITEMS' | translate }}
+                            <span>({{ 'COMMON.MAX' | translate }}-4)</span>
+                          }
+                        </label>
+                        <div class="question-wrapper">
+                          <ul
+                            class="multi-select-wrap"
+                            formArrayName="intellectual_conversation_interest">
+                            <!--*** "--active" class will be toggled in the "li"s on click of the "li" below ***-->
+                            @for (option of item.options; track $index) {
+                              <li
+                                class="multi-select-option"
+                                [ngClass]="{
+                                  '--active': this.selectedId[
+                                    'intellectual_conversation_interest'
+                                  ].includes(option.op_id),
+                                }">
+                                <input
+                                  type="checkbox"
+                                  [formControlName]="$index"
+                                  (change)="
+                                    onclickAnswer(
+                                      option.op_id,
+                                      item.q_id,
+                                      item.selection_type,
+                                      $event,
+                                      option.en,
+                                      item.field_name,
+                                      $index
+                                    )
+                                  " />
+                                <span>{{ language === 'chinese' ? option.zh : option.en }}</span>
+                              </li>
+                            }
+                          </ul>
+                        </div>
+                        <div class="card-button-wrap">
+                          <div class="button-block left">
+                            <button class="btn transparent-btn" (click)="goToPrevious()">
+                              {{ 'COMMON.PREVIOUS' | translate }}
+                            </button>
+                          </div>
+                          <div class="button-block right">
+                            <a
+                              class="btn primary-btn"
+                              (click)="goToNextStep()"
+                              [ngClass]="{
+                                disabled:
+                                  !this.selectedId['intellectual_conversation_interest'].length,
+                              }"
+                              >{{ 'COMMON.NEXT' | translate }}</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </mat-step>
+              }
+              @if (item.q_id === 59) {
+                <mat-step>
+                  @if (selectedIndex === $index) {
+                    <header class="fadeInRight">
+                      <h1 class="page-heading">
+                        {{ language === 'chinese' ? item.question.zh : item.question.en }}
+                      </h1>
+                      <span class="sub-heading">{{
+                        language === 'chinese' ? item.question_desc.zh : item.question_desc.en
+                      }}</span>
+                    </header>
+                    <div class="content-card-wrap fadeInRight">
+                      <div class="content-card">
+                        <label class="card-heading">
+                          @if (item.selection_type === 0) {
+                            {{ 'COMMON_QUESTION.SELECT_ONLY_ONE' | translate }}
+                          } @else {
+                            {{ 'COMMON_QUESTION.PICK_FEW_ITEMS' | translate }}
+                            <span>({{ 'COMMON.MAX' | translate }}-4)</span>
+                          }
+                        </label>
+                        <div class="question-wrapper">
+                          <ul class="multi-select-wrap" formArrayName="conversation_preference">
+                            <!--*** "--active" class will be toggled in the "li"s on click of the "li" below ***-->
+                            @for (option of item.options; track $index) {
+                              <li
+                                class="multi-select-option"
+                                [ngClass]="{
+                                  '--active': this.selectedId['conversation_preference'].includes(
+                                    option.op_id
+                                  ),
+                                }">
+                                <input
+                                  type="checkbox"
+                                  [formControlName]="$index"
+                                  (change)="
+                                    onclickAnswer(
+                                      option.op_id,
+                                      item.q_id,
+                                      item.selection_type,
+                                      $event,
+                                      option.en,
+                                      item.field_name,
+                                      $index
+                                    )
+                                  " />
+                                <span>{{ language === 'chinese' ? option.zh : option.en }}</span>
+                              </li>
+                            }
+                          </ul>
+                        </div>
+                        <div class="card-button-wrap">
+                          <div class="button-block left">
+                            <button class="btn transparent-btn" (click)="goToPrevious()">
+                              {{ 'COMMON.PREVIOUS' | translate }}
+                            </button>
+                          </div>
+                          <div class="button-block right">
+                            <a
+                              class="btn primary-btn"
+                              (click)="saveAnswer()"
+                              [ngClass]="{
+                                disabled: !this.selectedId['conversation_preference'].length,
+                              }"
+                              >{{ 'COMMON.NEXT' | translate }}</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </mat-step>
+              }
+            }
+          </form>
+        }
+      }
+    </mat-horizontal-stepper>
+  </div>
+</section>

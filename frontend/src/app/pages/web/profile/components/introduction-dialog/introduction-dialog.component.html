@@ -1,0 +1,44 @@
+<div class="dialog-chat-box">
+  <div class="formcontrol-wrapper textarea-control-wrapper">
+    <textarea [(ngModel)]="introduction" class="textarea-control"></textarea>
+  </div>
+  <div class="chatbox-footer-part">
+    <div class="left-part">
+      <a
+        class="left-part-common-block auto-generate-block"
+        (click)="onGenerate('autoGenerate', false, $event); setActiveButton(1)"
+        [ngClass]="{ '--active': activeButton === 1 }">
+        <div class="image-block">
+          <img src="/images/auto-generate-image.svg" alt="" />
+        </div>
+        <p>{{ 'PROFILE_PAGE.AUTO_GENERATE' | translate }}</p>
+      </a>
+      <a
+        class="left-part-common-block ai-voice-block disabled"
+        (click)="setActiveButton(2)"
+        [ngClass]="{ '--active': activeButton === 2 }">
+        <div class="image-block">
+          <img src="/images/ai-voice-image.svg" alt="" />
+        </div>
+        <p>{{ 'PROFILE_PAGE.VOICE' | translate }}</p>
+      </a>
+      <a
+        class="left-part-common-block ai-voice-block"
+        (click)="setActiveButton(3); onGenerate('aiText', false, $event)"
+        [ngClass]="{ '--active': activeButton === 3 }">
+        <div class="image-block">
+          <img src="/images/ai-text-image.svg" alt="" />
+        </div>
+        <p>{{ 'PROFILE_PAGE.TEXT' | translate }}</p>
+      </a>
+    </div>
+    <div class="button-block">
+      <button type="button" class="btn transparent-btn" (click)="onCloseIntroductionDialog($event)">
+        {{ 'COMMON.CANCEL' | translate }}
+      </button>
+      <button type="button" class="btn primary-btn" (click)="onSaveIntroduction($event)">
+        {{ 'COMMON.SAVE' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

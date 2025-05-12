@@ -1,0 +1,146 @@
+<div class="indroduction-block">
+  <div class="row">
+    <div class="col-8">
+      <div class="intro-left-block">
+        @for (singleQuestion of partnerPreferenceArrangeData; track $index) {
+          <div class="intro-common-block intro-question-part">
+            <div class="header-part">
+              <div class="header-part-left">
+                <span>Partner Preference</span>
+                <h6>
+                  {{
+                    language === 'chinese'
+                      ? singleQuestion?.question?.zh
+                      : singleQuestion?.question?.en
+                  }}
+                </h6>
+              </div>
+              <a class="icon-edit">
+                <svg>
+                  <use xlink:href="/scss/icons.svg#icon-edit"></use>
+                </svg>
+              </a>
+            </div>
+            <div class="question-wrapper">
+              <ul class="multi-select-wrap">
+                @if (singleQuestion?.options?.length) {
+                  @for (item of singleQuestion.options; track $index) {
+                    <li class="multi-select-option">
+                      <span>{{ language === 'chinese' ? item.zh : item.en }}</span>
+                    </li>
+                  }
+                } @else {
+                  <li class="multi-select-option">
+                    <span>{{ singleQuestion.optionText }}</span>
+                  </li>
+                }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="intro-right-block">
+        <div class="right-common-block">
+          <h5>Lifestyle Preferences</h5>
+          @for (singleQuestion of lifestyleQuestionAnswerList; track $index) {
+            <div class="factfile-content">
+              <div class="icon-block">
+                <svg>
+                  <use [attr.href]="singleQuestion.url"></use>
+                </svg>
+              </div>
+              <div class="content-area">
+                <h6>
+                  {{
+                    language === 'chinese' ? singleQuestion.question.zh : singleQuestion.question.en
+                  }}
+                </h6>
+                <p>
+                  {{
+                    language === 'chinese'
+                      ? singleQuestion.answerText?.zh
+                      : singleQuestion.answerText?.en
+                  }}
+                </p>
+              </div>
+              <a class="icon-edit">
+                <svg>
+                  <use xlink:href="/scss/icons.svg#icon-edit"></use>
+                </svg>
+              </a>
+            </div>
+          }
+          <div class="right-common-block">
+            <h5>Relationship Preferences</h5>
+            @for (singleQuestion of relationshipPreferenceArrangeData; track $index) {
+              <div class="factfile-content">
+                <div class="icon-block">
+                  <svg>
+                    <use [attr.href]="singleQuestion.url"></use>
+                  </svg>
+                </div>
+                <div class="content-area">
+                  <h6>
+                    {{
+                      language === 'chinese'
+                        ? singleQuestion.question.zh
+                        : singleQuestion.question.en
+                    }}
+                  </h6>
+                  <p>
+                    {{
+                      language === 'chinese'
+                        ? singleQuestion.answerText?.zh
+                        : singleQuestion.answerText?.en
+                    }}
+                  </p>
+                </div>
+                <a class="icon-edit">
+                  <svg>
+                    <use xlink:href="/scss/icons.svg#icon-edit"></use>
+                  </svg>
+                </a>
+              </div>
+            }
+          </div>
+          <div class="right-common-block">
+            <h5>Date Preferences</h5>
+            @for (singleQuestion of datePreferenceArrangeData; track $index) {
+              <div class="factfile-content">
+                <div class="icon-block">
+                  <svg>
+                    <use [attr.href]="singleQuestion.url"></use>
+                  </svg>
+                </div>
+                <div class="content-area">
+                  <h6>
+                    {{
+                      language === 'chinese'
+                        ? singleQuestion.question.zh
+                        : singleQuestion.question.en
+                    }}
+                  </h6>
+                  <p>
+                    {{
+                      language === 'chinese'
+                        ? singleQuestion.answerText?.zh
+                        : singleQuestion.answerText?.en
+                    }}
+                  </p>
+                </div>
+                <a class="icon-edit">
+                  <svg>
+                    <use xlink:href="/scss/icons.svg#icon-edit"></use>
+                  </svg>
+                </a>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

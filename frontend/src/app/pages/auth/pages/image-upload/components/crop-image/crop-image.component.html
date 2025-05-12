@@ -1,0 +1,39 @@
+<div class="dialog-wrapper">
+  <div class="dialog-content">
+    <a class="close-btn" (click)="closeUploadImage()">
+      <svg>
+        <use xlink:href="/scss/icons.svg#icon-cross"></use>
+      </svg>
+    </a>
+    <h1>{{ 'CROPIMAGE_PAGE.CROP_PHOTO' | translate }}</h1>
+    <div class="scroll-wrapper">
+      <ly-img-cropper
+        [withClass]="classes.cropper"
+        [config]="myConfig"
+        [(scale)]="scale"
+        (minScale)="minScale = $event"
+        (cropped)="onCropped($event)">
+        <span>Drag and drop image</span>
+      </ly-img-cropper>
+      <div [className]="classes.sliderContainer" class="slider-wrap">
+        <ly-slider
+          [thumbVisible]="false"
+          [min]="minScale"
+          [max]="2"
+          [(ngModel)]="scale"
+          (input)="onSliderInput($event)"
+          [step]="0.000001"></ly-slider>
+        <!-- <button color="accent" (click)="uploadImage()" ly-button><ly-icon>crop</ly-icon></button> -->
+      </div>
+
+      <!-- <div *ngIf="croppedImage">
+      <div [class]="classes.cropperResult">
+        <img [src]="croppedImage" />
+      </div>
+    </div> -->
+      <a class="primary-btn" mat-button (click)="uploadImage()">
+        {{ 'CROPIMAGE_PAGE.UPLOAD_PHOTO' | translate }}
+      </a>
+    </div>
+  </div>
+</div>

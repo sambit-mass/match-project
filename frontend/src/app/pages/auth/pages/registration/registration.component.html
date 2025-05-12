@@ -1,0 +1,704 @@
+<app-auth-header [showProfile]="false"></app-auth-header>
+<div class="login-page-wrapper">
+  <!-- Signup With Social Media -->
+  @if (socialType === 'registration') {
+    <div class="form-block social-media fadeInRight">
+      <a class="icon-cross" (click)="goToRegQuestion()">
+        <svg>
+          <use xlink:href="/scss/icons.svg#icon-cross"></use>
+        </svg>
+      </a>
+      <div class="form-block-header-part social-form-header-part">
+        <div class="title-block">
+          <h1>
+            {{ 'REGISTRATION_PAGE.SIGNUP_TO_MATCHBY' | translate
+            }}<strong>{{ 'REGISTRATION_PAGE.AI' | translate }}</strong>
+          </h1>
+        </div>
+        <!-- <p>Already a member? <a (click)="redirectToLogin()">Sign In</a></p> -->
+        <p>
+          {{ 'REGISTRATION_PAGE.ALREADY_MEMBER' | translate }}
+          <a (click)="redirectToLogin()">{{ 'COMMON.SIGN_IN' | translate }}</a>
+        </p>
+      </div>
+      <form>
+        <div class="social-links-wrap">
+          <a>
+            <div class="social-links-block facebook">
+              <figure class="icon">
+                <img src="images/Facebook.png" alt="facebook" />
+              </figure>
+              <span>{{ 'REGISTRATION_PAGE.SIGNUP_FACEBOOK' | translate }}</span>
+            </div>
+          </a>
+          <a>
+            <div class="social-links-block google">
+              <figure class="icon">
+                <img src="images/google-icon.png" alt="google" />
+              </figure>
+              <span>{{ 'REGISTRATION_PAGE.SIGNUP_GOOGLE' | translate }}</span>
+            </div>
+          </a>
+          <a>
+            <div class="social-links-block apple">
+              <figure class="icon">
+                <img src="images/apple-icon.png" alt="apple" />
+              </figure>
+              <span>{{ 'REGISTRATION_PAGE.SIGNUP_APPLE' | translate }}</span>
+            </div>
+          </a>
+          <div class="divider">
+            <span>{{ 'REGISTRATION_PAGE.OR' | translate }}</span>
+          </div>
+          <a (click)="signInWithEmail()">
+            <div class="social-links-block mail">
+              <figure class="icon">
+                <svg>
+                  <use xlink:href="/scss/icons.svg#icon-envelope"></use>
+                </svg>
+              </figure>
+              <span>{{ 'REGISTRATION_PAGE.SIGNUP_EMAIL' | translate }}</span>
+            </div>
+          </a>
+        </div>
+        <div class="app-store-block">
+          <a class="image-block">
+            <img src="images/google-play-image.png" alt="" />
+          </a>
+          <a class="image-block">
+            <img src="images/app-store-image.png" alt="" />
+          </a>
+        </div>
+      </form>
+    </div>
+  }
+
+  <!-- Signup With Email -->
+  @if (socialType === 'emailLogin') {
+    <div class="form-block fadeInRight">
+      <a class="icon-cross" (click)="backToRegistration()">
+        <svg>
+          <use xlink:href="/scss/icons.svg#icon-cross"></use>
+        </svg>
+      </a>
+      <div class="form-block-header-part">
+        <div class="title-block">
+          <a class="icon-chevron-left" (click)="backToRegistration()">
+            <img src="/images/left-chevron.svg" alt="" />
+          </a>
+          <div class="content-block">
+            <h1>{{ 'REGISTRATION_PAGE.SIGNUP_EMAIL' | translate }}</h1>
+            <p>
+              {{ 'REGISTRATION_PAGE.ALREADY_MEMBER' | translate }}
+              <a (click)="redirectToLogin()">{{ 'COMMON.SIGN_IN' | translate }}</a>
+            </p>
+          </div>
+        </div>
+
+        <custom-toast />
+      </div>
+      <form [formGroup]="signUpWithEmailForm" (ngSubmit)="registrationSubmit()">
+        <div class="form-group">
+          <mat-label>{{ 'REGISTRATION_PAGE.NAME' | translate }}</mat-label>
+          <div
+            class="formcontrol-wrapper"
+            [ngClass]="{
+              'auth-invalid-control': hasFormControlError('user_first_name'),
+            }">
+            <input
+              type="text"
+              #userFirstNameInput
+              autocomplete="off"
+              class="formcontrol"
+              formControlName="user_first_name" />
+          </div>
+          @if (hasFormControlError('user_first_name')) {
+            @if (formControl['user_first_name'].hasError('required')) {
+              <div [@fadeAnimation] class="auth-error-message">
+                <div class="icon-block">
+                  <svg>
+                    <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+                  </svg>
+                </div>
+                <p>{{ 'VALIDATION.NAME' | translate }}</p>
+              </div>
+            }
+            @if (formControl['user_first_name'].hasError('maxlength')) {
+              <div [@fadeAnimation] class="auth-error-message">
+                <p>{{ 'VALIDATION.NAME_MAX_LENGTH' | translate }}</p>
+              </div>
+            }
+          }
+        </div>
+        <div class="form-group">
+          <mat-label>{{ 'REGISTRATION_PAGE.EMAIL' | translate }}</mat-label>
+          <div
+            class="formcontrol-wrapper"
+            [ngClass]="{ 'auth-invalid-control': hasFormControlError('email') }">
+            <input
+              type="email"
+              #emailInput
+              autocomplete="off"
+              class="formcontrol"
+              formControlName="email" />
+          </div>
+          @if (hasFormControlError('email')) {
+            @if (formControl['email'].hasError('required')) {
+              <div [@fadeAnimation] class="auth-error-message">
+                <div class="icon-block">
+                  <svg>
+                    <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+                  </svg>
+                </div>
+                <p>{{ 'VALIDATION.EMAIL' | translate }}</p>
+              </div>
+            }
+            @if (formControl['email'].hasError('pattern')) {
+              <div [@fadeAnimation] class="auth-error-message">
+                <div class="icon-block">
+                  <svg>
+                    <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+                  </svg>
+                </div>
+                <p>{{ 'VALIDATION.VALID_EMAIL' | translate }}</p>
+              </div>
+            }
+          }
+        </div>
+        <div class="form-group">
+          <mat-label>{{ 'REGISTRATION_PAGE.PASSWORD' | translate }}</mat-label>
+          <div
+            class="formcontrol-wrapper"
+            [ngClass]="{
+              'auth-invalid-control': hasFormControlError('password'),
+            }">
+            <a class="icon-eye-close" (click)="showPassword($event)">
+              @if (!show_type) {
+                <svg>
+                  <use xlink:href="/scss/icons.svg#icon-eye-close"></use>
+                </svg>
+                <!-- {{ 'COMMON.SHOW' | translate }} -->
+              } @else {
+                <svg>
+                  <use xlink:href="/scss/icons.svg#icon-eye"></use>
+                </svg>
+                <!-- {{ 'COMMON.HIDE' | translate }} -->
+              }
+            </a>
+            <input
+              #passwordInput
+              (focus)="passwordContainErrors = true"
+              (blur)="passwordContainErrors = false"
+              [type]="show_type ? 'text' : 'password'"
+              autocomplete="off"
+              class="formcontrol !pr-9"
+              placeholder=""
+              formControlName="password" />
+          </div>
+
+          <!-- required password -->
+          @if (hasFormControlError('password')) {
+            @if (formControl['password'].hasError('required')) {
+              <div [@fadeAnimation] class="auth-error-message">
+                <div class="icon-block">
+                  <svg>
+                    <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+                  </svg>
+                </div>
+                <p>{{ 'VALIDATION.PASSWORD' | translate }}</p>
+              </div>
+            }
+          }
+          <!--------------------------------Right Error Message Block-------------------------->
+          <!-- custom strong password tooltip -->
+          @if (passwordContainErrors && passwordValidationCheck) {
+            <div class="right-error-message-block">
+              <div class="error-message-suggestion">
+                <div class="error-item">
+                  @if (formControl['password'].errors?.['upperCase']) {
+                    <a class="cross-icon">
+                      <img src="/images/icon-cross-image.svg" alt="" />
+                    </a>
+                  } @else {
+                    <a class="icon-tick">
+                      <img src="/images/icon-tick-image.svg" alt="" />
+                    </a>
+                  }
+                  <p [class.text-valid]="!formControl['password'].errors?.['upperCase']">
+                    {{ 'VALIDATION.PASSWORD_ONE_UPPERCASE' | translate }}
+                  </p>
+                </div>
+                <div class="error-item">
+                  @if (formControl['password'].errors?.['lowerCase']) {
+                    <a class="cross-icon">
+                      <img src="/images/icon-cross-image.svg" alt="" />
+                    </a>
+                  } @else {
+                    <a class="icon-tick">
+                      <img src="/images/icon-tick-image.svg" alt="" />
+                    </a>
+                  }
+                  <p [class.text-valid]="!formControl['password'].errors?.['lowerCase']">
+                    {{ 'VALIDATION.PASSWORD_ONE_LOWERCASE' | translate }}
+                  </p>
+                </div>
+                <div class="error-item">
+                  @if (formControl['password'].errors?.['number']) {
+                    <a class="cross-icon">
+                      <img src="/images/icon-cross-image.svg" alt="" />
+                    </a>
+                  } @else {
+                    <a class="icon-tick">
+                      <img src="/images/icon-tick-image.svg" alt="" />
+                    </a>
+                  }
+                  <p [class.text-valid]="!formControl['password'].errors?.['number']">
+                    {{ 'VALIDATION.PASSWORD_ONE_NUMBER' | translate }}
+                  </p>
+                </div>
+                <div class="error-item">
+                  @if (formControl['password'].errors?.['specialCharacter']) {
+                    <a class="cross-icon">
+                      <img src="/images/icon-cross-image.svg" alt="" />
+                    </a>
+                  } @else {
+                    <a class="icon-tick">
+                      <img src="/images/icon-tick-image.svg" alt="" />
+                    </a>
+                  }
+                  <p [class.text-valid]="!formControl['password'].errors?.['specialCharacter']">
+                    {{ 'VALIDATION.PASSWORD_ONE_SPECIAL' | translate }}
+                  </p>
+                </div>
+                <div class="error-item">
+                  @if (formControl['password'].errors?.['length']) {
+                    <a class="cross-icon">
+                      <img src="/images/icon-cross-image.svg" alt="" />
+                    </a>
+                  } @else {
+                    <a class="icon-tick">
+                      <img src="/images/icon-tick-image.svg" alt="" />
+                    </a>
+                  }
+                  <p [class.text-valid]="!formControl['password'].errors?.['length']">
+                    {{ 'VALIDATION.PASSWORD_LENGTH' | translate }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+        <div class="form-group">
+          <mat-label>{{ 'REGISTRATION_PAGE.DATE_OF_BIRTH' | translate }} </mat-label>
+          <div
+            class="formcontrol-wrapper"
+            [attr.role]="'none'"
+            [ngClass]="{ 'auth-invalid-control': hasFormControlError('dob') }">
+            <mat-form-field class="custom-datepicker">
+              <input
+                #dobInput
+                matInput
+                [max]="maxDate"
+                [min]="minDate"
+                [matDatepicker]="pickerOne"
+                formControlName="dob"
+                (click)="pickerOne.open()"
+                (focus)="pickerOne.open()"
+                readonly />
+              <mat-datepicker-toggle matIconSuffix [for]="pickerOne"></mat-datepicker-toggle>
+              <mat-datepicker panelClass="custom-filter-calendar" #pickerOne></mat-datepicker>
+            </mat-form-field>
+          </div>
+          @if (hasFormControlError('dob')) {
+            @if (formControl['dob'].hasError('required')) {
+              <div [@fadeAnimation] class="auth-error-message">
+                <div class="icon-block">
+                  <svg>
+                    <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+                  </svg>
+                </div>
+                <p>{{ 'VALIDATION.BIRTH' | translate }}</p>
+              </div>
+            }
+          }
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <mat-label>{{ 'REGISTRATION_PAGE.COUNTRY' | translate }}</mat-label>
+              <div
+                class="formcontrol-wrapper"
+                [ngClass]="{
+                  'auth-invalid-control': hasFormControlError('country'),
+                }">
+                <!-- <ng-country-select
+                  #country
+                  class="custom-country-select"
+                  [lang]="countryLanguage"
+                  [formControl]="countryControl"
+                  [searchAllLanguages]="true"
+                  [debounceTime]="200"
+                  [required]="true"
+                  [showFlag]="true"
+                  (countrySelected)="onCountrySelected($event)"></ng-country-select>
+                <a class="country-dropdown-arrow">
+                  <img src="./images/select-dropdown.svg" alt="" />
+                </a> -->
+                <mat-form-field appearance="outline" class="custom-autocomplete-box">
+                  <span class="country-flag-image">
+                    {{ flagImage }}
+                  </span>
+                  <input
+                    #country
+                    #supplierTypeInput
+                    type="text"
+                    matInput
+                    class="autocomplete-input"
+                    [formControl]="countryControl"
+                    #countryTrigger="matAutocompleteTrigger"
+                    (focus)="showFilteredCountryType(true)"
+                    (input)="showFilteredCountryType(false)"
+                    (keydown.enter)="countryTrigger.closePanel(); supplierTypeInput.blur()"
+                    [matAutocomplete]="countryType" />
+                  <mat-autocomplete
+                    class="custom-select-panel country-select-panel"
+                    #countryType="matAutocomplete"
+                    (closed)="onCloseCountryType()">
+                    @for (option of filteredCountryType; track $index) {
+                      <mat-option
+                        [ngClass]="{
+                          active:
+                            signUpWithEmailForm.controls['country'].value ===
+                            (language === 'chinese' ? option.zh : option.en),
+                        }"
+                        [value]="language === 'chinese' ? option.zh : option.en">
+                        {{ option.flag }}
+                        {{ language === 'chinese' ? option.zh : option.en }}
+                      </mat-option>
+                      <!-- (language === 'chinese' ? option.en : option.zh) -->
+                    }
+                  </mat-autocomplete>
+                  @if (countryControl.value) {
+                    <a class="autocomplete-cross" (click)="resetCountry()">
+                      <svg>
+                        <use xlink:href="/scss/icons.svg#icon-cross"></use>
+                      </svg>
+                    </a>
+                  }
+                  <a class="dropdown-arrow">
+                    <img src="./images/select-dropdown.svg" alt="" />
+                  </a>
+                </mat-form-field>
+              </div>
+              @if (hasFormControlError('country')) {
+                @if (formControl['country'].hasError('required')) {
+                  <div [@fadeAnimation] class="auth-error-message">
+                    <div class="icon-block">
+                      <svg>
+                        <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+                      </svg>
+                    </div>
+                    <p>{{ 'VALIDATION.COUNTRY' | translate }}</p>
+                  </div>
+                }
+              }
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <mat-label>{{ 'REGISTRATION_PAGE.ZIP' | translate }} </mat-label>
+              <div
+                class="formcontrol-wrapper"
+                [ngClass]="{
+                  'auth-invalid-control': hasFormControlError('zipcode'),
+                }">
+                <input
+                  type="text"
+                  #zipcodeInput
+                  autocomplete="off"
+                  class="formcontrol"
+                  placeholder=""
+                  formControlName="zipcode" />
+              </div>
+              @if (hasFormControlError('zipcode')) {
+                <!-- @if (formControl['zipcode'].hasError('required')) {
+                  <div [@fadeAnimation] class="auth-error-message">
+                    <div class="icon-block">
+                      <svg>
+                        <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+                      </svg>
+                    </div>
+                    <p>{{ 'VALIDATION.ZIP' | translate }}</p>
+                  </div>
+                } -->
+                @if (formControl['zipcode'].hasError('maxlength')) {
+                  <div [@fadeAnimation] class="auth-error-message double-line-auth-message">
+                    <div class="icon-block">
+                      <svg>
+                        <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+                      </svg>
+                    </div>
+                    <p>{{ 'VALIDATION.ZIP_MAX_LENGTH' | translate }}</p>
+                  </div>
+                }
+              }
+            </div>
+          </div>
+        </div>
+        <div class="global-checkbox">
+          <label for="privacy-check-data" class="customCheckbox">
+            <input id="privacy-check-data" type="checkbox" formControlName="isCheck" />
+            <span class="checkmark"></span>
+          </label>
+          <p class="checkbox-text">
+            {{ 'REGISTRATION_PAGE.BY_CREATE_ACCOUNT' | translate }},
+            {{ 'REGISTRATION_PAGE.AGREE_TO_OUR' | translate }}
+            <a (click)="openTermsPrivacyDialog('tab1')"
+              >{{ 'REGISTRATION_PAGE.TERMS_OF_USE' | translate }}
+            </a>
+            {{ 'REGISTRATION_PAGE.AND' | translate }}
+            <a (click)="openTermsPrivacyDialog('tab2')"
+              >{{ 'REGISTRATION_PAGE.PRIVACY_POLICY' | translate }}
+            </a>
+          </p>
+          @if (signUpWithEmailForm.controls['isCheck'].value === false && submitted) {
+            <div class="auth-error-message customcheckbox-error-msg" [@fadeAnimation]>
+              <div class="icon-block">
+                <svg>
+                  <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+                </svg>
+              </div>
+              <p>{{ 'VALIDATION.TERMSCONDITION' | translate }}</p>
+            </div>
+          }
+        </div>
+        <button type="submit" class="btn primary-btn" [disabled]="isDisabled">
+          {{ 'REGISTRATION_PAGE.CONTINUE' | translate }}...
+        </button>
+
+        <div class="app-store-block mt-6">
+          <a class="image-block">
+            <img src="images/google-play-image.png" alt="" />
+          </a>
+          <a class="image-block">
+            <img src="images/app-store-image.png" alt="" />
+          </a>
+        </div>
+      </form>
+    </div>
+  }
+
+  <!-- Signup With Google -->
+  <div class="form-block fadeInRight hidden">
+    <a class="icon-cross">
+      <svg>
+        <use xlink:href="/scss/icons.svg#icon-cross"></use>
+      </svg>
+    </a>
+    <div class="form-block-header-part otp-form-header-part">
+      <div class="title-block">
+        <a class="icon-chevron-left">
+          <svg>
+            <use xlink:href="/scss/icons.svg#icon-chevron-left"></use>
+          </svg>
+        </a>
+        <h1>Sign Up with Google</h1>
+      </div>
+    </div>
+    <form>
+      <div class="form-group">
+        <mat-label>Name </mat-label>
+        <div class="formcontrol-wrapper">
+          <input type="text" autocomplete="off" class="formcontrol" placeholder="" />
+        </div>
+      </div>
+      <div class="form-group">
+        <mat-label>Email </mat-label>
+        <div class="formcontrol-wrapper">
+          <input type="email" autocomplete="off" class="formcontrol" disabled />
+        </div>
+      </div>
+      <div class="form-group">
+        <mat-label>Date of Birth </mat-label>
+        <div class="formcontrol-wrapper" [attr.role]="'none'">
+          <mat-form-field class="custom-datepicker">
+            <input matInput [matDatepicker]="pickerOne" readonly />
+            <mat-datepicker-toggle matIconSuffix [for]="pickerOne"></mat-datepicker-toggle>
+            <mat-datepicker panelClass="custom-filter-calendar" #pickerOne></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <mat-label>Country </mat-label>
+            <div class="formcontrol-wrapper">
+              <input type="text" autocomplete="off" class="formcontrol" placeholder="" />
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <mat-label>Zip </mat-label>
+            <div class="formcontrol-wrapper">
+              <input type="text" autocomplete="off" class="formcontrol" placeholder="" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn primary-btn">Continue...</button>
+      <div class="global-checkbox">
+        <label for="privacy-check" class="customCheckbox">
+          By creating an account, I agree to our
+          <a>Terms of use </a> and
+          <a>Privacy Policy </a>
+          <input id="privacy-check" type="checkbox" checked="checked" />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <div class="app-store-block">
+        <a class="image-block">
+          <img src="images/google-play-image.png" alt="" />
+        </a>
+        <a class="image-block">
+          <img src="images/app-store-image.png" alt="" />
+        </a>
+      </div>
+    </form>
+  </div>
+
+  <!-- OTP Verification Form -->
+  @if (socialType === 'otp') {
+    <div class="form-block fadeInRight">
+      <a class="icon-cross">
+        <svg>
+          <use xlink:href="/scss/icons.svg#icon-cross"></use>
+        </svg>
+      </a>
+      <div class="form-block-header-part otp-form-header-part">
+        <div class="title-block">
+          <h1>OTP Verification</h1>
+        </div>
+        <p>We’ve sent a verification code to your email janecooper25</p>
+      </div>
+      <!-- //////for otp design////// -->
+      <div class="form-group">
+        <div class="formcontrol-wrapper">
+          <input
+            type="text"
+            autocomplete="off"
+            class="formcontrol"
+            placeholder="Enter Verification Code"
+            [(ngModel)]="otp" />
+        </div>
+        @if (!otp && submitted) {
+          <div [@fadeAnimation] class="auth-error-message">
+            <p>Please enter OTP</p>
+          </div>
+        }
+      </div>
+      <p class="resend-text">Don’t received the code?<a>Resend</a></p>
+      <button type="button" class="btn primary-btn btn-submit">Submit</button>
+    </div>
+  }
+</div>
+
+<!-- Terms Condition and Privacy Policy Dialog -->
+<ng-template let-data #termsConditionDialog>
+  <div class="dialog-wrapper">
+    <header>
+      <ul>
+        <li [ngClass]="{ active: activeTab === 'tab1' }" (click)="activeTab = 'tab1'">
+          <a>{{ 'TERMS_CONDITION_PRIVACY_POLICY.TERMS_OF_SERVICE' | translate }}</a>
+        </li>
+        <li [ngClass]="{ active: activeTab === 'tab2' }" (click)="activeTab = 'tab2'">
+          <a>{{ 'TERMS_CONDITION_PRIVACY_POLICY.PRIVACY_POLICY' | translate }}</a>
+        </li>
+      </ul>
+      <!-- <div class="dropdown-box">
+        <div class="flag-box" [matMenuTriggerFor]="menu">
+          <img src="/images/flag-image.svg" alt="" />
+        </div>
+        <mat-menu #menu="matMenu" class="country-dropdown-box">
+          <div class="dropdown-inner-box">
+            <div class="flag-box">
+              <img src="/images/chinese-flag-image.svg" alt="" />
+            </div>
+            <p>Chinese</p>
+          </div>
+          <div class="dropdown-inner-box">
+            <div class="flag-box">
+              <img src="/images/flag-image.svg" alt="" />
+            </div>
+            <p>English</p>
+          </div>
+        </mat-menu>
+      </div> -->
+    </header>
+    <section class="dialog-content">
+      @if (activeTab === 'tab1') {
+        <div class="tearms-body-part">
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.WELCOME_TO_MATCHBYAI' | translate }}</p>
+          <h6>1. {{ 'TERMS_CONDITION_PRIVACY_POLICY.USE_OF_SERVICE' | translate }}</h6>
+          <p>
+            {{ 'TERMS_CONDITION_PRIVACY_POLICY.AGREE_FOR_SERVICE' | translate }}
+          </p>
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.VIOLATE_LAWS_REGULATION' | translate }}</p>
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.FALSE_MISLEADING_INFORMATION' | translate }}</p>
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.INTERFACE_WITH_OPERATION' | translate }}</p>
+          <h6>2. {{ 'TERMS_CONDITION_PRIVACY_POLICY.USER_ACCOUNT' | translate }}</h6>
+          <p>
+            {{ 'TERMS_CONDITION_PRIVACY_POLICY.ACCESS_CERTAIN_FEATURES' | translate }}
+          </p>
+          <h6>3. {{ 'TERMS_CONDITION_PRIVACY_POLICY.PROPERTY_LISTING' | translate }}</h6>
+          <p>
+            {{ 'TERMS_CONDITION_PRIVACY_POLICY.LISTINGS_ARE_ACCURATE' | translate }}
+          </p>
+        </div>
+      } @else if (activeTab === 'tab2') {
+        <div class="tearms-body-part">
+          <!-- <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.WELCOME_TO_MATCHBYAI' | translate }}</p>
+          <h6>1. {{ 'TERMS_CONDITION_PRIVACY_POLICY.USE_OF_SERVICE' | translate }}</h6>
+          <p>
+            {{ 'TERMS_CONDITION_PRIVACY_POLICY.AGREE_FOR_SERVICE' | translate }}
+          </p>
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.VIOLATE_LAWS_REGULATION' | translate }}</p>
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.FALSE_MISLEADING_INFORMATION' | translate }}</p>
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.INTERFACE_WITH_OPERATION' | translate }}</p>
+          <h6>2. {{ 'TERMS_CONDITION_PRIVACY_POLICY.USER_ACCOUNT' | translate }}</h6>
+          <p>
+            {{ 'TERMS_CONDITION_PRIVACY_POLICY.ACCESS_CERTAIN_FEATURES' | translate }}
+          </p>
+          <h6>3. {{ 'TERMS_CONDITION_PRIVACY_POLICY.PROPERTY_LISTING' | translate }}</h6>
+          <p>
+            {{ 'TERMS_CONDITION_PRIVACY_POLICY.LISTINGS_ARE_ACCURATE' | translate }}
+          </p> -->
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          <h6>1. Lorem Ipsum</h6>
+          <p>
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+            unknown printer took a galley
+          </p>
+          <p>
+            when an unknown printer took a galley of type and scrambled it to make a type specimen
+            book.
+          </p>
+          <p>It has survived not only five centuries, but also the leap into electronic</p>
+          <p>It has survived not only five centuries, but also the leap into electronic</p>
+          <h6>2. Lorem Ipsum</h6>
+          <p>
+            when an unknown printer took a galley of type and scrambled it to make a type specimen
+            book.
+          </p>
+          <h6>3. Lorem Ipsum</h6>
+          <p>It has survived not only five centuries, but also the leap into electronic</p>
+        </div>
+      }
+
+      <button type="button" (click)="closeTermsPolicyDialog()" class="btn btn-close">
+        {{ 'COMMON.CLOSE' | translate }}
+      </button>
+    </section>
+  </div>
+</ng-template>

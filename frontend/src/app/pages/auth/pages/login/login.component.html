@@ -1,0 +1,134 @@
+<app-auth-header [showProfile]="false"></app-auth-header>
+<div class="login-page-wrapper">
+  <div class="form-block">
+    <h1>{{ 'COMMON.SIGN_IN' | translate }}</h1>
+    @if (showMessage && showMessage.message) {
+      <div class="login-toastr-block">
+        <custom-toast />
+      </div>
+    }
+    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+      <div class="form-group">
+        <mat-label>{{ 'REGISTRATION_PAGE.EMAIL_ADDRESS' | translate }}</mat-label>
+        <div
+          class="formcontrol-wrapper"
+          [ngClass]="{ 'auth-invalid-control': hasFormControlError('email') }">
+          <input
+            type="email"
+            autocomplete="off"
+            class="formcontrol"
+            formControlName="email"
+            #emailInput />
+        </div>
+        @if (hasFormControlError('email')) {
+          @if (formControl['email'].hasError('required')) {
+            <div [@fadeAnimation] class="auth-error-message">
+              <div class="icon-block">
+                <svg>
+                  <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+                </svg>
+              </div>
+              <p>{{ 'VALIDATION.EMAIL' | translate }}</p>
+            </div>
+          }
+          @if (formControl['email'].hasError('pattern')) {
+            <div [@fadeAnimation] class="auth-error-message">
+              <div class="icon-block">
+                <svg>
+                  <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+                </svg>
+              </div>
+              <p>{{ 'VALIDATION.VALID_EMAIL' | translate }}</p>
+            </div>
+          }
+        }
+      </div>
+      <div class="form-group">
+        <mat-label> {{ 'REGISTRATION_PAGE.PASSWORD' | translate }}</mat-label>
+        <div
+          class="formcontrol-wrapper"
+          [ngClass]="{
+            'auth-invalid-control': hasFormControlError('password'),
+          }">
+          <a class="icon-eye-close" (click)="showPassword($event)">
+            @if (!show_type) {
+              <svg>
+                <use xlink:href="/scss/icons.svg#icon-eye-close"></use>
+              </svg>
+              <!-- {{ 'COMMON.SHOW' | translate }} -->
+            } @else {
+              <svg>
+                <use xlink:href="/scss/icons.svg#icon-eye"></use>
+              </svg>
+              <!-- {{ 'COMMON.HIDE' | translate }} -->
+            }
+          </a>
+          <input
+            type="password"
+            autocomplete="off"
+            [type]="show_type ? 'text' : 'password'"
+            class="formcontrol !pr-9"
+            formControlName="password"
+            placeholder=""
+            #passwordInput />
+        </div>
+        @if (hasFormControlError('password')) {
+          @if (formControl['password'].hasError('required')) {
+            <div [@fadeAnimation] class="auth-error-message">
+              <div class="icon-block">
+                <svg>
+                  <use xlink:href="/scss/icons.svg#icon-exclamation"></use>
+                </svg>
+              </div>
+              <p>{{ 'VALIDATION.PASSWORD' | translate }}</p>
+            </div>
+          }
+
+          <!-- Checking custom password errors individually -->
+        }
+      </div>
+      <div class="password-block">
+        <div class="global-checkbox">
+          <label for="privacy-check" class="customCheckbox">
+            {{ 'REGISTRATION_PAGE.REMEMBER_ME' | translate }}
+            <input
+              id="privacy-check"
+              type="checkbox"
+              checked="checked"
+              formControlName="rememberMe" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <a> {{ 'REGISTRATION_PAGE.FORGOT_PASSWORD' | translate }}</a>
+      </div>
+      <button type="submit" class="btn primary-btn" [disabled]="isDisabled">
+        {{ 'COMMON.SIGN_IN' | translate }}
+      </button>
+
+      <div class="or-block">
+        <span>{{ 'REGISTRATION_PAGE.OR' | translate }}</span>
+      </div>
+      <div class="social-icon-block">
+        <div class="icon-block icon-facebook">
+          <img src="/images/facebook-image.svg" alt="" />
+        </div>
+        <div class="icon-block icon-google">
+          <img src="/images/google-image.svg" alt="" />
+        </div>
+        <div class="icon-block icon-app-store">
+          <img src="/images/app-store-image.svg" alt="" />
+        </div>
+      </div>
+      <p class="sign-up-text">
+        {{ 'REGISTRATION_PAGE.DONT_HAVE_ACCOUNT' | translate }}
+        <a (click)="redirectToSignUp()">
+          {{ 'COMMON.SIGN_UP' | translate }}
+        </a>
+      </p>
+      <p class="learn-more-text">
+        {{ 'REGISTRATION_PAGE.RECAPTCHA_FOR_NOTBOT' | translate }}
+        <a> {{ 'COMMON.LEARNMORE' | translate }}.</a>
+      </p>
+    </form>
+  </div>
+</div>

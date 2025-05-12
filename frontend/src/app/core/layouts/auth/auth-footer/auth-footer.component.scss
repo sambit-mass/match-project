@@ -1,0 +1,132 @@
+@import 'partials';
+
+footer {
+  @apply bg-black-300;
+  @apply py-[34px];
+  @include flex-all(flex, center, space-between);
+  @apply px-[100px];
+  @apply relative;
+  @apply z-1;
+
+  p {
+    @apply text-md;
+    @apply leading-none;
+    @apply font-primary;
+    @include property('color', rgba(255, 255, 255, 0.4));
+    &.footer-right-content {
+      @apply capitalize;
+      @apply relative;
+    }
+    a {
+      @apply cursor-pointer;
+      @include transition;
+      &:hover {
+        @apply underline;
+        @apply text-white;
+      }
+    }
+  }
+}
+
+/* Dialog Terms Privacy */
+::ng-deep .custom-termscondition-dialog {
+  @apply w-[64.4rem];
+  @apply max-w-full #{!important};
+
+  .mat-mdc-dialog-surface {
+    @apply shadow-none #{!important};
+    @apply rounded-3xl #{!important};
+  }
+  header {
+    @apply pt-7 pr-6 pb-[18px] pl-9;
+    @apply border-b border-solid border-gray-700;
+    @include property('box-shadow', 0px 3px 12px 0px rgba(158, 158, 158, 0.1));
+    @include flex-all(flex, center, space-between);
+    ul {
+      @include flex-all(flex, center);
+      @apply gap-x-11;
+      li {
+        &.active {
+          a {
+            @apply text-3xl;
+            @apply leading-none;
+            @apply font-primary;
+            @apply font-black;
+            @apply text-black-500;
+            transition: font-size 0.2s ease-out;
+          }
+        }
+        a {
+          @apply text-sm;
+          @apply font-primary;
+          @apply leading-none;
+          @apply font-medium;
+          @include property('color', rgba(102, 102, 102, 0.8));
+          @include transition;
+          @apply cursor-pointer;
+          &:hover {
+            @apply text-black;
+          }
+        }
+      }
+    }
+    .dropdown-box {
+      .flag-box {
+        @apply cursor-pointer;
+      }
+    }
+  }
+  .dialog-content {
+    @apply pt-10 pr-[55px] pb-9 pl-9;
+    .tearms-body-part {
+      @apply h-[calc(100vh-460px)];
+      @apply max-h-[510px];
+      @apply overflow-y-auto;
+      animation: fadeDown 1s ease-in both;
+      &::-webkit-scrollbar {
+        @apply w-[3px];
+      }
+      &::-webkit-scrollbar-thumb {
+        @include property('background-color', rgba(211, 211, 211, 0.8));
+        @apply rounded-xl;
+      }
+    }
+    p {
+      @apply text-md;
+      @apply leading-5;
+      @apply font-primary;
+      @apply font-normal;
+      @apply text-black-600;
+      @apply mb-5;
+      &:last-of-type {
+        @apply mb-0;
+      }
+    }
+    h6 {
+      @apply text-md;
+      @apply leading-5;
+      @apply font-primary;
+      @apply font-bold;
+      @apply text-black-600;
+    }
+    .btn-close {
+      @apply bg-black;
+      @apply rounded-md;
+      @apply capitalize;
+      @apply mx-auto;
+      @apply h-9;
+      @include transition;
+      @apply mt-7;
+      &:hover {
+        @apply bg-primary;
+      }
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 1199px) {
+  footer {
+    @apply px-10;
+  }
+}

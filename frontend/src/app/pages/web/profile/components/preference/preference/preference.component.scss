@@ -1,0 +1,340 @@
+@import 'partials';
+//introduction section//
+.indroduction-block {
+  @apply pt-6;
+}
+.intro-left-block {
+  h6 {
+    @apply text-2xl;
+    @apply font-primary;
+    @apply leading-none;
+    @apply font-bold;
+    @apply text-black;
+  }
+  p {
+    @apply text-xl;
+    @apply font-primary;
+    @apply leading-7;
+    @apply font-medium;
+    @apply text-black;
+    @apply max-w-[656px];
+  }
+
+  .header-part {
+    @include flex-all(flex, center, space-between);
+    @apply mb-5;
+    .header-part-left {
+      span {
+        @apply text-md;
+        @apply font-primary;
+        @apply leading-none;
+        @apply font-medium;
+        @apply text-black;
+        @apply inline-block;
+        @apply mb-[18px];
+      }
+    }
+  }
+}
+.icon-edit {
+  @apply w-[38px];
+  @apply h-[38px];
+  @apply inline-block;
+  @apply rounded-full;
+  @apply border border-solid border-gray-1200;
+  @include flex-all(flex, center, center);
+  @include transition;
+  @apply cursor-pointer;
+  @apply bg-white;
+  &:hover {
+    @apply bg-black;
+    svg {
+      @apply fill-white;
+    }
+  }
+  svg {
+    @apply w-3.5;
+    @apply h-3;
+    @apply fill-black;
+  }
+  &.icon-edit-active {
+    @apply border-black;
+  }
+}
+.intro-common-block {
+  @apply border-b border-solid border-gray-1100;
+  @apply pb-[30px];
+  &:last-of-type {
+    @apply border-b-0;
+  }
+  &.intro-question-part {
+    @apply pt-12;
+    &:first-of-type {
+      @apply pt-0;
+    }
+    .header-part {
+      @apply mb-5;
+      @apply items-end;
+    }
+  }
+}
+.multi-select-wrap {
+  @apply pb-0;
+  .multi-select-option {
+    @apply border-none;
+    @apply bg-secondary;
+    span {
+      @apply text-white;
+    }
+  }
+}
+//intro right block//
+.custom-progressbar-spinner {
+  @apply mb-5;
+}
+.right-common-block {
+  @apply bg-white;
+  @apply pt-6 pl-3 pb-5 pr-3;
+  @apply rounded-xl;
+  @apply mb-4;
+  &:last-of-type {
+    @apply mb-9;
+  }
+  h5 {
+    @apply text-md;
+    @apply font-primary;
+    @apply leading-none;
+    @apply font-bold;
+    @apply text-secondary;
+    @apply mb-2.5;
+    @apply pl-3;
+  }
+  p {
+    @apply text-md;
+    @apply font-primary;
+    @apply leading-6;
+    @apply font-medium;
+    @apply text-black;
+  }
+}
+// .secondary-common-block {
+//   @apply mb-9;
+//   @apply pl-[13px] pt-6;
+//   h5 {
+//     @apply mb-3.5;
+//     @apply pl-3;
+//   }
+// }
+.factfile-content {
+  @include flex-all(flex, center);
+  @apply gap-x-3.5;
+  @apply py-3.5 pr-3 pl-3;
+  @apply rounded-lg;
+  @include transition;
+  @apply cursor-pointer;
+  &:hover {
+    @apply bg-gray-300;
+    .icon-edit {
+      @apply opacity-100;
+    }
+  }
+  .icon-block {
+    @apply w-14;
+    @apply h-14;
+    @apply border border-solid border-gray-1300;
+    @apply rounded-full;
+    @include flex-all(flex, center, center);
+    svg {
+      @apply w-5;
+      @apply h-5;
+      @apply fill-black;
+    }
+  }
+  .content-area {
+    @apply w-[calc(100%-122px)];
+    h6 {
+      @apply text-md;
+      @apply font-primary;
+      @apply leading-none;
+      @apply font-medium;
+      @apply text-black;
+      @apply mb-1.5;
+    }
+    p {
+      @apply text-base;
+      @apply font-primary;
+      @apply leading-none;
+      @apply font-bold;
+      @apply text-black;
+      @include truncate(1);
+    }
+  }
+  .icon-edit {
+    @apply opacity-0;
+    @apply bg-white;
+    @apply border-gray-1200;
+    &:hover {
+      @apply bg-black;
+    }
+  }
+}
+.entertainment-block {
+  @apply pt-9 pb-[26px] pr-[9px];
+  .factfile-content {
+    &:hover {
+      .icon-right-chevron {
+        svg {
+          @apply fill-primary;
+        }
+      }
+    }
+  }
+
+  .icon-right-chevron {
+    svg {
+      @apply w-3.5;
+      @apply h-3.5;
+      @apply fill-black;
+    }
+  }
+  .factfile-content {
+    .content-area {
+      @apply w-[calc(100%-92px)];
+    }
+  }
+}
+// Profile Common Dialog//
+::ng-deep .profile-common-dialog {
+  @apply max-w-[1150px] #{!important};
+  .mat-mdc-dialog-container {
+    @apply max-w-full;
+  }
+  .mat-mdc-dialog-surface {
+    @apply shadow-none #{!important};
+    @apply rounded-xl #{!important};
+  }
+  .dialog-wrapper {
+    @apply py-20 pl-[92px] pr-36;
+    header {
+      a {
+        @apply absolute;
+        @apply right-5;
+        @apply top-9;
+        @apply cursor-pointer;
+        @apply bg-black;
+        @apply w-14;
+        @apply h-14;
+        @include flex-all(flex, center, center);
+        @apply rounded-full;
+        @include transition;
+        &:hover {
+          @apply bg-primary;
+        }
+        svg {
+          @apply w-4;
+          @apply h-4;
+          @apply fill-white;
+        }
+      }
+    }
+    &.question-dialog-wrapper {
+      @apply pb-[77px] pl-[88px];
+    }
+  }
+  .dialog-content {
+    .dialog-content-wrapper {
+      // @apply h-[550px];
+      &.question-content-wrapper {
+        // @apply h-[600px];
+      }
+    }
+    h1 {
+      @apply text-7xl;
+      @apply leading-none;
+      @apply font-primary;
+      @apply font-black;
+      @apply text-black-600;
+      @apply max-w-[856px];
+      @apply mb-8;
+    }
+    h2 {
+      @apply text-3xl;
+      @apply font-primary;
+      @apply leading-none;
+      @apply font-medium;
+      @apply text-gray-400;
+      @apply mb-16;
+      span {
+        @apply text-primary;
+      }
+    }
+    &.question-dialog-content {
+      h2 {
+        @apply mb-9;
+      }
+    }
+  }
+}
+
+//Question Dialog//
+::ng-deep .profile-question-dialog {
+  @apply w-[1150px] #{!important};
+  @apply max-w-full #{!important};
+
+  .mat-mdc-dialog-surface {
+    @apply shadow-none #{!important};
+    @apply rounded-xl #{!important};
+  }
+  .dialog-content {
+    .dialog-content-wrapper {
+      // @apply h-[582px];
+    }
+    h1 {
+      @apply text-7xl;
+      @apply leading-none;
+      @apply font-primary;
+      @apply font-black;
+      @apply text-black-600;
+      @apply max-w-[856px];
+      @apply mb-8;
+    }
+    h2 {
+      @apply text-3xl;
+      @apply font-primary;
+      @apply leading-none;
+      @apply font-medium;
+      @apply text-gray-400;
+      @apply mb-9;
+    }
+    &.question-dialog-content {
+      h2 {
+        @apply mb-9;
+      }
+    }
+  }
+  .dialog-wrapper {
+    @apply pt-20 pr-[140px] pb-[77px] pl-20;
+    header {
+      a {
+        @apply absolute;
+        @apply right-5;
+        @apply top-9;
+        @apply cursor-pointer;
+        @apply bg-black;
+        @apply w-14;
+        @apply h-14;
+        @include flex-all(flex, center, center);
+        @apply rounded-full;
+        @include transition;
+        &:hover {
+          @apply bg-primary;
+        }
+        svg {
+          @apply w-4;
+          @apply h-4;
+          @apply fill-white;
+        }
+      }
+    }
+  }
+}

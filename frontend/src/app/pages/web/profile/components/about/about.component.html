@@ -1,0 +1,361 @@
+<div class="indroduction-block">
+  <div class="row">
+    <div class="col-8">
+      <div class="intro-left-block">
+        @if (!questionnaireTypeId || questionnaireTypeId === 2) {
+          <div class="intro-common-block">
+            <div class="header-part">
+              <h6>{{ 'PROFILE_PAGE.INTRODUCE_YOURSELF' | translate }}</h6>
+              <a class="icon-edit icon-edit-active" (click)="openIntroductionDialog($event)">
+                <svg>
+                  <use xlink:href="/scss/icons.svg#icon-edit"></use>
+                </svg>
+              </a>
+            </div>
+            <p>
+              {{
+                language === 'chinese'
+                  ? profileDetails?.introduction?.zh
+                  : profileDetails?.introduction?.en
+              }}
+            </p>
+          </div>
+        }
+        @if (questionnaireTypeId) {
+          @for (singleQuestion of singleQuestionList; track $index) {
+            <div class="intro-common-block intro-question-part">
+              <div class="header-part">
+                <div class="header-part-left">
+                  <!-- <span>{{
+                    language === 'chinese'
+                      ? singleQuestion.questionnaireType.zh
+                      : singleQuestion.questionnaireType.en
+                  }}</span> -->
+                  <h6>
+                    {{
+                      language === 'chinese'
+                        ? singleQuestion?.question?.zh
+                        : singleQuestion?.question?.en
+                    }}
+                  </h6>
+                </div>
+                <a
+                  class="icon-edit"
+                  [ngClass]="{
+                    'icon-edit-active': activeQuestionIdType && activeQuestionIdType.id,
+                  }"
+                  (click)="openQuestionDialog($event, singleQuestion)">
+                  <svg>
+                    <use xlink:href="/scss/icons.svg#icon-edit"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="question-wrapper">
+                <ul class="multi-select-wrap">
+                  @if (singleQuestion?.options?.length) {
+                    @for (item of singleQuestion.options; track $index) {
+                      <li class="multi-select-option">
+                        <span>{{ language === 'chinese' ? item.zh : item.en }}</span>
+                      </li>
+                    }
+                  } @else {
+                    <li class="multi-select-option">
+                      <span>{{ singleQuestion.optionText }}</span>
+                    </li>
+                  }
+                </ul>
+              </div>
+            </div>
+          }
+        } @else {
+          @for (singleQuestion of showQuestionList; track $index) {
+            <div class="intro-common-block intro-question-part">
+              <div class="header-part">
+                <div class="header-part-left">
+                  <span>{{
+                    language === 'chinese'
+                      ? singleQuestion.questionnaireType?.zh
+                      : singleQuestion.questionnaireType?.en
+                  }}</span>
+                  <h6>
+                    {{
+                      language === 'chinese'
+                        ? singleQuestion.question.zh
+                        : singleQuestion.question.en
+                    }}
+                  </h6>
+                </div>
+                <a class="icon-edit" (click)="selectQuestion(singleQuestion)">
+                  <svg>
+                    <use xlink:href="/scss/icons.svg#icon-edit"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="question-wrapper">
+                <ul class="multi-select-wrap">
+                  @for (item of singleQuestion.options; track $index) {
+                    <li class="multi-select-option">
+                      <span>{{ language === 'chinese' ? item.zh : item.en }}</span>
+                    </li>
+                  }
+                </ul>
+              </div>
+            </div>
+          }
+        }
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="intro-right-block">
+        <div class="right-common-block">
+          <div class="custom-progressbar-spinner">
+            <div class="spinner-container">
+              <div class="spinner-background">{{ completePercent }}%</div>
+              <mat-progress-spinner mode="determinate" [value]="completePercent" diameter="100">
+              </mat-progress-spinner>
+            </div>
+          </div>
+          <h5>{{ 'PROFILE_PAGE.PROFILE_COMPLETENESS' | translate }}</h5>
+          <p>
+            {{ 'PROFILE_PAGE.ADDMORE_GRAB_THE_ATTENTION' | translate }}
+          </p>
+        </div>
+        <div class="right-common-block secondary-common-block">
+          <h5>{{ 'PROFILE_PAGE.FACTFILE' | translate }}</h5>
+          <!-- <div class="factfile-content">
+            <div class="icon-block">
+              <svg>
+                <use xlink:href="/scss/icons.svg#icon-location"></use>
+              </svg>
+            </div>
+            <div class="content-area">
+              <h6>{{ 'PROFILE_PAGE.CITY_OF_RESIDENCE' | translate }}</h6>
+              <p>{{ city_zipcode }}</p>
+            </div>
+            <a class="icon-edit" (click)="openEditProfileDialog()">
+              <svg>
+                <use xlink:href="/scss/icons.svg#icon-edit"></use>
+              </svg>
+            </a>
+          </div> -->
+          <!-- <div class="factfile-content">
+            <div class="icon-block">
+              <svg>
+                <use xlink:href="/scss/icons.svg#icon-gender"></use>
+              </svg>
+            </div>
+            <div class="content-area">
+              <h6>{{ 'PROFILE_PAGE.GENDER' | translate }}</h6>
+              <p>{{ language === 'chinese' ? selectedGender.zh : selectedGender.en }}</p>
+            </div>
+            <a
+              class="icon-edit"
+              (click)="
+                openFactfileQuestionDialog(
+                  $event,
+                  {
+                    questionnaireTypeId: 1,
+                    qId: 1,
+                  },
+                  'single'
+                )
+              ">
+              <svg>
+                <use xlink:href="/scss/icons.svg#icon-edit"></use>
+              </svg>
+            </a>
+          </div> -->
+          @for (item of factfileViewArr; track $index) {
+            <div class="factfile-content">
+              <div class="icon-block">
+                <svg>
+                  <use [attr.href]="item.logoUrl"></use>
+                </svg>
+              </div>
+              <div class="content-area">
+                <h6>{{ language === 'chinese' ? item.name?.zh : item.name?.en }}</h6>
+                @if (item.text) {
+                  @if (item.text['onlyText']) {
+                    <p>{{ item.text['onlyText'] }}</p>
+                  } @else {
+                    <p>
+                      {{ language === 'chinese' ? item.text['zh'] : item.text['en'] }}
+                    </p>
+                  }
+                } @else {
+                  <p>
+                    {{
+                      language === 'chinese' ? item.questionText?.['zh'] : item.questionText?.['en']
+                    }}
+                  </p>
+                }
+              </div>
+              <a class="icon-edit" (click)="openFactfileQuestionDialog($event, item)">
+                <svg>
+                  <use xlink:href="/scss/icons.svg#icon-edit"></use>
+                </svg>
+              </a>
+            </div>
+          }
+        </div>
+        <!-- //entertainment block -->
+        <div class="right-common-block secondary-common-block entertainment-block">
+          <h5>ENTERTAINMENT</h5>
+          <div class="factfile-content">
+            <div class="icon-block">
+              <svg>
+                <use xlink:href="/scss/icons.svg#icon-food"></use>
+              </svg>
+            </div>
+            <div class="content-area">
+              <h6>Favorite TV Shows & Movies</h6>
+              <p>Not Specified</p>
+            </div>
+            <a class="icon-right-chevron">
+              <svg>
+                <use xlink:href="/scss/icons.svg#icon-chevron-right"></use>
+              </svg>
+            </a>
+          </div>
+          <div class="factfile-content">
+            <div class="icon-block">
+              <svg>
+                <use xlink:href="/scss/icons.svg#icon-music"></use>
+              </svg>
+            </div>
+            <div class="content-area">
+              <h6>Music</h6>
+              <p>Not Specified</p>
+            </div>
+            <a class="icon-right-chevron">
+              <svg>
+                <use xlink:href="/scss/icons.svg#icon-chevron-right"></use>
+              </svg>
+            </a>
+          </div>
+          <div class="factfile-content">
+            <div class="icon-block">
+              <svg>
+                <use xlink:href="/scss/icons.svg#icon-books"></use>
+              </svg>
+            </div>
+            <div class="content-area">
+              <h6>Favorite Books</h6>
+              <p>Not Specified</p>
+            </div>
+            <a class="icon-right-chevron">
+              <svg>
+                <use xlink:href="/scss/icons.svg#icon-chevron-right"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Indroduction Dialog -->
+    <ng-template #introductionDialog>
+      <div class="dialog-wrapper">
+        <header>
+          <a [attr.role]="'none'" (click)="closeIntroductionDialog()">
+            <svg>
+              <use xlink:href="/scss/icons.svg#icon-cross"></use>
+            </svg>
+          </a>
+        </header>
+        <div class="dialog-content">
+          <div class="dialog-content-wrapper">
+            <h1>{{ 'PROFILE_PAGE.KNOW_ABOUT_YOURSELF' | translate }}.</h1>
+            <h2>
+              {{ 'PROFILE_PAGE.WRITE_ABOUT_YOURSELF' | translate }}
+              <span>{{ 'PROFILE_PAGE.HELP_BY_AI' | translate }}</span>
+            </h2>
+            <app-introduction-dialog
+              (close-dialog)="closeIntroductionDialog()"></app-introduction-dialog>
+          </div>
+        </div>
+        <!-- (introductionDetails)="recievedIntroductionDeatils($event)" -->
+        <!-- [recievedExistIntroduction]="introductionDetails" -->
+      </div>
+    </ng-template>
+    <!-- Question Dialog -->
+    <ng-template #questionDialog>
+      <div class="dialog-wrapper question-dialog-wrapper">
+        <header>
+          <a [attr.role]="'none'" (click)="closeQuestionDialog()">
+            <svg>
+              <use xlink:href="/scss/icons.svg#icon-cross"></use>
+            </svg>
+          </a>
+        </header>
+        <div class="dialog-content question-dialog-content">
+          <div class="dialog-content-wrapper question-content-wrapper">
+            <!-- <h1>What's your highest level of education?</h1>
+        <h2>Select the highest level of education you have completed</h2> -->
+            @if (isProfileDialogOpen) {
+              <app-edit-profile
+                (closeDialog)="closeQuestionDialog()"
+                [editTypeId]="editProfileTypeId" />
+            } @else {
+              @switch (questionnaireTypeId) {
+                @case (1) {
+                  <app-profie-partner-preference
+                    (closeDialog)="closeQuestionDialog()"
+                    [activeQuestionerIdType]="activeQuestionIdType"></app-profie-partner-preference>
+                }
+                @case (2) {
+                  <app-profile-profile-basic
+                    (closeDialog)="closeQuestionDialog()"
+                    [activeQuestionerIdType]="activeQuestionIdType"></app-profile-profile-basic>
+                }
+                @case (3) {
+                  <app-profile-lifestyle-preference
+                    (closeDialog)="closeQuestionDialog()"
+                    [activeQuestionerIdType]="
+                      activeQuestionIdType
+                    "></app-profile-lifestyle-preference>
+                }
+                @case (4) {
+                  <app-profile-value-and-beliefs
+                    (closeDialog)="closeQuestionDialog()"
+                    [activeQuestionerIdType]="activeQuestionIdType"></app-profile-value-and-beliefs>
+                }
+                @case (5) {
+                  <app-profile-personality-interest
+                    (closeDialog)="closeQuestionDialog()"
+                    [activeQuestionerIdType]="
+                      activeQuestionIdType
+                    "></app-profile-personality-interest>
+                }
+                @case (6) {
+                  <app-profile-relationship-preference
+                    (closeDialog)="closeQuestionDialog()"
+                    [activeQuestionerIdType]="
+                      activeQuestionIdType
+                    "></app-profile-relationship-preference>
+                }
+                @case (7) {
+                  <app-profile-dating-preference
+                    (closeDialog)="closeQuestionDialog()"
+                    [activeQuestionerIdType]="activeQuestionIdType"></app-profile-dating-preference>
+                }
+                @case (8) {
+                  <app-profile-communication-interaction
+                    (closeDialog)="closeQuestionDialog()"
+                    [activeQuestionerIdType]="
+                      activeQuestionIdType
+                    "></app-profile-communication-interaction>
+                }
+                @case (9) {
+                  <app-profile-future-aspiration
+                    (closeDialog)="closeQuestionDialog()"
+                    [activeQuestionerIdType]="activeQuestionIdType"></app-profile-future-aspiration>
+                }
+              }
+            }
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

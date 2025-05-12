@@ -1,0 +1,207 @@
+@import 'partials';
+.page-wrapper {
+  @apply bg-gray-300;
+  @apply pt-0;
+  .page-container {
+    @apply w-[967px];
+  }
+  &.profile-preference-page-wrapper {
+    .page-container {
+      @apply w-[1240px];
+    }
+  }
+  &.profile-basics-page-wrapper {
+    .page-container {
+      @apply mt-11;
+      @apply w-[1140px];
+    }
+  }
+}
+//registering page design //
+.registering-page-wrapper {
+  @include flex-all(flex, center);
+}
+.text-block {
+  @apply max-w-[967px];
+  @apply mx-auto;
+  @apply text-center;
+  animation: fadeInDown 0.6s ease-in both;
+  @include property('animation-delay', 1s);
+  h1 {
+    @apply text-7xl;
+    @apply leading-none;
+    @apply font-primary;
+    @apply font-black;
+    @apply text-black-600;
+    @apply mb-6;
+  }
+  p {
+    @apply text-3xl;
+    @apply leading-none;
+    @apply font-primary;
+    @apply font-medium;
+    @apply text-gray-400;
+    @apply mb-[60px];
+  }
+}
+.circle-wrapper {
+  @apply relative;
+  @apply w-[132px];
+  @apply h-[132px];
+  @apply mx-auto;
+  @apply mb-10;
+  animation: fadeInDown 0.6s ease-in both;
+  @include property('animation-delay', 1s);
+  .shadow-circle {
+    @apply absolute;
+    @apply w-full;
+    @apply h-full;
+    @apply rounded-full;
+    @apply bg-secondary-200;
+    @apply top-2.5;
+    @apply left-2.5;
+    @apply z-0;
+  }
+  .tick-icon-block {
+    @apply absolute;
+    @apply w-full;
+    @apply h-full;
+    @apply rounded-full;
+    @apply bg-green-300;
+    @include flex-all(flex, center, center);
+    @include property('border', 4px solid #fff);
+    @apply relative;
+    @apply z-1;
+    svg {
+      @apply w-14;
+      @apply h-14;
+      @apply fill-white;
+    }
+  }
+}
+
+.primary-btn {
+  @apply text-lg;
+  @apply leading-none;
+  @apply normal-case;
+  @apply mx-auto;
+  @apply h-14;
+  @apply min-w-[211px];
+  animation: fadeInUp 0.6s ease-in both;
+  @include property('animation-delay', 2s);
+  &.btn-white {
+    @apply bg-white;
+    @apply text-primary-200;
+    &:hover {
+      @apply bg-black-1000;
+      @apply text-white;
+    }
+  }
+}
+
+////profile preference design///
+
+.profile-preference-header-block {
+  @apply bg-white;
+  @include flex-all(flex, center);
+  @apply pt-28 pb-7;
+  @apply mb-28;
+  .image-block {
+    @apply w-[753px];
+    @apply mx-auto;
+    @apply relative;
+    img {
+      @apply w-full;
+      @apply object-cover;
+    }
+    &::after {
+      @apply empty-content;
+      @apply absolute;
+      @apply -right-[184px];
+      @apply -top-[71px];
+      @include background-image('large-partical-image.svg', no-repeat);
+      @apply w-64;
+      @apply h-[290px];
+    }
+  }
+}
+h1 {
+  @include property('font-size', 70px);
+  @apply leading-[80px];
+  @apply font-primary;
+  @apply font-black;
+  @apply text-black-600;
+  @apply mb-0;
+  @apply text-center;
+  span {
+    @apply text-primary;
+  }
+}
+////profile basics design///
+.profile-basics-page-wrapper {
+  @include property('background', linear-gradient(101.88deg, #e34677 2.25%, #ff5b49 97.75%));
+  @include flex-all(flex, center);
+  .page-partical-image {
+    @apply top-auto;
+    @apply -bottom-[60px];
+  }
+  .image-block {
+    @apply w-[266px];
+    @apply mx-auto;
+    @apply mb-[50px];
+    img {
+      @apply w-full;
+      @apply object-cover;
+    }
+  }
+  h1 {
+    @include property('font-size', 68px);
+    @apply leading-[75px];
+    @apply font-primary;
+    @apply font-semibold;
+    @apply text-white;
+    @apply mb-12;
+    span {
+      @apply font-black;
+      @apply text-white;
+    }
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    @apply opacity-0;
+    @include property('transform', translateY(-40%));
+  }
+  to {
+    @apply opacity-100;
+    @include property('transform', translateY(0));
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    @apply opacity-0;
+    @include property('transform', translateY(40%));
+  }
+  to {
+    @apply opacity-100;
+    @include property('transform', translateY(0));
+  }
+}
+
+// Responsive
+@media (max-width: 991px) {
+  .circle-wrapper {
+    @apply w-[100px];
+    @apply h-[100px];
+  }
+  .text-block {
+    h1 {
+      @apply text-[52px];
+    }
+    p {
+      @apply text-2xl;
+    }
+  }
+}

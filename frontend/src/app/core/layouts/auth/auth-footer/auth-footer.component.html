@@ -1,0 +1,108 @@
+<footer>
+  <p>&#169; 2025 MatchByAI. {{ 'FOOTER_PAGE.ALL_RIGHTS_RESERVED' | translate }}.</p>
+  <p class="footer-right-content">
+    <a (click)="openTermsPrivacyDialog('tab1')">{{
+      'FOOTER_PAGE.TERMS_AND_CONDITION' | translate
+    }}</a>
+    |
+    <a (click)="openTermsPrivacyDialog('tab2')">{{ 'FOOTER_PAGE.PRIVACY_POLICY' | translate }}</a>
+  </p>
+</footer>
+
+<ng-template let-data #termsConditionDialog>
+  <div class="dialog-wrapper">
+    <header>
+      <ul>
+        <li [ngClass]="{ active: activeTab === 'tab1' }" (click)="activeTab = 'tab1'">
+          <a>{{ 'TERMS_CONDITION_PRIVACY_POLICY.TERMS_OF_SERVICE' | translate }}</a>
+        </li>
+        <li [ngClass]="{ active: activeTab === 'tab2' }" (click)="activeTab = 'tab2'">
+          <a>{{ 'TERMS_CONDITION_PRIVACY_POLICY.PRIVACY_POLICY' | translate }}</a>
+        </li>
+      </ul>
+      <!-- <div class="dropdown-box">
+        <div class="flag-box" [matMenuTriggerFor]="menu">
+          <img src="/images/flag-image.svg" alt="" />
+        </div>
+        <mat-menu #menu="matMenu" class="country-dropdown-box">
+          <div class="dropdown-inner-box">
+            <div class="flag-box">
+              <img src="/images/chinese-flag-image.svg" alt="" />
+            </div>
+            <p>Chinese</p>
+          </div>
+          <div class="dropdown-inner-box">
+            <div class="flag-box">
+              <img src="/images/flag-image.svg" alt="" />
+            </div>
+            <p>English</p>
+          </div>
+        </mat-menu>
+      </div> -->
+    </header>
+    <section class="dialog-content">
+      @if (activeTab === 'tab1') {
+        <div class="tearms-body-part">
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.WELCOME_TO_MATCHBYAI' | translate }}</p>
+          <h6>1. {{ 'TERMS_CONDITION_PRIVACY_POLICY.USE_OF_SERVICE' | translate }}</h6>
+          <p>
+            {{ 'TERMS_CONDITION_PRIVACY_POLICY.AGREE_FOR_SERVICE' | translate }}
+          </p>
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.VIOLATE_LAWS_REGULATION' | translate }}</p>
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.FALSE_MISLEADING_INFORMATION' | translate }}</p>
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.INTERFACE_WITH_OPERATION' | translate }}</p>
+          <h6>2. {{ 'TERMS_CONDITION_PRIVACY_POLICY.USER_ACCOUNT' | translate }}</h6>
+          <p>
+            {{ 'TERMS_CONDITION_PRIVACY_POLICY.ACCESS_CERTAIN_FEATURES' | translate }}
+          </p>
+          <h6>3. {{ 'TERMS_CONDITION_PRIVACY_POLICY.PROPERTY_LISTING' | translate }}</h6>
+          <p>
+            {{ 'TERMS_CONDITION_PRIVACY_POLICY.LISTINGS_ARE_ACCURATE' | translate }}
+          </p>
+        </div>
+      } @else if (activeTab === 'tab2') {
+        <div class="tearms-body-part">
+          <!-- <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.WELCOME_TO_MATCHBYAI' | translate }}</p>
+          <h6>1. {{ 'TERMS_CONDITION_PRIVACY_POLICY.USE_OF_SERVICE' | translate }}</h6>
+          <p>
+            {{ 'TERMS_CONDITION_PRIVACY_POLICY.AGREE_FOR_SERVICE' | translate }}
+          </p>
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.VIOLATE_LAWS_REGULATION' | translate }}</p>
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.FALSE_MISLEADING_INFORMATION' | translate }}</p>
+          <p>{{ 'TERMS_CONDITION_PRIVACY_POLICY.INTERFACE_WITH_OPERATION' | translate }}</p>
+          <h6>2. {{ 'TERMS_CONDITION_PRIVACY_POLICY.USER_ACCOUNT' | translate }}</h6>
+          <p>
+            {{ 'TERMS_CONDITION_PRIVACY_POLICY.ACCESS_CERTAIN_FEATURES' | translate }}
+          </p>
+          <h6>3. {{ 'TERMS_CONDITION_PRIVACY_POLICY.PROPERTY_LISTING' | translate }}</h6>
+          <p>
+            {{ 'TERMS_CONDITION_PRIVACY_POLICY.LISTINGS_ARE_ACCURATE' | translate }}
+          </p> -->
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          <h6>1. Lorem Ipsum</h6>
+          <p>
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+            unknown printer took a galley
+          </p>
+          <p>
+            when an unknown printer took a galley of type and scrambled it to make a type specimen
+            book.
+          </p>
+          <p>It has survived not only five centuries, but also the leap into electronic</p>
+          <p>It has survived not only five centuries, but also the leap into electronic</p>
+          <h6>2. Lorem Ipsum</h6>
+          <p>
+            when an unknown printer took a galley of type and scrambled it to make a type specimen
+            book.
+          </p>
+          <h6>3. Lorem Ipsum</h6>
+          <p>It has survived not only five centuries, but also the leap into electronic</p>
+        </div>
+      }
+
+      <button type="button" (click)="closeTermsPolicyDialog()" class="btn btn-close">
+        {{ 'COMMON.CLOSE' | translate }}
+      </button>
+    </section>
+  </div>
+</ng-template>

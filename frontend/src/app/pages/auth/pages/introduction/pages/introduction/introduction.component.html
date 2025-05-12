@@ -1,0 +1,88 @@
+<app-auth-header [showProfile]="true"></app-auth-header>
+<section class="page-wrapper">
+  <figure class="page-partical-image">
+    <img src="images/page-common-particals.png" alt="Common Partical" />
+  </figure>
+  <div class="page-container">
+    <h1 class="page-heading">{{ 'PROFILE_PAGE.KNOW_ABOUT_YOURSELF' | translate }}</h1>
+    <span class="sub-heading"
+      >{{ 'PROFILE_PAGE.WRITE_ABOUT_YOURSELF' | translate }}
+      <strong>{{ 'PROFILE_PAGE.HELP_BY_AI' | translate }}</strong></span
+    >
+
+    <div class="dialog-chat-box">
+      <custom-toast />
+      <div class="formcontrol-wrapper textarea-control-wrapper">
+        <textarea
+          [(ngModel)]="introduction"
+          class="textarea-control"
+          placeholder="{{ 'PROFILE_PAGE.AI_AUTO_GENERATOR' | translate }}"></textarea>
+      </div>
+      <div class="chatbox-footer-part">
+        <div class="left-part">
+          <a
+            class="left-part-common-block auto-generate-block"
+            [ngClass]="{ 'active-block': activeButton === 1 }"
+            (click)="onGenerate('autoGenerate'); setActiveButton(1)">
+            <div class="image-block">
+              <img src="/images/auto-generate-image.svg" alt="" />
+            </div>
+            <p>{{ 'PROFILE_PAGE.AUTO_GENERATE' | translate }}</p>
+          </a>
+          <a
+            class="left-part-common-block ai-voice-block disabled"
+            [ngClass]="{ 'active-block': activeButton === 2 }"
+            (click)="setActiveButton(2)">
+            <div class="image-block">
+              <img src="/images/ai-voice-image.svg" alt="" />
+            </div>
+            <p>{{ 'PROFILE_PAGE.VOICE' | translate }}</p>
+          </a>
+          <a
+            class="left-part-common-block ai-voice-block"
+            [ngClass]="{ 'active-block': activeButton === 3 }"
+            (click)="onGenerate('aiText'); setActiveButton(3)">
+            <div class="image-block">
+              <img src="/images/ai-text-image.svg" alt="" />
+            </div>
+            <p>{{ 'PROFILE_PAGE.TEXT' | translate }}</p>
+          </a>
+        </div>
+        <div class="button-block">
+          <button type="button" class="btn primary-btn" (click)="onSaveIntroduction($event)">
+            {{ 'COMMON.FINISH' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template let-data #warningDialog>
+  <div class="dialog-wrapper">
+    <header>
+      <a [attr.role]="'none'" (click)="closeWarningDialog()">
+        <svg>
+          <use xlink:href="/scss/icons.svg#icon-cross"></use>
+        </svg>
+      </a>
+    </header>
+    <div class="dialog-content">
+      <div class="warning-image-block">
+        <img src="/images/new-warning-image.svg" alt="" />
+      </div>
+      <h3>{{ 'PROFILE_PAGE.ABOUT_USING_AI' | translate }}</h3>
+      <div class="button-block">
+        <button
+          type="button"
+          class="btn primary-btn"
+          (click)="onGenerate('autoGenerate', true, $event)">
+          {{ 'COMMON.YES' | translate }}
+        </button>
+        <button type="button" class="btn transparent-btn" (click)="closeWarningDialog()">
+          {{ 'COMMON.NO' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

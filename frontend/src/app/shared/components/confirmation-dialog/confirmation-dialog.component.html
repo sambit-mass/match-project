@@ -1,0 +1,41 @@
+<section class="dialog-wrapper">
+  <header class="dialog-close-block">
+    <a [attr.role]="'none'" (click)="closeDialog()">
+      <svg class="icon-sidebar-cross">
+        <use xlink:href="./assets/scss/icons.svg#icon-sidebar-cross"></use>
+      </svg>
+    </a>
+  </header>
+  <main>
+    <!-- <div class="warning-icon">
+      <img [src]="photoIcon" alt="" />
+    </div> -->
+    <div class="dialog-content">
+      <p [innerHTML]="message"></p>
+    </div>
+  </main>
+  <footer class="dialog-actions">
+    @if (showCancelButton) {
+      <button
+        [ngClass]="{
+          'btn-reset': dialogType === 'normal',
+        }"
+        type="button"
+        class="btn"
+        (click)="onCancelDialogFn()">
+        {{ cancelButtonText }}
+      </button>
+    }
+    @if (showConfirmButton) {
+      <button
+        [ngClass]="{
+          'btn-primary': dialogType === 'normal',
+        }"
+        type="button"
+        class="btn"
+        (click)="onConfirmDialogFn()">
+        {{ confirmButtonText }}
+      </button>
+    }
+  </footer>
+</section>

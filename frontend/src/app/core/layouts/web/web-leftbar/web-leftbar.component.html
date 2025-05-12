@@ -1,0 +1,73 @@
+<div class="profile-leftbar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      @if (showCategorySubmenu) {
+        <img src="/images/profile-footer-image.svg" alt="Logo" decoding="async" loading="lazy" />
+      } @else {
+        <img src="/images/profile-logo.svg" alt="Logo" decoding="async" loading="lazy" />
+      }
+    </div>
+  </div>
+  <div class="sidebar-body">
+    <nav>
+      <ul class="sidebar-nav">
+        <li class="nav-list">
+          <a class="nav-list-item">
+            <svg class="menu-icon icon-home">
+              <use xlink:href="/scss/icons.svg#icon-home"></use>
+            </svg>
+            <p>{{ 'PROFILE_PAGE.HOME' | translate }}</p>
+          </a>
+        </li>
+        <li class="nav-list">
+          <a class="nav-list-item">
+            <svg class="menu-icon icon-search">
+              <use xlink:href="/scss/icons.svg#icon-search"></use>
+            </svg>
+            <p>{{ 'PROFILE_PAGE.EXPLORE' | translate }}</p>
+          </a>
+        </li>
+        <li class="nav-list">
+          <a class="nav-list-item">
+            <svg class="menu-icon icon-likes">
+              <use xlink:href="/scss/icons.svg#icon-like"></use>
+            </svg>
+            <p>{{ 'PROFILE_PAGE.LIKES' | translate }}</p>
+          </a>
+        </li>
+        <li class="nav-list">
+          <a class="nav-list-item">
+            <svg class="menu-icon icon-message">
+              <use xlink:href="/scss/icons.svg#icon-message"></use>
+            </svg>
+            <p>{{ 'PROFILE_PAGE.MESSAGE' | translate }}</p>
+          </a>
+        </li>
+        <li class="nav-list">
+          <a class="nav-list-item active-item">
+            <svg class="menu-icon icon-user">
+              <use xlink:href="/scss/icons.svg#icon-user"></use>
+            </svg>
+            <p>{{ 'PROFILE_PAGE.PROFILE' | translate }}</p>
+          </a>
+        </li>
+        <li class="nav-list">
+          <a class="nav-list-item">
+            <svg class="menu-icon icon-setting">
+              <use xlink:href="/scss/icons.svg#icon-setting"></use>
+            </svg>
+            <p>{{ 'PROFILE_PAGE.SETTINGS' | translate }}</p>
+          </a>
+        </li>
+        <li class="nav-list">
+          <a class="nav-list-item">
+            <svg class="menu-icon icon-help">
+              <use xlink:href="/scss/icons.svg#icon-help"></use>
+            </svg>
+            <p>{{ 'PROFILE_PAGE.HELP' | translate }}</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

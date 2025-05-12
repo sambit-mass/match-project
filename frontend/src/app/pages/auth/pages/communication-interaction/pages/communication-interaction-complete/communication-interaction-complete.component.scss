@@ -1,0 +1,57 @@
+@import 'partials';
+
+figure {
+  @apply w-[380px];
+  @apply mx-auto;
+  img {
+    @apply w-full;
+  }
+}
+.moveble-block-first {
+  animation: fadeInRightStayFadeOutLeft 9s ease-in-out forwards;
+  @include property('animation-delay', 0.8s);
+  @apply opacity-0;
+}
+.moveble-block-second {
+  animation: fadeInRight 3s ease-in-out forwards;
+  @include property('animation-delay', 10s);
+  @apply opacity-0;
+}
+
+.moveble-block-first,
+.moveble-block-second {
+  @apply w-full;
+  @apply absolute;
+  @apply top-0 right-0 left-0;
+  h1,
+  h2,
+  h6 {
+    @apply text-center;
+  }
+}
+.about-step-page-cont {
+  .btn {
+    animation: fadeIn 0.6s ease-in both;
+    @include property('animation-delay', 19s);
+  }
+}
+
+@keyframes fadeInRightStayFadeOutLeft {
+  0% {
+    transform: translateX(100%);
+    @apply opacity-0;
+  }
+  20% {
+    transform: translateX(0);
+    @apply opacity-100;
+  }
+  90% {
+    transform: translateX(0);
+    @apply opacity-100;
+  }
+  100% {
+    transform: translateX(-100%);
+    @apply opacity-0;
+    @apply hidden;
+  }
+}

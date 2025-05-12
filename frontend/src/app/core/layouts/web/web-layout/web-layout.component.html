@@ -1,0 +1,13 @@
+<div class="page-wrapper sidebar-collapse">
+  <div class="web-wrap">
+    <div class="profile-left-panel" [ngClass]="{ 'left-panel-add-category': showCategorySubmenu }">
+      <app-web-leftbar></app-web-leftbar>
+    </div>
+
+    <div class="middle-part-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <app-web-footer></app-web-footer>
+</div>

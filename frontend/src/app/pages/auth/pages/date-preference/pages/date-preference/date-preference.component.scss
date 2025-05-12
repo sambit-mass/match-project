@@ -1,0 +1,22 @@
+@import 'partials';
+.page-wrapper {
+  @apply pt-14;
+}
+.page-heading {
+  @apply mb-7 #{!important};
+}
+.question-wrapper {
+  @apply min-h-32;
+}
+
+// Responsive
+@media (min-width: 768px) {
+  .page-container {
+    @apply w-[750px];
+  }
+}
+@media (min-width: 1199px) {
+  .page-container {
+    @apply w-[914px];
+  }
+}

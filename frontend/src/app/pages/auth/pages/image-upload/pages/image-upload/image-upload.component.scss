@@ -1,0 +1,251 @@
+@import 'partials';
+.page-wrapper {
+  .content-card-wrap {
+    &.upload-images {
+      @apply pb-11;
+      .content-card {
+        @apply pt-4;
+      }
+    }
+  }
+}
+.image-upload-page-wrap {
+  .page-container {
+    @apply w-[1036px];
+  }
+}
+.content-card {
+  @include flex-all(flex, center, center);
+  @apply min-h-[calc(100vh-292px)];
+}
+.drag-drop-wrap {
+  @apply overflow-hidden;
+  @apply relative;
+  @apply cursor-pointer;
+  &.drag-drop-wrap-chinese {
+    input[type='file'] {
+      @apply left-[98px];
+    }
+  }
+  input[type='file'] {
+    @apply absolute;
+    @apply left-[189px] right-auto;
+    @apply top-[25px] bottom-auto;
+    @apply w-[93px];
+    @apply h-[93px];
+    @apply cursor-pointer;
+    @apply z-1;
+    @apply opacity-0;
+  }
+  .drag-drop-inner {
+    @apply p-[25px];
+    @include flex-all(flex, center, center);
+    @apply flex-col;
+    .plus-btn {
+      @apply mb-12;
+      svg {
+        @apply w-[94px];
+        @apply h-[94px];
+      }
+    }
+    h2 {
+      @apply text-3xl;
+      @apply leading-[22px];
+      @apply font-bold;
+      @apply text-black-1000;
+      @apply font-primary;
+      @apply mb-6;
+    }
+    span {
+      @apply text-lg;
+      @apply leading-none;
+      @apply font-normal;
+      @apply font-primary;
+      @include property('color', rgba(0, 0, 0, 0.5));
+      @apply inline-block;
+    }
+  }
+}
+.upload-gallery-wrap {
+  @apply min-h-[calc(100vh-413px)];
+  .upload-gallery-heading {
+    @apply text-lg;
+    @apply leading-4;
+    @apply font-normal;
+    @apply font-primary;
+    @include property('color', rgba(0, 0, 0, 0.5));
+    @apply inline-block;
+    @apply mb-9;
+  }
+  .upload-gallery-content {
+    @apply grid;
+    @apply grid-cols-6;
+    @apply gap-[29px];
+  }
+  .upload-gallery-content-items {
+    @apply border border-[#EEEEEE];
+    @include rounded(9);
+    @apply relative;
+    figure {
+      @apply size-full;
+      @apply overflow-hidden;
+      @include rounded(9);
+      @include flex-all(flex, center, center);
+      img {
+        @apply size-full;
+        aspect-ratio: 1/1;
+        @apply object-cover;
+      }
+    }
+    .close-btn {
+      @include flex-all(flex, center, center);
+      @apply absolute;
+      @apply -right-2.5;
+      @apply -top-2.5;
+      @apply w-7;
+      @apply h-7;
+      @apply border-2 border-[#EEEEEE];
+      @apply rounded-full;
+      @apply bg-[#1C1C1C];
+      @apply transition-all;
+      @apply cursor-pointer;
+      @apply z-1;
+      svg {
+        @apply fill-white;
+        @apply text-white;
+        @apply w-[13px];
+        @apply h-3;
+      }
+
+      &:hover {
+        @apply bg-primary;
+      }
+      &.icon-cross {
+        @apply flex;
+      }
+      &.icon-tick {
+        @apply hidden;
+      }
+    }
+    .overlay-text {
+      @apply absolute;
+      @apply left-0;
+      @apply top-0;
+      @apply w-full;
+      @apply h-full;
+      @include rounded(9);
+      @include property('background', rgba(0, 0, 0, 0.42));
+      @include flex-all(flex, center, center);
+      @apply text-xs;
+      @apply leading-7;
+      @apply font-semibold;
+      @apply font-primary;
+      @apply text-white;
+      @apply opacity-0;
+      @include transition;
+      @apply cursor-pointer;
+    }
+    &:hover {
+      box-shadow: $selectedProfilePictureShadow;
+      @apply border-0;
+      .overlay-text {
+        @apply opacity-100;
+      }
+    }
+    &.add-more {
+      @apply min-h-[140px];
+      @include flex-all(flex, center, center);
+      @apply border-transparent;
+      @include rounded(15);
+      @apply relative;
+      box-shadow: $addMoreButtonShadow;
+      figure {
+        svg {
+          @apply mx-auto;
+          @apply w-[50px];
+          @apply h-[50px];
+        }
+      }
+      input[type='file'] {
+        @apply absolute;
+        @apply w-full;
+        @apply h-full;
+        @apply opacity-0;
+        @apply cursor-pointer;
+      }
+      .pseudo-click-btn {
+        @apply absolute;
+        @apply w-full;
+        @apply h-full;
+        @apply top-0;
+        @apply left-0;
+        @apply cursor-pointer;
+      }
+    }
+    &.--selected {
+      box-shadow: $selectedProfilePictureShadow;
+      @apply border-0;
+    }
+    &.--added .close-btn {
+      @apply bg-green;
+      &.icon-cross {
+        @apply hidden;
+      }
+      &.icon-tick {
+        @apply flex;
+      }
+    }
+  }
+}
+.card-button-wrap {
+  @apply mt-0;
+  @apply py-5;
+  @apply border-0;
+  .button-block.left {
+    @apply justify-start;
+    .succes-text {
+      @include flex-all(flex, center);
+      @apply gap-x-3.5;
+      @apply text-label;
+      @apply leading-none;
+      @apply font-medium;
+      @apply text-gray-400;
+    }
+  }
+}
+::ng-deep .upload-image-toastr {
+  .custom-toastr-block {
+    @apply mt-0 mb-10 #{!important};
+  }
+}
+.button-block {
+  @include flex-all(flex, center, center);
+  @apply gap-x-3;
+}
+/* Responsive */
+@media (min-width: 768px) {
+  .page-container {
+    @apply w-[750px];
+  }
+}
+@media (min-width: 1199px) {
+  .page-container {
+    @apply w-[1036px];
+  }
+}
+@media (max-width: 1199px) {
+  .drag-drop-wrap {
+    .drag-drop-inner {
+      .plus-btn svg {
+        @apply w-[72px];
+        @apply h-[72px];
+      }
+    }
+  }
+  .upload-gallery-wrap {
+    .upload-gallery-content {
+      @apply grid-cols-4;
+      @apply gap-6;
+    }
+  }
+}

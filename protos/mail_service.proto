@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+service MailService {
+    rpc mailSend(mailSendRequest) returns (mailSendResponse) {}
+    rpc mailSendWithAttachment(mailSendWithAttachmentRequest) returns (mailSendWithAttachmentResponse) {}
+}
+
+message Empty {}
+
+/******************************** FOR MAIL SEND START ********************************************/
+
+message mailSendRequest {
+    string to = 1;
+    string from = 2;
+    string subject = 3;
+    string reply_to = 4;
+    string emailbody = 5;
+}
+
+message mailSendResponse {}
+/******************************** FOR MAIL SEND END ********************************************/
+
+/******************************** FOR MAIL SEND WITH ATTACHMENT START ********************************************/
+message mailSendWithAttachmentRequest {
+    string to = 1;
+    string from = 2;
+    string subject = 3;
+    string reply_to = 4;
+    string emailbody = 5;
+}
+
+message mailSendWithAttachmentResponse {}
+/******************************** FOR MAIL SEND WITH ATTACHMENT END ********************************************/

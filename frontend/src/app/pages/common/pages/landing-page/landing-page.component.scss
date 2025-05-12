@@ -1,0 +1,131 @@
+@import 'partials';
+.landing-wrapper {
+  @apply pt-[38px] pb-12;
+  @apply mt-20;
+  @apply min-h-[calc(100vh-162px)];
+}
+.landing-content {
+  @apply w-[900px];
+  @apply mx-auto;
+  .sub-heading {
+    @apply text-[25px];
+    @apply leading-9;
+    @apply font-medium;
+    @apply text-[#727272];
+    @apply font-primary;
+    @apply inline-block;
+    @apply mb-10;
+    @apply text-center;
+    @apply w-full;
+  }
+  h1 {
+    @apply text-[85px];
+    @apply leading-[75px];
+    @apply text-black-300;
+    @apply font-black;
+    @apply font-primary;
+    @apply mb-[70px];
+    @apply relative;
+    span {
+      @apply text-primary;
+    }
+    &::after {
+      @apply empty-content;
+      @apply absolute;
+      @apply -right-24;
+      @apply top-[86px];
+      @include background-image('arrow-image.svg', no-repeat);
+      @apply w-44;
+      @apply h-52;
+    }
+  }
+  .landing-page-image-wrap {
+    @apply relative;
+    .custom-btn {
+      @apply inline-block;
+      @apply bg-primary;
+      @apply text-xl;
+      @apply leading-[58px];
+      @apply text-white;
+      @apply font-extrabold;
+      @apply uppercase;
+      @apply tracking-[3.5px];
+      @apply px-[25px];
+      @include rounded(12);
+      @apply absolute;
+      @apply bottom-[52px];
+      @apply left-1/2;
+      @apply -translate-x-1/2;
+      @apply cursor-pointer;
+      @apply transition-all;
+      &:hover {
+        @apply bg-black;
+      }
+    }
+  }
+}
+::ng-deep .lang-zh {
+  .landing-content {
+    .sub-heading {
+    }
+    h1 {
+      @apply leading-[90px] #{!important};
+      @apply text-center;
+      &::after {
+        @apply right-[70px] #{!important};
+        @apply top-14 #{!important};
+      }
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 1199px) {
+  .landing-wrapper {
+    @apply min-h-[calc(100vh-162px)];
+  }
+  .landing-content {
+    .sub-heading {
+      @apply text-1xl;
+    }
+    h1 {
+      @apply text-[71px];
+      @apply leading-[70px];
+      @apply mb-[55px];
+      &::after {
+        @apply right-8;
+        @apply top-[74px];
+        @apply w-[146px];
+        @apply h-[175px];
+        @apply bg-cover;
+      }
+    }
+    .landing-page-image-wrap .custom-btn {
+      @apply text-lg;
+      @apply leading-[52px];
+    }
+  }
+}
+@media (max-width: 991px) {
+  .landing-content {
+    @apply w-[750px];
+    @apply px-5;
+    .landing-page-image-wrap .custom-btn {
+      @apply text-base;
+      @apply leading-[48px];
+    }
+    .sub-heading {
+      @apply text-lg;
+    }
+    h1 {
+      @apply text-[52px];
+      @apply leading-[56px];
+      &::after {
+        @apply right-28;
+        @apply top-5;
+        @apply w-[106px];
+        @apply h-[127px];
+      }
+    }
+  }
+}

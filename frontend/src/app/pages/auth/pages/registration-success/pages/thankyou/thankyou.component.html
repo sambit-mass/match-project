@@ -1,0 +1,67 @@
+<app-auth-header></app-auth-header>
+<!----------------------------Registering page--------------------->
+<div class="wrapper">
+  <section class="page-wrapper registering-page-wrapper">
+    <figure class="page-partical-image fadeInRight">
+      <img src="images/page-common-particals.png" alt="Common Partical" />
+    </figure>
+    <figure class="pge-character-image fadeInRight">
+      <img src="images/page-common-character.png" alt="Common Partical" />
+    </figure>
+    <div class="page-container">
+      <div class="circle-wrapper">
+        <div class="tick-icon-block">
+          <svg>
+            <use xlink:href="/scss/icons.svg#icon-tick"></use>
+          </svg>
+        </div>
+        <div class="shadow-circle"></div>
+      </div>
+      <div class="text-block">
+        <h1>{{ 'SUCCESS_REGISTRATION.THANKYOU_FOR_REG' | translate }}!</h1>
+        <p>{{ 'SUCCESS_REGISTRATION.SUCCESSFULLY_CREATED' | translate }}.</p>
+      </div>
+      <button type="button" class="btn primary-btn" [routerLink]="'/profile'">
+        {{ 'SUCCESS_REGISTRATION.GO_TO_DASHBOARD' | translate }}
+      </button>
+    </div>
+  </section>
+</div>
+<!----------------------------Profile Preference Page--------------------->
+<section class="page-wrapper profile-preference-page-wrapper" hidden>
+  <figure class="pge-character-image">
+    <img src="images/page-common-character2.png" alt="Common Partical" />
+  </figure>
+  <div class="profile-preference-header-block">
+    <div class="image-block">
+      <img src="/images/large-logo-image.svg" alt="" />
+    </div>
+  </div>
+  <div class="page-container">
+    <h1>
+      Congratulations, you have competed <br />
+      Partner Preference <br />
+      Now you need to update your<span> Profile Preference</span>
+    </h1>
+  </div>
+</section>
+<!----------------------------Profile Basics Page--------------------->
+<div class="wrapper" hidden>
+  <section class="page-wrapper profile-basics-page-wrapper">
+    <figure class="page-partical-image">
+      <img src="images/profile-basics-partical.svg" alt="Common Partical" />
+    </figure>
+    <div class="page-container">
+      <div class="image-block">
+        <img src="/images/love-image.svg" alt="" />
+      </div>
+      <h1>
+        Congratulations, you have competed<br />
+        Partner Preference<br />
+        Now you need to update your
+        <span>Profile Preference</span>
+      </h1>
+      <button type="button" class="btn primary-btn btn-white">Get Started</button>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,109 @@
+<!-- <div class="form-block-header-part"></div> -->
+<!-- <h1 class="page-heading">City & ZIP Code</h1> -->
+<!-- <span class="sub-heading">Lorem ipsum dolor sit, amet consectetur adipisicing.</span> -->
+<div class="content-card-wrap">
+  <div class="content-card">
+    <form [formGroup]="EditProfileForm" (ngSubmit)="onSubmitUpdateProfile()">
+      @if (editTypeId === 10) {
+        <h1 class="page-heading">{{ 'PROFILE_PAGE.CITY&ZIP' | translate }}</h1>
+        <label class="card-heading">{{ 'PROFILE_PAGE.CITY' | translate }}</label>
+        <!-- City -->
+        <div class="form-group">
+          <!-- <mat-label>{{ 'PROFILE_PAGE.CITY' | translate }}</mat-label> -->
+          <div
+            class="formcontrol-wrapper"
+            [ngClass]="{ 'auth-invalid-control': hasFormControlError('city') }">
+            <input
+              type="text"
+              class="formcontrol"
+              autocomplete="off"
+              formControlName="city"
+              [placeholder]="'PROFILE_PAGE.ENTER_CITY' | translate" />
+          </div>
+          @if (hasFormControlError('city')) {
+            @if (formControl['city'].hasError('required')) {
+              <div [@fadeAnimation] class="auth-error-message">
+                <p>{{ 'VALIDATION.CITY' | translate }}</p>
+              </div>
+            }
+            @if (formControl['city'].hasError('maxlength')) {
+              <div [@fadeAnimation] class="auth-error-message">
+                <p>{{ 'VALIDATION.COUNTRY_MAX_LENGTH' | translate }}</p>
+              </div>
+            }
+          }
+        </div>
+
+        <!-- Zipcode -->
+        <label class="card-heading">{{ 'REGISTRATION_PAGE.ZIP' | translate }}</label>
+        <div class="form-group">
+          <!-- <mat-label>{{ 'REGISTRATION_PAGE.ZIP' | translate }}</mat-label> -->
+          <div
+            class="formcontrol-wrapper"
+            [ngClass]="{ 'auth-invalid-control': hasFormControlError('zipcode') }">
+            <input
+              type="text"
+              class="formcontrol"
+              autocomplete="off"
+              formControlName="zipcode"
+              [placeholder]="'PROFILE_PAGE.ENTER_ZIP' | translate" />
+          </div>
+          @if (hasFormControlError('zipcode')) {
+            @if (formControl['zipcode'].hasError('required')) {
+              <div [@fadeAnimation] class="auth-error-message">
+                <p>{{ 'VALIDATION.ZIP' | translate }}</p>
+              </div>
+            }
+            @if (formControl['zipcode'].hasError('maxlength')) {
+              <div [@fadeAnimation] class="auth-error-message">
+                <p>{{ 'VALIDATION.ZIP_MAX_LENGTH' | translate }}</p>
+              </div>
+            }
+          }
+        </div>
+      } @else if (editTypeId === 11) {
+        <!-- University -->
+        <h1 class="page-heading">{{ 'PROFILE_PAGE.UNIVERSITY' | translate }}</h1>
+        <div class="form-group">
+          <!-- <mat-label>{{ 'PROFILE_PAGE.UNIVERSITY' | translate }}</mat-label> -->
+          <div class="formcontrol-wrapper">
+            <input
+              type="text"
+              class="formcontrol"
+              autocomplete="off"
+              formControlName="university"
+              [placeholder]="'PROFILE_PAGE.ENTER_UNIVERSITY' | translate" />
+          </div>
+        </div>
+      } @else {
+        <!-- Political View -->
+        <h1 class="page-heading">{{ 'PROFILE_PAGE.POLITICAL_VIEW' | translate }}</h1>
+        <div class="form-group">
+          <!-- <mat-label>{{ 'PROFILE_PAGE.POLITICAL_VIEW' | translate }}</mat-label> -->
+          <div class="formcontrol-wrapper">
+            <input
+              type="text"
+              class="formcontrol"
+              autocomplete="off"
+              formControlName="political_view"
+              [placeholder]="'PROFILE_PAGE.ENTER_POLITICALVIEW' | translate" />
+          </div>
+        </div>
+      }
+
+      <div class="chatbox-footer-part">
+        <div class="left-part">
+          <button type="button" class="btn transparent-btn" (click)="onCloseDialog($event)">
+            {{ 'COMMON.CANCEL' | translate }}
+          </button>
+        </div>
+        <div class="button-block">
+          <button type="submit" class="btn btn primary-btn btn-save" [disabled]="isDisabled">
+            {{ 'COMMON.SAVE' | translate }}
+          </button>
+          <!-- <button type="button" class="btn primary-btn">save and next</button> -->
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

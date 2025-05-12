@@ -1,0 +1,171 @@
+<div class="right-panel-content-block">
+  <div class="right-panel-common-block">
+    <h6>{{ 'PROFILE_PAGE.MIGHT_LIKE' | translate }}</h6>
+    <div class="content-area">
+      <div class="image-block">
+        <img src="/images/profile-image-one.png" alt="" />
+      </div>
+      <p>Guó</p>
+      <button type=" button" class="btn primary-btn">{{ 'COMMON.VIEW' | translate }}</button>
+    </div>
+    <div class="content-area">
+      <div class="image-block">
+        <img src="/images/profile-image-two.png" alt="" />
+      </div>
+      <p>Zhāng</p>
+      <button type=" button" class="btn primary-btn">{{ 'COMMON.VIEW' | translate }}</button>
+    </div>
+    <div class="content-area">
+      <div class="image-block">
+        <img src="/images/profile-image-three.png" alt="" />
+      </div>
+      <p>Liú</p>
+      <button type=" button" class="btn primary-btn">{{ 'COMMON.VIEW' | translate }}</button>
+    </div>
+    <a>{{ 'COMMON.SHOW_MORE' | translate }}</a>
+  </div>
+  <div class="right-panel-common-block">
+    <h6>{{ 'PROFILE_PAGE.TOP_PICKS' | translate }}</h6>
+    <div class="content-area">
+      <div class="image-block">
+        <img src="/images/profile-image-one.png" alt="" />
+      </div>
+      <p>Guó</p>
+      <button type=" button" class="btn primary-btn">{{ 'COMMON.VIEW' | translate }}</button>
+    </div>
+    <div class="content-area">
+      <div class="image-block">
+        <img src="/images/profile-image-two.png" alt="" />
+      </div>
+      <p>Zhāng</p>
+      <button type=" button" class="btn primary-btn">{{ 'COMMON.VIEW' | translate }}</button>
+    </div>
+    <div class="content-area">
+      <div class="image-block">
+        <img src="/images/profile-image-three.png" alt="" />
+      </div>
+      <p>Liú</p>
+      <button type=" button" class="btn primary-btn">{{ 'COMMON.VIEW' | translate }}</button>
+    </div>
+    <a>{{ 'COMMON.SHOW_MORE' | translate }}</a>
+  </div>
+</div>
+<div class="right-footer-block" [ngClass]="displayChatBox ? 'showChat' : 'hideChat'">
+  <div class="chat-bot-block">
+    <div class="header-part">
+      <div class="logo-block">
+        <img src="/images/profile-log.svg" alt="" />
+      </div>
+      <div class="minimize-btn" (click)="displayChatBox = false">
+        <a class="minus"></a>
+      </div>
+    </div>
+    <div class="body-part">
+      <!-- <div class="body-contentpart">
+      <div class="icon-block">
+        <img src="/images/profile-footer-image.svg" alt="" />
+      </div>
+      <div class="quick-replies-block">
+        <h6>Selectable prompts or quick replies</h6>
+        <p>What's something totally random that makes you happy?</p>
+        <div class="answer-block">
+          <p>Thoughtful & Deep</p>
+          <a>
+            <svg class="icon-chevron-right">
+              <use xlink:href="/scss/icons.svg#icon-chevron-right"></use>
+            </svg>
+          </a>
+        </div>
+        <div class="answer-block">
+          <p>Personality Reveals</p>
+          <a>
+            <svg class="icon-chevron-right">
+              <use xlink:href="/scss/icons.svg#icon-chevron-right"></use>
+            </svg>
+          </a>
+        </div>
+        <div class="answer-block">
+          <p>Icebreakers</p>
+          <a>
+            <svg class="icon-chevron-right">
+              <use xlink:href="/scss/icons.svg#icon-chevron-right"></use>
+            </svg>
+          </a>
+        </div>
+        <div class="answer-block">
+          <p>You seem fun</p>
+          <a>
+            <svg class="icon-chevron-right">
+              <use xlink:href="/scss/icons.svg#icon-chevron-right"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div> -->
+      <div #chatContainer class="message-area">
+        @for (msg of allMessages(); track msg) {
+          <div [class.message-wrapper-self]="msg.sender === username" class="message-wrapper">
+            @if (msg.sender === 'bot') {
+              <div class="image-block bot-image">
+                <img src="/images/profile-footer-image.svg" alt="" />
+              </div>
+            } @else {
+              <div class="image-block">
+                <img [src]="image" alt="" />
+              </div>
+            }
+            <div [class.tooltip-self]="msg.sender === username" class="tooltip">
+              <p>{{ msg.text }}</p>
+              <p class="time-stamp">{{ msg.timestamp }}</p>
+            </div>
+          </div>
+        }
+        @if (errorMessage) {
+          <div class="error-msg">
+            <img src="images/new-warning-image.svg" alt="" />
+            <p>{{ errorMessage }}</p>
+          </div>
+        }
+        @if (message.length > 500) {
+          <div class="error-msg">
+            <img src="images/new-warning-image.svg" alt="" />
+            <p>Input too long. Please reduce the length of your message and try again.</p>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="footer-part" [ngClass]="message.length === 0 ? 'warning' : 'typing'">
+      <div class="left-part">
+        <!-- <div class="left-icon-block">
+        <a></a>
+      </div> -->
+        <textarea
+          rows="1"
+          textAreaHeight
+          type="text"
+          class="formcontrol"
+          placeholder="Ask Something..."
+          [(ngModel)]="message"
+          (keydown.enter)="$event.preventDefault()"
+          (keyup.enter)="sendMessage()"></textarea>
+      </div>
+
+      <!-- <a class="right-icon-block">
+      <svg>
+        <use xlink:href="/scss/icons.svg#icon-microphone"></use>
+      </svg>
+    </a> -->
+      <a
+        [ngClass]="
+          botMessageIndex == null && disabled && message.length < 500 ? 'enabled' : 'disabled'
+        "
+        class="right-icon-block arrow-block"
+        (click)="sendMessage()">
+        <img src="/images/arrow-up.svg" alt="" />
+      </a>
+    </div>
+  </div>
+  <div class="chat-bot-image">
+    <img (click)="displayChatBox = true" src="/images/chat-bot.svg" alt="" />
+  </div>
+</div>
